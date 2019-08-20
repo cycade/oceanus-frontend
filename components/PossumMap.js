@@ -17,14 +17,27 @@ export default class PossumMap extends Component {
       const lat = position.coords.latitude;
       console.log(lat, lng);
       this.setState({longitude: lng, latitude: lat});
-    });
 
-    L.mapquest.key = 'jGneTJYe7bEeRvHy69LvAtGcADwoiNZ1';
+      L.mapquest.key = 'jGneTJYe7bEeRvHy69LvAtGcADwoiNZ1';
 
-    L.mapquest.map('map', {
-      center: [this.state.latitide, this.state.longitude],
-      layers: L.mapquest.tileLayer('map'),
-      zoom: 12
+      let map = L.mapquest.map('map', {
+        center: [-38, 145],
+        layers: L.mapquest.tileLayer('map'),
+        zoom: 12
+      })
+
+      L.mapquest.textMarker([this.state.latitide, this.state.longitude], {
+        text: 'Your Location',
+        // subtext: 'Iconic coffeehouse chain',
+        position: 'right',
+        type: 'marker',
+        icon: {
+          primaryColor: '#333333',
+          secondaryColor: '#333333',
+          size: 'sm'
+        }
+      }).addTo(map);
+
     });
   }
 
