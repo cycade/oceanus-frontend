@@ -26,7 +26,7 @@ export default class PossumMap extends Component {
         zoom: 12
       })
 
-      L.mapquest.textMarker([this.state.latitide, this.state.longitude], {
+      L.mapquest.textMarker([lat, lng], {
         text: 'Your Location',
         // subtext: 'Iconic coffeehouse chain',
         position: 'right',
