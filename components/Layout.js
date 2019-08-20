@@ -1,4 +1,4 @@
-import Header from './Header'
+import NavigationBar from './NavigationBar'
 
 const layoutStyle = {
     'fontFamily': 'Helvetica, Arial, sans-serif'
@@ -7,7 +7,7 @@ const layoutStyle = {
 export default function Layout(props) {
     return (
 <div style={layoutStyle}>
-    <Header />
+    <NavigationBar />
     {props.children}
 </div>
     )
