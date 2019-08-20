@@ -1,6 +1,7 @@
 import Head from 'next/head';
 import Layout from '../components/Layout';
 import Banner from '../components/Banner';
+import PossumMap from '../components/PossumMap';
 
 function Home() {
     return (
@@ -14,7 +15,6 @@ function Home() {
     </Head>
     <Layout>
         <Banner />
-        <div>Blue Planet</div>
     </Layout>
 </div>
     );
