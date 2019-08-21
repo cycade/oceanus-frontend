@@ -15,33 +15,46 @@ export default class PossumMap extends Component {
     window.navigator.geolocation.getCurrentPosition(position => {
       const lng = position.coords.longitude;
       const lat = position.coords.latitude;
-      console.log(lat, lng);
       this.setState({longitude: lng, latitude: lat});
 
       L.mapquest.key = 'jGneTJYe7bEeRvHy69LvAtGcADwoiNZ1';
 
       let map = L.mapquest.map('map', {
-        center: [-38, 145],
+        center: [-37.9, 145.3],
         layers: L.mapquest.tileLayer('map'),
         zoom: 10
       })
 
-      fetch("https://psmapi.lcquest.com/api/v1/records", {
-        // mode: 'no-cors'
-      }).then((res) => {
+      fetch("https://psmapi.lcquest.com/api/v1/records/from?lat=" + lat + "&lng=" + lng)
+      .then((res) => {
+        console.log(res);
         return res.json();
       }).then((data) => {
-        for (let e of data) {
-          if (e.year >= 2010) {
-            L.marker([e.latitude, e.longitude], {
-              icon: L.mapquest.icons.via({
-                primaryColor: '#D2D2D2',
-                secondaryColor: '#000000',
-                size: 'sm'
-              })
-            }).addTo(map);
-          }  
+        for (let e of data['rest']) {
+          L.marker([e.latitude, e.longitude], {
+            icon: L.mapquest.icons.via({
+              primaryColor: '#D2D2D2',
+              secondaryColor: '#000000',
+              size: 'sm'
+            })
+          }).addTo(map);
         }
+
+        L.marker([data['nearest'].latitude, data['nearest'].longitude], {
+          icon: L.mapquest.icons.via({
+            primaryColor: '#020202',
+            secondaryColor: '#000000',
+            size: 'sm'
+          })
+        }).addTo(map);
+
+        L.marker([data['latest'].latitude, data['latest'].longitude], {
+          icon: L.mapquest.icons.via({
+            primaryColor: '#D202D2',
+            secondaryColor: '#000000',
+            size: 'sm'
+          })
+        }).addTo(map);
       })
 
       L.mapquest.textMarker([lat, lng], {
