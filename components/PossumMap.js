@@ -23,7 +23,25 @@ export default class PossumMap extends Component {
       let map = L.mapquest.map('map', {
         center: [-38, 145],
         layers: L.mapquest.tileLayer('map'),
-        zoom: 12
+        zoom: 10
+      })
+
+      fetch("https://psmapi.lcquest.com/api/v1/records", {
+        // mode: 'no-cors'
+      }).then((res) => {
+        return res.json();
+      }).then((data) => {
+        for (let e of data) {
+          if (e.year >= 2010) {
+            L.marker([e.latitude, e.longitude], {
+              icon: L.mapquest.icons.via({
+                primaryColor: '#D2D2D2',
+                secondaryColor: '#000000',
+                size: 'sm'
+              })
+            }).addTo(map);
+          }  
+        }
       })
 
       L.mapquest.textMarker([lat, lng], {
