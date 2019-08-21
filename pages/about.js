@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Layout from '../components/Layout';
-import Banner from '../components/Banner';
 
 function Home() {
     return (
@@ -13,7 +12,12 @@ function Home() {
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     </Head>
     <Layout>
-        <Banner />
+        <div className="d-flex justify-content-center mt-3 pt-5">
+            <h3>Built by OceanWorld</h3>
+        </div>
+        <div className="d-flex justify-content-center pt-3">
+            <a href='https://mahara.infotech.monash.edu.au/mahara/view/blocks.php?id=35669'>View Our Mahara Page</a>
+        </div>
     </Layout>
 </div>
     );

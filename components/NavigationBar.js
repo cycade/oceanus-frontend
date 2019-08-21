@@ -12,10 +12,13 @@ export default function NavigationBar() {
                 <a className='nav-link' href='/possummap'>Occurrence Map</a>
             </li>
             <li className='nav-item'>
-                <a className='nav-link' href='#'>News</a>
+                <a className='nav-link' href='/possumcountmap'>Occurrence Count Map</a>
             </li>
             <li className='nav-item'>
-                <a className='nav-link' href='#'>About</a>
+                <a className='nav-link' href='/news'>News</a>
+            </li>
+            <li className='nav-item'>
+                <a className='nav-link' href='/about'>About</a>
             </li>
         </ul>
     </div>
