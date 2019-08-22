@@ -1,4 +1,5 @@
 import React, { Component, useState } from 'react';
+import getDistanceFromLatLonInKm from '../asset/js/getDistanceFromLatLonInKm.js';
 
 const mapStyle = {
   height: 800,
@@ -58,21 +59,29 @@ export default class PossumMap extends Component {
         }
 
         // highlight the neareat occurrence record
-        L.marker([data['nearest'].latitude, data['nearest'].longitude], {
-          icon: L.mapquest.icons.via({
-            primaryColor: '#020202',
+        L.mapquest.textMarker([data['nearest'].latitude, data['nearest'].longitude], {
+          text: 'Nearest Record',
+          subtext: '' + Math.round(getDistanceFromLatLonInKm(data['nearest'].latitude, data['nearest'].longitude, lat, lng), 2) + "km from you",
+          position: 'right',
+          type: 'via',
+          icon: {
+            primaryColor: '#B30059',
             secondaryColor: '#000000',
-            size: 'sm'
-          })
+            size: 'lg'
+          }
         }).addTo(map);
 
         // highlight the latest occurrence record
-        L.marker([data['latest'].latitude, data['latest'].longitude], {
-          icon: L.mapquest.icons.via({
-            primaryColor: '#D202D2',
+        L.mapquest.textMarker([data['latest'].latitude, data['latest'].longitude], {
+          text: 'Latest Record',
+          subtext: 'Occurs on ' + data['latest']['year'] + "/" + data['latest']['month'] + '/' + data['latest']['day'],
+          position: 'right',
+          type: 'via',
+          icon: {
+            primaryColor: '#77B300',
             secondaryColor: '#000000',
-            size: 'sm'
-          })
+            size: 'lg'
+          }
         }).addTo(map);
       })
 
