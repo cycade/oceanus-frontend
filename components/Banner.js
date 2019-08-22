@@ -19,16 +19,20 @@ export default function Banner() {
         <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
         <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
       </ol>
+
       <div className="carousel-inner" role="listbox">
         <div className="carousel-item active" style={carouselItemStyle("url('https://source.unsplash.com/RCAhiGJsUUE/1920x1080')")}>
-          <div className="carousel-caption d-none d-md-block">
-            <h3 className="display-4">Help us to save leadbeater's possum!</h3>
+          <div className="carousel-caption">
+            <p className="display-4 d-none d-sm-block">Help us to save leadbeater's possum!</p>
+            <p className="h2 d-sm-none">Help us to save leadbeater's possum!</p>
             <p className="lead">Leadbeater's Possum is the only member of the genus Gymnobelideus and wild populations are confined to Victoria.</p>
           </div>
         </div>
+
         <div className="carousel-item" style={carouselItemStyle("url('https://source.unsplash.com/wfh8dDlNFOk/1920x1080')")}>
-          <div className="carousel-caption d-none d-md-block">
-            <h3 className="display-4">The endangered Leadbeater's Possum is Victoria’s faunal emblem</h3>
+          <div className="carousel-caption d-none d-sm-block">
+            <p className="display-4">The endangered Victoria’s faunal emblem</p>
+            <p className="h2 d-sm-none">The endangered Victoria’s faunal emblem</p>
             <p className="lead">The species is found only in Victoria and lives primarily in the ash forests and sub-alpine woodlands of Victoria's central highlands to the east of Melbourne.</p>
           </div>
         </div>
