@@ -1,5 +1,7 @@
 import React, { Component, useState } from 'react';
 import getDistanceFromLatLonInKm from '../asset/js/getDistanceFromLatLonInKm.js';
+import PossumCountByMonthBarchart from './PossumCountByMonthBarchart.js';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 const mapStyle = {
   height: 800,
@@ -14,7 +16,8 @@ export default class PossumMap extends Component {
       "longitude": 145,
       "nearest": null,
       "latest": null,
-      "rest": []
+      "rest": [],
+      "month": []
     };
   }
 
@@ -33,6 +36,17 @@ export default class PossumMap extends Component {
         layers: L.mapquest.tileLayer('map'),
         zoom: 10
       })
+
+
+
+
+      fetch("https://psmapi.lcquest.com/api/v1/records/month")
+      .then((res) => {
+        return res.json();
+      }).then((count) => {
+        this.setState({month: Object.values(count)});
+      })
+
 
       // fetch data from backend
       fetch("https://psmapi.lcquest.com/api/v1/records/from?lat=" + lat + "&lng=" + lng)
@@ -106,6 +120,11 @@ export default class PossumMap extends Component {
       <div>
         <div>Occurrence Records</div>
         <div id='map' style={mapStyle}></div>
+{      
+    this.state.month.length === 0
+    ? <LoadingSpinner />
+    : <PossumCountByMonthBarchart data={this.state.month} />
+}
       </div>
     );
   }
