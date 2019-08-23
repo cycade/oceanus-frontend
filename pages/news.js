@@ -14,11 +14,11 @@ class NewsPage extends Component {
     }
 
     componentWillMount() {
-        fetch("https://psmapi.lcquest.com/api/v1/news/1")
+        fetch("https://psmapi.lcquest.com/api/v1/news")
         .then((res) => {
           return res.json();
         }).then((data) => {
-          this.setState({news: [...this.state.news, data]});
+          this.setState({news: data});
         })
       }
 
@@ -33,15 +33,21 @@ class NewsPage extends Component {
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     </Head>
     <Layout>
-        <div className="container mt-3 px-3">
-            <div className="d-flex justify-content-center mt-3 px-3">
-                <h2>News about Leadbeater's Possum</h2>
+        <div className="container mt-3 p-3">
+            <div className="d-flex justify-content-center mt-3 pt-3">
+                <p className='display-4'>News about Leadbeater's Possum</p>
             </div>
         </div>
 
-        <div className='container'>
-            <div className='mt-3'>
-                {this.state.news.length === 0 ? <LoadingSpinner /> : <NewsCard title={this.state.news[0]['title']} desc={this.state.news[0]['description']} url={this.state.news[0]['url']}/>}
+        <div className='container mt-5 pt-3'>
+            <div className="card-columns">
+                {
+                    this.state.news.length === 0
+                    ? <LoadingSpinner />
+                    : this.state.news.map((e) => {
+                        return <NewsCard title={e['title']} desc={e['description']} url={e['url']}/>
+                    })
+                }
             </div>
         </div>
     </Layout>
