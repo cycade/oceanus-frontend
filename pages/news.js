@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import Head from 'next/head';
 import Layout from '../components/Layout';
-import fetch from 'isomorphic-fetch';
-import LoadingSpinner from '../components/LoadingSpinner';
-import NewsCard from '../components/NewsCard';
+import NewsCollection from '../components/news/NewsCollection';
 
 class NewsPage extends Component {
     constructor() {
@@ -33,23 +31,7 @@ class NewsPage extends Component {
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
     </Head>
     <Layout>
-        <div className="container mt-3 p-3">
-            <div className="d-flex justify-content-center mt-3 pt-3">
-                <p className='display-4'>News about Leadbeater's Possum</p>
-            </div>
-        </div>
-
-        <div className='container mt-5 pt-3'>
-            <div className="card-columns">
-                {
-                    this.state.news.length === 0
-                    ? <LoadingSpinner />
-                    : this.state.news.map((e) => {
-                        return <NewsCard title={e['title']} desc={e['description']} url={e['url']}/>
-                    })
-                }
-            </div>
-        </div>
+        <NewsCollection />
     </Layout>
 </div>
         );
