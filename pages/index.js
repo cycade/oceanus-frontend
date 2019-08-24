@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Layout from '../components/Layout';
 import NewsCollection from '../components/news/NewsCollection';
 import Banner from '../components/layout/Banner.js';
+import BGStory from '../components/info/BGStory';
 
 class Home extends Component {
   constructor() {
@@ -29,6 +30,7 @@ class Home extends Component {
 
         <Layout>
           <Banner />
+          <BGStory />
           <NewsCollection />
         </Layout>
       </div>

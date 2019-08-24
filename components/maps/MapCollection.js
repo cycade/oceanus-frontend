@@ -72,9 +72,13 @@ export default class MapCollection extends Component {
                 month={this.state.selectedMonth}
                 />
 
-                <div><br /></div>
-                <RecordBarchart data={this.state.countByMonth} selector={this._handleMonthSelect.bind(this)} />
-                <div><br /></div>
+                <div className='mt-3'><br /></div>
+                
+                <div className='container mx-3 px-3'>
+                    <RecordBarchart data={this.state.countByMonth} selector={this._handleMonthSelect.bind(this)} />
+                </div>
+
+                <div className='mt-3'><br /></div>
 
                 <RecordClusteringMap
                 center={this.state.currentPosition}

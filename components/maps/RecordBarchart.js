@@ -27,10 +27,12 @@ export default class RecordBarchart extends Component {
             >
                 <XAxis />
                 <YAxis />
-                <VerticalBarSeries data={this.renderData} 
+                <VerticalBarSeries
+                    data={this.renderData} 
                     onValueClick={(datapoint, event)=>{
                         this.props.selector(datapoint.x);
                     }}
+                    barWidth={0.5}
                 />
                 <LabelSeries
                     data={this.renderData.map(obj => {
