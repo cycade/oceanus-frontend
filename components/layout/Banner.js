@@ -28,12 +28,8 @@ export default function Banner() {
   return (
     <header style={headerStyle}>
       <div className='container px-3'>
-        <MediaQuery query="(min-width: 769px)">
-          <p className='display-4' style={titleStyle(45)}>Possum Minute</p>
-        </MediaQuery>
-        <MediaQuery query="(max-width: 769px)">
-          <h1 style={titleStyle(36)}>Possum Minute</h1>
-        </MediaQuery>
+          <p className='d-none d-lg-block display-4' style={titleStyle(45)}>Possum Minute</p>
+          <h1 className='d-lg-none' style={titleStyle(36)}>Possum Minute</h1>
       <p style={descStyle}>Leadbeater's Possum is the only member of the genus Gymnobelideus and wild populations are confined to Victoria.</p>
       </div>
     </header>

@@ -42,7 +42,7 @@ export default class NewsCollection extends Component {
     });
 
     return (
-      <div id='news' className='pt-5'>
+      <div id='news' className='py-5'>
         <div className="container px-3">
             <div className="d-flex justify-content-center mt-3 pt-3">
                 <p className='h2'>News about Leadbeater's Possum</p>

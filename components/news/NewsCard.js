@@ -11,7 +11,7 @@ export default function NewsCard(props) {
             }
             </div>
             <h5 className="card-title">{props.title}</h5>
-            <p className="card-text">{props.time.substring(0, 10)}</p>
+            {/* <p className="card-text">{props.time.substring(0, 10)}</p> */}
             <p className="card-text">{props.desc}</p>
             
             <a href={props.url} className="btn btn-primary">Read More...</a>

@@ -63,7 +63,7 @@ export default class MapCollection extends Component {
     render() {
         if (this._isUserLocationReady() && this._isMapReady() && this._isChartReady()) {
             return (
-            <div>
+            <div className='my-5 py-3'>
                 <RecordMap
                 center={this.state.currentPosition}
                 nearest={this.state.nearestRecord}
@@ -83,6 +83,10 @@ export default class MapCollection extends Component {
                 rest={this.state.restRecord} />
             </div>)
         }
-        return <LoadingSpinner />;
+        return(
+            <div className='my-5 py-5' style={{'height': '75vh'}}>
+                <LoadingSpinner />
+            </div>
+        );
     }
 }

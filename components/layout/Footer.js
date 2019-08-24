@@ -1,6 +1,6 @@
 export default function Footer(props) {
   return (
-    <div className='bg-dark'>
+    <div className='bg-dark' style={{'height': '25vh'}}>
         <div className="d-flex justify-content-center mt-3 pt-5">
             <h3 className='text-light'>Built by OceanWorld</h3>
         </div>

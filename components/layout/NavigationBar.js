@@ -20,11 +20,11 @@ export default function NavigationBar() {
 
     <div className='collapse navbar-collapse justify-content-end' id='navitem'>
         <ul className='navbar-nav mr-auto mt-2 mt-lg-0'>
-            <li className='nav-item'>
-                <a className='nav-link' href='/record'>Occurrence Record Map</a>
+            <li className='nav-item' data-target='#navitem' data-toggle='collapse'>
+                <a className='nav-link'  href='/record'>Occurrence Record Map</a>
             </li>
-            <li className='nav-item'>
-                <a className='nav-link' href='#news'>News</a>
+            <li className='nav-item' data-target='#navitem' data-toggle='collapse'>
+                <a className='nav-link'  href='#news'>News</a>
             </li>
         </ul>
     </div>
