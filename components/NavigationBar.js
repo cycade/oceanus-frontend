@@ -9,10 +9,7 @@ export default function NavigationBar() {
     <div className='collapse navbar-collapse justify-content-end' id='navitem'>
         <ul className='navbar-nav mr-auto mt-2 mt-lg-0'>
             <li className='nav-item'>
-                <a className='nav-link' href='/possummap'>Occurrence Map</a>
-            </li>
-            <li className='nav-item'>
-                <a className='nav-link' href='/possumcountmap'>Occurrence Count Map</a>
+                <a className='nav-link' href='/record'>Occurrence Record Map</a>
             </li>
             <li className='nav-item'>
                 <a className='nav-link' href='/news'>News</a>
