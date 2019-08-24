@@ -1,5 +1,6 @@
 import react, { Component } from 'react';
 import getDistanceFromLatLonInKm from '../../utils/getDistanceFromLatLonInKm.js';
+import getRecordPopup from '../../utils/getRecordPopup.js';
 
 const mapStyle = {
     height: 300,
@@ -43,7 +44,9 @@ export default class RecordClusteringMap extends Component {
                 secondaryColor: '#000000',
                 size: 'lg'
             }
-        }).addTo(map);
+        })
+        .bindPopup(getRecordPopup(this.props.nearest))
+        .addTo(map);
   
         // highlight the latest occurrence record
         L.mapquest.textMarker([this.props.latest['latitude'], this.props.latest['longitude']], {
@@ -56,7 +59,9 @@ export default class RecordClusteringMap extends Component {
                 secondaryColor: '#000000',
                 size: 'lg'
             }
-        }).addTo(map);
+        })
+        .bindPopup(getRecordPopup(this.props.latest))
+        .addTo(map);
 
 
 
@@ -72,7 +77,7 @@ export default class RecordClusteringMap extends Component {
                 })
             });
 
-            marker.bindPopup(record['count'] + ' LBP(s) occurred on ' + record['year'] + '/' + record['month'] + '/' + record['day']);
+            marker.bindPopup(getRecordPopup(record));
             markers.addLayer(marker);
         }
 
