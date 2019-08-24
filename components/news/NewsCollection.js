@@ -1,7 +1,7 @@
 import react, { Component } from 'react';
 import fetch from 'isomorphic-fetch';
 import NewsCard from './NewsCard.js';
-import LoadingSpinner from '../LoadingSpinner.js';
+import LoadingSpinner from '../layout/LoadingSpinner.js';
 
 export default class NewsCollection extends Component {
   constructor(props) {
@@ -42,10 +42,10 @@ export default class NewsCollection extends Component {
     });
 
     return (
-      <div>
-        <div className="container mt-3 p-3">
+      <div id='news' className='pt-5'>
+        <div className="container px-3">
             <div className="d-flex justify-content-center mt-3 pt-3">
-                <p className='display-4'>News about Leadbeater's Possum</p>
+                <p className='h2'>News about Leadbeater's Possum</p>
             </div>
         </div>
 
@@ -54,8 +54,8 @@ export default class NewsCollection extends Component {
                 {
                     this.state.news.length === 0
                     ? <LoadingSpinner />
-                    : renderedNews.map((e) => {
-                        return <NewsCard title={e['title']} desc={e['description']} url={e['url']} tags={e['tags']} selectTag={this._onTagSelected.bind(this)}/>
+                    : renderedNews.map((e, i) => {
+                        return <NewsCard key={i} title={e['title']} desc={e['description']} url={e['url']} tags={e['tags']} time={e['time']} selectTag={this._onTagSelected.bind(this)}/>
                     })
                 }
             </div>

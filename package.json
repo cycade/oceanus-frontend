@@ -31,6 +31,7 @@
     "react-dom": "^16.8.6",
     "react-geolocated": "^2.5.0",
     "react-plotly.js": "^2.3.0",
+    "react-responsive": "^7.0.0",
     "react-vis": "^1.11.7",
     "reactstrap": "^8.0.1"
   },

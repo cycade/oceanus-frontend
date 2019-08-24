@@ -1,5 +1,5 @@
 import react, { Component } from 'react';
-import LoadingSpinner from '../LoadingSpinner.js';
+import LoadingSpinner from '../layout/LoadingSpinner.js';
 
 import RecordMap from './RecordMap.js';
 import RecordClusteringMap from './RecordClusteringMap';
