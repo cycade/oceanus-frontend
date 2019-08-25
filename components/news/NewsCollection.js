@@ -17,6 +17,10 @@ export default class NewsCollection extends Component {
     this.setState({selectedTag: [tag]});
   }
 
+  _clearTag() {
+    this.setState({selectedTag: []});
+  }
+
   componentWillMount() {
     fetch("https://psmapi.lcquest.com/api/v1/news")
     .then((res) => {
@@ -43,22 +47,39 @@ export default class NewsCollection extends Component {
 
     return (
       <div id='news' className='py-5'>
-        <div className="container px-3">
+        <div className="container pt-3">
             <div className="d-flex justify-content-center mt-3 pt-3">
                 <p className='h2'>News about Leadbeater's Possum</p>
             </div>
         </div>
 
+        
+
         <div className='container mt-5 pt-3'>
-            <div className="card-columns">
                 {
                     this.state.news.length === 0
                     ? <LoadingSpinner />
-                    : renderedNews.map((e, i) => {
-                        return <NewsCard key={i} title={e['title']} desc={e['description']} url={e['url']} tags={e['tags']} time={e['time']} selectTag={this._onTagSelected.bind(this)}/>
-                    })
+                    : (
+                      <div>
+                        <div className='d-flex justify-content-center mb-3'>
+                          <p className='h4 pt-2 mr-3'>Filter news by tag:</p>
+                          {this.state.tags.map((tag, i) => {
+                            if (this.state.selectedTag.indexOf(tag) !== -1) {
+                              return <button key={i+1} type="button" className="btn btn-sm btn-dark m-1" onClick={() => this._onTagSelected(tag)}>{tag}</button>
+                            } else {
+                              return <button key={i+1} type="button" className="btn btn-sm btn-outline-secondary m-1" onClick={() => this._onTagSelected(tag)}>{tag}</button>
+                            }
+                          })}
+                          <button key='0' type="button" className="btn btn-sm btn-outline-primary m-1" onClick={() => this._clearTag()}>All</button>
+                        </div>
+                        <div className="card-columns">
+                          {renderedNews.map((e, i) => {
+                              return <NewsCard key={i} title={e['title']} desc={e['description']} url={e['url']} tags={e['tags']} time={e['time']} selectTag={this._onTagSelected.bind(this)}/>
+                          })}
+                        </div>
+                      </div>
+                    )
                 }
-            </div>
         </div>
       </div>
     );
