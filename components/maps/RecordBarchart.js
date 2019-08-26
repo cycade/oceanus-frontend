@@ -1,12 +1,11 @@
 import react, { Component } from 'react';
-import { XYPlot, XAxis, YAxis, VerticalBarSeries, LabelSeries } from 'react-vis';
+import { VictoryBar, VictoryChart, VictoryAxis, VictoryTheme } from 'victory';
 
 let monthSeries = [
     'January', 'February', 'March', 'April',
     'May', 'June', 'July', 'August',
     'September', 'October', 'November', 'December'
 ];
-  
 
 export default class RecordBarchart extends Component {
     constructor(props) {
@@ -15,33 +14,34 @@ export default class RecordBarchart extends Component {
     }
 
     render() {
-        const chartWidth = 1200;
-        const chartHeight = 200;
-        const chartDomain = [0, chartHeight];
         return (
-            <XYPlot 
-                xType="ordinal" 
-                width={chartWidth} 
-                height={chartHeight} 
-                yDomain={chartDomain}
-            >
-                <XAxis />
-                <YAxis />
-                <VerticalBarSeries
-                    data={this.renderData} 
-                    onValueClick={(datapoint, event)=>{
-                        this.props.selector(datapoint.x);
-                    }}
-                    barWidth={0.5}
-                />
-                <LabelSeries
-                    data={this.renderData.map(obj => {
-                        return { ...obj, label: obj.y.toString() }
-                    })}
-                    labelAnchorX="middle"
-                    labelAnchorY="text-after-edge"
-                />
-            </XYPlot>
+            <div>
+        <VictoryChart horizontal height={240} width={400} padding={{left:80}}
+          domain={{x:[0.5, 12.5]}}
+          domainPadding={{ x: 0, y: 35 }}
+   
+        >
+          <VictoryBar
+            style={{ data: { fill: "#c43a31" } }}
+            barWidth={15}
+             labels={this.props.data}
+            data={[
+              { x: 'January', y: 63 },
+              { x: 'February', y: 54 },
+              { x: 'March', y: 80 },
+              { x: 'April', y: 80 },
+              { x: 'May', y: 61 },
+              { x: 'June', y: 27 },
+              { x: 'July', y: 19 },
+              { x: 'August', y: 41 },
+              { x: 'September', y: 62 },
+              { x: 'October', y: 107 },
+              { x: 'November', y: 47 },
+              { x: 'December', y: 5 },
+            ]}
+          />
+        </VictoryChart>
+      </div>
         );
     }
 }

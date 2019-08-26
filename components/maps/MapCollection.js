@@ -3,7 +3,6 @@ import LoadingSpinner from '../layout/LoadingSpinner.js';
 
 import RecordMap from './RecordMap.js';
 import RecordClusteringMap from './RecordClusteringMap';
-import RecordBarchart from './RecordBarchart';
 
 export default class MapCollection extends Component {
     constructor(props) {
@@ -13,7 +12,6 @@ export default class MapCollection extends Component {
             nearestRecord: null,
             latestRecord: null,
             restRecord: [],
-            countByMonth: [],
             selectedMonth: null
         }
     }
@@ -24,10 +22,6 @@ export default class MapCollection extends Component {
 
     _isMapReady() {
         return this.state.nearestRecord !== null && this.state.latestRecord !== null && this.state.restRecord.length > 0;
-    }
-
-    _isChartReady() {
-        return this.state.countByMonth.length > 0;
     }
 
     _handleMonthSelect(month) {
@@ -52,18 +46,15 @@ export default class MapCollection extends Component {
             })
         })
         
-        fetch("https://psmapi.lcquest.com/api/v1/records/month")
-        .then((res) => {
-            return res.json();
-        }).then((data) => {
-            this.setState({countByMonth: Object.values(data)});
-        })
     }
 
     render() {
-        if (this._isUserLocationReady() && this._isMapReady() && this._isChartReady()) {
+        if (this._isUserLocationReady() && this._isMapReady()) {
             return (
-            <div className='my-5 py-3'>
+            <div className='my-5 py-3 bg-light' id='map'>
+                <div className='container col-12 d-flex justify-content-center mt-3 pt-3'>
+                    <p className='h2'>Occurrence Records on Map</p>
+                </div>
                 <RecordMap
                 center={this.state.currentPosition}
                 nearest={this.state.nearestRecord}
@@ -73,12 +64,9 @@ export default class MapCollection extends Component {
                 />
 
                 <div className='mt-3'><br /></div>
-                
-                <div className='container mx-3 px-3'>
-                    <RecordBarchart data={this.state.countByMonth} selector={this._handleMonthSelect.bind(this)} />
+                <div className='container col-12 d-flex justify-content-center mt-3 pt-3'>
+                    <p className='h2'>Occurrence Records amounts on Map</p>
                 </div>
-
-                <div className='mt-3'><br /></div>
 
                 <RecordClusteringMap
                 center={this.state.currentPosition}
@@ -88,8 +76,20 @@ export default class MapCollection extends Component {
             </div>)
         }
         return(
-            <div className='my-5 py-5' style={{'height': '75vh'}}>
-                <LoadingSpinner />
+            <div className='container'>
+                <div className='container col-12 d-flex justify-content-center mt-3 pt-3'>
+                    <p className='h2'>Occurrence Records on Map</p>
+                </div>
+                <div className='my-5 py-5' style={{'height': '75vh'}}>
+                    <LoadingSpinner />
+                </div>
+                <div className='mt-3'><br /></div>
+                <div className='container col-12 d-flex justify-content-center mt-3 pt-3'>
+                    <p className='h2'>Occurrence Records amounts on Map</p>
+                </div>
+                <div className='my-5 py-5' style={{'height': '75vh'}}>
+                    <LoadingSpinner />
+                </div>
             </div>
         );
     }

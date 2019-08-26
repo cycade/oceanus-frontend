@@ -4,6 +4,8 @@ import Layout from '../components/Layout';
 import NewsCollection from '../components/news/NewsCollection';
 import Banner from '../components/layout/Banner.js';
 import BGStory from '../components/info/BGStory';
+import ChartWrapper from '../components/maps/ChartWrapper';
+import MapCollection from '../components/maps/MapCollection';
 
 class Home extends Component {
   constructor() {
@@ -26,11 +28,19 @@ class Home extends Component {
           
           <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
           <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+          <script src="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.js"></script>
+          <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"/>
+          <script src="https://unpkg.com/leaflet.markercluster@1.0.6/dist/leaflet.markercluster.js"></script>
+          <link type="text/css" rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.0.6/dist/MarkerCluster.css"/>
+          <link type="text/css" rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.0.6/dist/MarkerCluster.Default.css"/>
         </Head>
 
         <Layout>
           <Banner />
           <BGStory />
+          <ChartWrapper />
+          <MapCollection />
           <NewsCollection />
         </Layout>
       </div>

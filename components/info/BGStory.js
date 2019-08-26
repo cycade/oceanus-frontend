@@ -14,7 +14,7 @@ const headerStyle = {
 
 export default function BGStory(props) {
   return (
-    <div className='bg-light py-3'>
+    <div className='bg-light py-3' id='bgstory'>
       <div className='py-5'>
         <p className='h2 text-center'>The background story about Leadbeater's Possum</p>
       </div>

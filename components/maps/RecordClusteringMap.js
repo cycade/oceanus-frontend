@@ -15,7 +15,7 @@ export default class RecordClusteringMap extends Component {
     componentDidMount() {
         L.mapquest.key = 'jGneTJYe7bEeRvHy69LvAtGcADwoiNZ1';
         // initialize the record map
-        let map = L.mapquest.map('map', {
+        let map = L.mapquest.map('clustering-map', {
             center: this.props.center,
             layers: L.mapquest.tileLayer('map'),
             zoom: 10
@@ -86,7 +86,7 @@ export default class RecordClusteringMap extends Component {
 
     render() {
         return (
-            <div id='map' style={mapStyle}></div>
+            <div id='clustering-map' style={mapStyle}></div>
         );
     }
 }
