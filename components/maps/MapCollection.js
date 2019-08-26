@@ -56,7 +56,7 @@ export default class MapCollection extends Component {
                 <ChartWrapper onBarClick={this._handleMonthSelect.bind(this)} />
                 <div className='my-5 py-3 bg-light' id='map'>
                     <div className='container col-12 d-flex justify-content-center mt-3 pt-3'>
-                        <p className='h2'>Occurrence Records on Map</p>
+                        <p className='h2'>Occurrence Records</p>
                     </div>
                     <RecordMap
                     center={this.state.currentPosition}
@@ -68,7 +68,7 @@ export default class MapCollection extends Component {
 
                     <div className='mt-3'><br /></div>
                     <div className='container col-12 d-flex justify-content-center mt-3 pt-3'>
-                        <p className='h2'>Occurrence Records amounts on Map</p>
+                        <p className='h2'>Occurrence Records amounts</p>
                     </div>
 
                     <RecordClusteringMap
@@ -82,14 +82,14 @@ export default class MapCollection extends Component {
         return(
             <div className='container'>
                 <div className='container col-12 d-flex justify-content-center mt-3 pt-3'>
-                    <p className='h2'>Occurrence Records on Map</p>
+                    <p className='h2'>Occurrence Records</p>
                 </div>
                 <div className='my-5 py-5' style={{'height': '75vh'}}>
                     <LoadingSpinner />
                 </div>
                 <div className='mt-3'><br /></div>
                 <div className='container col-12 d-flex justify-content-center mt-3 pt-3'>
-                    <p className='h2'>Occurrence Records amounts on Map</p>
+                    <p className='h2'>Occurrence Records amounts</p>
                 </div>
                 <div className='my-5 py-5' style={{'height': '75vh'}}>
                     <LoadingSpinner />
