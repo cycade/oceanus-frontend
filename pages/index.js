@@ -39,7 +39,6 @@ class Home extends Component {
         <Layout>
           <Banner />
           <BGStory />
-          <ChartWrapper />
           <MapCollection />
           <NewsCollection />
         </Layout>

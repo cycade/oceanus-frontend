@@ -3,6 +3,7 @@ import LoadingSpinner from '../layout/LoadingSpinner.js';
 
 import RecordMap from './RecordMap.js';
 import RecordClusteringMap from './RecordClusteringMap';
+import ChartWrapper from './ChartWrapper.js';
 
 export default class MapCollection extends Component {
     constructor(props) {
@@ -51,28 +52,31 @@ export default class MapCollection extends Component {
     render() {
         if (this._isUserLocationReady() && this._isMapReady()) {
             return (
-            <div className='my-5 py-3 bg-light' id='map'>
-                <div className='container col-12 d-flex justify-content-center mt-3 pt-3'>
-                    <p className='h2'>Occurrence Records on Map</p>
-                </div>
-                <RecordMap
-                center={this.state.currentPosition}
-                nearest={this.state.nearestRecord}
-                latest={this.state.latestRecord}
-                rest={this.state.restRecord}
-                month={this.state.selectedMonth}
-                />
+            <div>
+                <ChartWrapper onBarClick={this._handleMonthSelect.bind(this)} />
+                <div className='my-5 py-3 bg-light' id='map'>
+                    <div className='container col-12 d-flex justify-content-center mt-3 pt-3'>
+                        <p className='h2'>Occurrence Records on Map</p>
+                    </div>
+                    <RecordMap
+                    center={this.state.currentPosition}
+                    nearest={this.state.nearestRecord}
+                    latest={this.state.latestRecord}
+                    rest={this.state.restRecord}
+                    month={this.state.selectedMonth}
+                    />
 
-                <div className='mt-3'><br /></div>
-                <div className='container col-12 d-flex justify-content-center mt-3 pt-3'>
-                    <p className='h2'>Occurrence Records amounts on Map</p>
-                </div>
+                    <div className='mt-3'><br /></div>
+                    <div className='container col-12 d-flex justify-content-center mt-3 pt-3'>
+                        <p className='h2'>Occurrence Records amounts on Map</p>
+                    </div>
 
-                <RecordClusteringMap
-                center={this.state.currentPosition}
-                nearest={this.state.nearestRecord}
-                latest={this.state.latestRecord}
-                rest={this.state.restRecord} />
+                    <RecordClusteringMap
+                    center={this.state.currentPosition}
+                    nearest={this.state.nearestRecord}
+                    latest={this.state.latestRecord}
+                    rest={this.state.restRecord} />
+                </div>
             </div>)
         }
         return(

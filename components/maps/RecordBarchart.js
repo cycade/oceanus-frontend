@@ -39,6 +39,15 @@ export default class RecordBarchart extends Component {
               { x: 'November', y: 47 },
               { x: 'December', y: 5 },
             ]}
+
+            events= {[{
+              target: "data",
+              eventHandlers: {
+                onClick: (d, i) => {
+                  this.props.onBarClick(i.index);
+                }
+              }
+            }]}
           />
         </VictoryChart>
       </div>

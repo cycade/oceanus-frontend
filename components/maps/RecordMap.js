@@ -91,7 +91,7 @@ export default class RecordMap extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        let monthIndex = monthSeries.indexOf(nextProps.month);
+        let monthIndex = nextProps.month;
         this.highlightLayer.clearLayers();
         
         if (monthIndex !== -1) {
