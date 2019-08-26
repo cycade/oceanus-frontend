@@ -1,11 +1,6 @@
 import react, { Component } from 'react';
 import Head from 'next/head';
-import Layout from '../components/Layout';
-import NewsCollection from '../components/news/NewsCollection';
-import Banner from '../components/layout/Banner.js';
-import BGStory from '../components/info/BGStory';
-import ChartWrapper from '../components/maps/ChartWrapper';
-import MapCollection from '../components/maps/MapCollection';
+import App from '../components/App.js';
 
 class Home extends Component {
   constructor() {
@@ -36,12 +31,7 @@ class Home extends Component {
           <link type="text/css" rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.0.6/dist/MarkerCluster.Default.css"/>
         </Head>
 
-        <Layout>
-          <Banner />
-          <BGStory />
-          <MapCollection />
-          <NewsCollection />
-        </Layout>
+        <App />
       </div>
     );
   }

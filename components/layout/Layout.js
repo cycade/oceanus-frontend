@@ -1,5 +1,5 @@
-import NavigationBar from './layout/NavigationBar.js';
-import Footer from './layout/Footer.js';
+import NavigationBar from './NavigationBar.js';
+import Footer from './Footer.js';
 
 const layoutStyle = {
     'fontFamily': 'Helvetica, Arial, sans-serif'
