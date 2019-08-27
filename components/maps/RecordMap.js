@@ -48,7 +48,7 @@ export default class RecordMap extends Component {
         // highlight the neareat occurrence record
         L.mapquest.textMarker([this.props.nearest['latitude'], this.props.nearest['longitude']], {
             text: 'Nearest Record',
-            subtext: '' + Math.round(getDistanceFromLatLonInKm(this.props.nearest[0], this.props.nearest[1], this.props.center[0], this.props.center[1])) + "km from you",
+            subtext: '' + Math.round(getDistanceFromLatLonInKm(this.props.nearest['latitude'], this.props.nearest['longitude'], this.props.center[0], this.props.center[1])) + "km from you",
             position: 'right',
             type: 'via',
             icon: {
