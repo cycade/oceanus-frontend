@@ -44,8 +44,8 @@ export default class RecordClusteringMap extends Component {
             position: 'right',
             type: 'marker',
             icon: {
-                primaryColor: '#1B4F72',
-                secondaryColor: '#1B4F72',
+                primaryColor: '#F1C40F',
+                secondaryColor: '#F1C40F',
                 size: 'md'
             }
         })
