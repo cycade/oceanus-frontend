@@ -45,7 +45,17 @@ export default class RecordBarchart extends Component {
               eventHandlers: {
                 onClick: (d, i) => {
                   this.props.onBarClick(i.index);
-                }
+                },
+                onMouseOver: () => { 
+                  return ({
+                    target: "data",
+                    mutation: () => ({ style: { fill: "orange" } })
+                  })
+                },
+                onMouseOut: () => ({
+                  target: "data",
+                  mutation: () => ({ style: { fill: "#c43a31" } })
+                })
               }
             }]}
           />

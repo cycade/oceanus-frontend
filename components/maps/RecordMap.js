@@ -16,10 +16,13 @@ let monthSeries = [
 export default class RecordMap extends Component {
     constructor(props) {
         super(props);
-        L.mapquest.key = 'jGneTJYe7bEeRvHy69LvAtGcADwoiNZ1';
         // initialize the record map
         this.map = null;
         this.highlightLayer = null;
+        this.state = {
+            baseColor: '#22407F',
+            markColor: '#c43a31',
+        }
     }
 
     componentDidMount() {
@@ -28,7 +31,7 @@ export default class RecordMap extends Component {
         this.highlightLayer = L.featureGroup();
         // initialize the record map
         this.map = L.mapquest.map('recordMap', {
-            center: this.props.center,
+            center: [-37.631482, 145.913061],
             layers: [L.mapquest.tileLayer('map'), this.highlightLayer],
             zoom: 10
         })
@@ -50,11 +53,11 @@ export default class RecordMap extends Component {
             text: 'Nearest Record',
             subtext: '' + Math.round(getDistanceFromLatLonInKm(this.props.nearest['latitude'], this.props.nearest['longitude'], this.props.center[0], this.props.center[1])) + "km from you",
             position: 'right',
-            type: 'via',
+            type: 'marker',
             icon: {
-                primaryColor: '#B30059',
-                secondaryColor: '#000000',
-                size: 'lg'
+                primaryColor: '#1B4F72',
+                secondaryColor: '#1B4F72',
+                size: 'md'
             }
         })
         .bindPopup(getRecordPopup(this.props.nearest))
@@ -65,11 +68,11 @@ export default class RecordMap extends Component {
             text: 'Latest Record',
             subtext: 'Occurs on ' + this.props.latest['year'] + "/" + this.props.latest['month'] + '/' + this.props.latest['day'],
             position: 'right',
-            type: 'via',
+            type: 'marker',
             icon: {
-                primaryColor: '#77B300',
-                secondaryColor: '#000000',
-                size: 'lg'
+                primaryColor: '#186A3B',
+                secondaryColor: '#186A3B',
+                size: 'md'
             }
         })
         .bindPopup(getRecordPopup(this.props.latest))
@@ -78,35 +81,43 @@ export default class RecordMap extends Component {
         // highlight the rest of occurrence records
         for (let record of this.props.rest) {
             L.marker([record['latitude'], record['longitude']], {
-                icon: L.mapquest.icons.via({
-                    primaryColor: '#D2D2D2',
-                    secondaryColor: '#000000',
-                    size: 'sm'
+                icon: L.mapquest.icons.flag({
+                    primaryColor: this.state.baseColor,
+                    secondaryColor: '#3B5998',
+                    shadow: true,
+                    size: 'sm',
+                    symbol: `${record['count']}`
                 })
             })
             .bindPopup(getRecordPopup(record))
             .addTo(this.map);
         }
-
     }
 
     componentWillReceiveProps(nextProps) {
         let monthIndex = nextProps.month;
         this.highlightLayer.clearLayers();
-        
+        this.map.flyTo([-37.631482, 145.913061], 10);
         if (monthIndex !== -1) {
             for (let record of this.props.rest) {
                 if (record['month'] === monthIndex + 1) {
                     L.marker([record['latitude'], record['longitude']], {
-                        icon: L.mapquest.icons.via({
-                            primaryColor: '#3292A7',
-                            secondaryColor: '#000000',
-                            size: 'md'
-                    })}).addTo(this.highlightLayer);
+                        icon: L.mapquest.icons.flag({
+                            primaryColor: this.state.markColor,
+                            secondaryColor: this.state.markColor,
+                            shadow: true,
+                            size: 'md',
+                            symbol: `${record['count']}`
+                        })
+                    })
+                    .bindPopup(getRecordPopup(record))
+                    .addTo(this.highlightLayer);
                 }
             }
         }
     }
+
+    _
 
     render() {
         return (

@@ -10,13 +10,17 @@ const mapStyle = {
 export default class RecordClusteringMap extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            baseColor: '#22407F',
+            markColor: '#c43a31',
+        }
     }
 
     componentDidMount() {
         L.mapquest.key = 'jGneTJYe7bEeRvHy69LvAtGcADwoiNZ1';
         // initialize the record map
         let map = L.mapquest.map('clustering-map', {
-            center: this.props.center,
+            center: [-37.631482, 145.913061],
             layers: L.mapquest.tileLayer('map'),
             zoom: 10
         })
@@ -38,11 +42,11 @@ export default class RecordClusteringMap extends Component {
             text: 'Nearest Record',
             subtext: '' + Math.round(getDistanceFromLatLonInKm(this.props.nearest['latitude'], this.props.nearest['longitude'], this.props.center[0], this.props.center[1])) + "km from you",
             position: 'right',
-            type: 'via',
+            type: 'marker',
             icon: {
-                primaryColor: '#B30059',
-                secondaryColor: '#000000',
-                size: 'lg'
+                primaryColor: '#1B4F72',
+                secondaryColor: '#1B4F72',
+                size: 'md'
             }
         })
         .bindPopup(getRecordPopup(this.props.nearest))
@@ -53,11 +57,11 @@ export default class RecordClusteringMap extends Component {
             text: 'Latest Record',
             subtext: 'Occurs on ' + this.props.latest['year'] + "/" + this.props.latest['month'] + '/' + this.props.latest['day'],
             position: 'right',
-            type: 'via',
+            type: 'marker',
             icon: {
-                primaryColor: '#77B300',
-                secondaryColor: '#000000',
-                size: 'lg'
+                primaryColor: '#186A3B',
+                secondaryColor: '#186A3B',
+                size: 'md'
             }
         })
         .bindPopup(getRecordPopup(this.props.latest))
@@ -70,10 +74,12 @@ export default class RecordClusteringMap extends Component {
         // highlight the rest of occurrence records
         for (let record of this.props.rest) {
             let marker = L.marker([record['latitude'], record['longitude']], {
-                icon: L.mapquest.icons.via({
-                    primaryColor: '#D2D2D2',
-                    secondaryColor: '#000000',
-                    size: 'sm'
+                icon: L.mapquest.icons.flag({
+                    primaryColor: this.state.baseColor,
+                    secondaryColor: '#3B5998',
+                    shadow: true,
+                    size: 'sm',
+                    symbol: `${record['count']}`
                 })
             });
 

@@ -1,4 +1,4 @@
-import react, { Component } from 'react';
+import react, { Component, createRef } from 'react';
 import LoadingSpinner from '../layout/LoadingSpinner.js';
 
 import RecordMap from './RecordMap.js';
@@ -83,12 +83,12 @@ export default class MapCollection extends Component {
             } else if (this.props.type === 'distribution') {
                 return (
                     <div>
-                        <div className='mt-3'><br /></div>
-                        <ChartWrapper onBarClick={this._handleMonthSelect.bind(this)} />
-                        <div className='my-5 py-3' id='map'>
-                            <div className='container col-12 d-flex justify-content-center mt-3 pt-3'>
+                        <div style={{'position': 'relative'}}><br /></div>
+                            <ChartWrapper style={{'position': 'fixed'}} onBarClick={this._handleMonthSelect.bind(this)} />
+                            <div className='py-3' id='map'>
+                            {/* <div className='container col-12 d-flex justify-content-center mt-3 pt-3'>
                                 <p className='h2'>Occurrence Records</p>
-                            </div>
+                            </div> */}
                             <RecordMap
                             center={this.state.currentPosition}
                             nearest={this.state.nearestRecord}

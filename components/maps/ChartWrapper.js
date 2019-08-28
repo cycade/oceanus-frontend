@@ -32,11 +32,12 @@ export default class ChartWrapper extends Component {
         {
           this._isChartReady()
           ? <div className='row align-items-center'>
-              <div className='container col-lg-4 col-md-6 col-12 py-3'>
+              <div className='container col-lg-4 col-md-6 col-12 pt-3'>
                 <RecordBarchart data={this.state.countByMonth} onBarClick={this.props.onBarClick.bind(this)}/>
               </div>
               <div className='container col-lg-8 col-md-6 col-12 p-3'>
                 <p className='h4 mx-5'><strong>October</strong>, <strong>March</strong>, and <strong>April</strong> have a high possibility of finding Leadbeater’s Possum occurrence. It’s better to be there in these months!</p>
+                <p className='mx-5 mt-3 pt-3'><strong>The record would be highlighted when clicking the barchart</strong></p>
               </div>
             </div>
           : <LoadingSpinner />

@@ -24,10 +24,10 @@ export default function NavigationBar() {
                 <a className='nav-link'  href='/'>Home</a>
             </li>
             <li className='nav-item' data-target='#navitem' data-toggle='collapse'>
-                <a className='nav-link'  href='/distributionmap'>Distribution Map</a>
+                <a className='nav-link'  href='/distributionMap'>Distribution Map</a>
             </li>
             <li className='nav-item' data-target='#navitem' data-toggle='collapse'>
-                <a className='nav-link'  href='/clusteringmap'>Clustering Map</a>
+                <a className='nav-link'  href='/clusteringMap'>Clustering Map</a>
             </li>
             <li className='nav-item' data-target='#navitem' data-toggle='collapse'>
                 <a className='nav-link'  href='/news'>News</a>
