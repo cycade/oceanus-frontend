@@ -51,45 +51,77 @@ export default class MapCollection extends Component {
 
     render() {
         if (this._isUserLocationReady() && this._isMapReady()) {
-            return (
-            <div>
-                <ChartWrapper onBarClick={this._handleMonthSelect.bind(this)} />
-                <div className='my-5 py-3 bg-light' id='map'>
-                    <div className='container col-12 d-flex justify-content-center mt-3 pt-3'>
-                        <p className='h2'>Occurrence Records</p>
-                    </div>
-                    <RecordMap
-                    center={this.state.currentPosition}
-                    nearest={this.state.nearestRecord}
-                    latest={this.state.latestRecord}
-                    rest={this.state.restRecord}
-                    month={this.state.selectedMonth}
-                    />
+            if (this.props.type === 'all') {
+                return (
+                    <div>
+                        <ChartWrapper onBarClick={this._handleMonthSelect.bind(this)} />
+                        <div className='my-5 py-3 bg-light' id='map'>
+                            <div className='container col-12 d-flex justify-content-center mt-3 pt-3'>
+                                <p className='h2'>Occurrence Records</p>
+                            </div>
+                            <RecordMap
+                            center={this.state.currentPosition}
+                            nearest={this.state.nearestRecord}
+                            latest={this.state.latestRecord}
+                            rest={this.state.restRecord}
+                            month={this.state.selectedMonth}
+                            />
 
-                    <div className='mt-3'><br /></div>
-                    <div className='container col-12 d-flex justify-content-center mt-3 pt-3'>
-                        <p className='h2'>Occurrence Records amounts</p>
-                    </div>
+                            <div className='mt-3'><br /></div>
+                            <div className='container col-12 d-flex justify-content-center mt-3 pt-3'>
+                                <p className='h2'>Occurrence Records amounts</p>
+                            </div>
 
-                    <RecordClusteringMap
-                    center={this.state.currentPosition}
-                    nearest={this.state.nearestRecord}
-                    latest={this.state.latestRecord}
-                    rest={this.state.restRecord} />
-                </div>
-            </div>)
+                            <RecordClusteringMap
+                            center={this.state.currentPosition}
+                            nearest={this.state.nearestRecord}
+                            latest={this.state.latestRecord}
+                            rest={this.state.restRecord} />
+                        </div>
+                    </div>
+                )
+            } else if (this.props.type === 'distribution') {
+                return (
+                    <div>
+                        <div className='mt-3'><br /></div>
+                        <ChartWrapper onBarClick={this._handleMonthSelect.bind(this)} />
+                        <div className='my-5 py-3' id='map'>
+                            <div className='container col-12 d-flex justify-content-center mt-3 pt-3'>
+                                <p className='h2'>Occurrence Records</p>
+                            </div>
+                            <RecordMap
+                            center={this.state.currentPosition}
+                            nearest={this.state.nearestRecord}
+                            latest={this.state.latestRecord}
+                            rest={this.state.restRecord}
+                            month={this.state.selectedMonth}
+                            />
+                        </div>
+                    </div>
+                )
+            } else {
+                return (
+                    <div>
+                        <div className='mt-3'><br /></div>
+                        <div className='container col-12 d-flex justify-content-center mt-3 pt-3'>
+                            <p className='h2'>Occurrence Records amounts</p>
+                        </div>
+
+                        <RecordClusteringMap
+                        center={this.state.currentPosition}
+                        nearest={this.state.nearestRecord}
+                        latest={this.state.latestRecord}
+                        rest={this.state.restRecord} />
+                    </div>
+                )
+            }
         }
+
         return(
             <div className='container'>
-                <div className='container col-12 d-flex justify-content-center mt-3 pt-3'>
-                    <p className='h2'>Occurrence Records</p>
-                </div>
-                <div className='my-5 py-5' style={{'height': '75vh'}}>
-                    <LoadingSpinner />
-                </div>
                 <div className='mt-3'><br /></div>
                 <div className='container col-12 d-flex justify-content-center mt-3 pt-3'>
-                    <p className='h2'>Occurrence Records amounts</p>
+                    <p className='h2'>Record is loading</p>
                 </div>
                 <div className='my-5 py-5' style={{'height': '75vh'}}>
                     <LoadingSpinner />
