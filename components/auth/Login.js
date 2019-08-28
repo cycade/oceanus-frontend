@@ -1,19 +1,28 @@
 import react, { Component } from 'react';
 import Head from 'next/head';
 import axios from 'axios';
+import LoadingSpinner from '../layout/LoadingSpinner.js';
+import Layout from '../layout/Layout.js';
 
 export default class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      usingStorage: true,
       password: '',
-      isLoading: false,
+      isLoading: true,
       hasFailed: false,
+      success: false
     }
   }
 
   _handleUserInput(event) {
     this.setState({ password: event.target.value });
+  }
+
+  _logout() {
+    localStorage.removeItem('possumnest');
+    this.setState({ success: false })
   }
 
   _handleSubmit(event) {
@@ -22,14 +31,39 @@ export default class Login extends Component {
 
     axios.post("https://psmapi.lcquest.com/login", { password: this.state.password })
     .then(res => {
-        this.setState({ isLoading: false })
-        this.props.onSuccessLogin(res.data['token']);
+        this.setState({ isLoading: false, success: true })
+        localStorage.setItem('possumnest', res.data.token);
     }).catch(err => {
         this.setState({ isLoading: false, hasFailed: true })
     })
   }
 
+  componentDidMount() {
+    let token = localStorage.getItem('possumnest');
+
+    if (token !== null) {
+      axios.get("https://psmapi.lcquest.com/secret", { headers: { Authorization: `Bearer ${token}` }})
+      .then(res => {
+        this.setState({ success: true, isLoading: false })
+      }).catch(err => {
+        this.setState({ usingStorage: false, isLoading: false })
+      })
+    } else {
+      this.setState({ usingStorage: false, isLoading: false })
+    }
+  }
+
   render() {
+    if (this.state.isLoading && this.state.usingStorage) {
+      return <LoadingSpinner />;
+    } else if (this.state.success) {
+      return (
+        <Layout onLogout={this._logout.bind(this)}>
+          {this.props.children}
+        </Layout>
+      )
+    }
+    
     return (
       <div>
         <Head>

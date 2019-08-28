@@ -1,9 +1,11 @@
 import Head from "next/head";
 import Layout from '../components/layout/Layout.js';
 import NewsCollection from '../components/news/NewsCollection.js';
+import Login from "../components/auth/Login.js";
 
 export default function news() {
   return (
+    <Login>
     <div>
       <Head>
         {/* import semantic-ui css */}
@@ -17,9 +19,8 @@ export default function news() {
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 
       </Head>
-      <Layout>
-        <NewsCollection />
-      </Layout>
+      <NewsCollection />
     </div>
+      </Login>
   );
 }

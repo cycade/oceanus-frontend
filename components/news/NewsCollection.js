@@ -74,7 +74,7 @@ export default class NewsCollection extends Component {
                         </div>
                         <div className="card-columns">
                           {renderedNews.map((e, i) => {
-                              return <NewsCard key={i} title={e['title']} desc={e['description']} url={e['url']} tags={e['tags']} time={e['time']} selectTag={this._onTagSelected.bind(this)}/>
+                              return <NewsCard key={i} num={i + 1} title={e['title']} desc={e['description']} url={e['url']} tags={e['tags']} time={e['time']} selectTag={this._onTagSelected.bind(this)}/>
                           })}
                         </div>
                       </div>

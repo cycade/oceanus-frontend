@@ -8,7 +8,7 @@ const layoutStyle = {
 export default function Layout(props) {
     return (
 <div style={layoutStyle}>
-    <NavigationBar />
+    <NavigationBar onLogout={props.onLogout.bind(this)}/>
     {props.children}
     <Footer />
 </div>

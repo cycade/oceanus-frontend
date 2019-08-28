@@ -4,6 +4,7 @@ import App from '../components/App.js';
 import Banner from '../components/layout/Banner.js';
 import Layout from '../components/layout/Layout.js';
 import BGStory from '../components/info/BGStory.js';
+import Login from '../components/auth/Login.js';
 
 class Home extends Component {
   constructor() {
@@ -28,10 +29,10 @@ class Home extends Component {
           <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
         </Head>
 
-        <Layout>
+        <Login>
           <Banner />
           <BGStory />
-        </Layout>
+        </Login>
       </div>
     );
   }

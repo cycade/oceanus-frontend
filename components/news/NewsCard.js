@@ -1,7 +1,7 @@
 export default function NewsCard(props) {
     return (
     <div className="card">
-        {/* <img src="/static/img/P0001.jpg" className="card-img-top" alt="..." /> */}
+        <img className="card-img-top" src={`../../static/img/N${props.num}.png`} alt="Card image cap"></img>
         <div className="card-body">
             <div className='mb-3'>
             {
