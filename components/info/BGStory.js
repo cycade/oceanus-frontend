@@ -20,7 +20,7 @@ export default function BGStory(props) {
       <div className='py-5'>
         <p className='h2 text-center'>The background story about Leadbeater's Possum</p>
       </div>
-      <div className='row container pb-5 mx-auto'>
+      <div className='d-flex justify-content-center container pb-5 mx-auto'>
         <Species />
       </div>
     </div>
