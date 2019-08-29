@@ -36,11 +36,13 @@ export default class NavigationBar extends Component {
                         <li className='nav-item' data-target='#navitem' data-toggle='collapse'>
                             <a className='nav-link'  href='/news'>News</a>
                         </li>
-                        <li className='nav-item' data-target='#navitem' data-toggle='collapse'>
-                            <button type="button" className="btn btn-outline-dark btn-sm" onClick={this.props.onLogout.bind(this)}>Logout</button>
-                        </li>
             
                     </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                    <li className='nav-item' data-target='#navitem' data-toggle='collapse'>
+                            <button type="button" className="btn btn-outline-dark btn-sm" onClick={this.props.onLogout.bind(this)}>Logout</button>
+                        </li>
+</ul>
                 </div>
             </nav>
             
