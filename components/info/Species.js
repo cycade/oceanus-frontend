@@ -41,7 +41,7 @@ const tileData = [
   {type: 'img', img: image1, title: 'title', featured: true},
   {type: 'text', content: 'Broken sustainable forest logging rules, low habitats protection, bush fire and predator threats are the main endanger parameters', title: 'Survival Threats'},
   {type: 'img', img: image2, title: 'title', featured: true},
-  {type: 'text', content: 'Ending logging of Mountain Ash forests for habitat protection is the best hope of survival.', title: 'Purpose'},
+  {type: 'text', content: 'Ending logging of Mountain Ash forests for habitat protection is the best hope of survival.', title: 'Conservation'},
   {type: 'text', content: '20 million years ago the only species in the petaurid genus Gymnobelideus with an ancestral form.', title: 'Rare Species'},
   {type: 'img', img: image3, title: 'title', featured: true},
   {type: 'text', content: 'List of Threatened Animals 1994 endangered red lists in the IUCN (International Union for the Conservation of Nature).', title: 'Endanger Species'},
