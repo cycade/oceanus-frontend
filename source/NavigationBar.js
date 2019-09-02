@@ -18,26 +18,33 @@ const styles = theme => ({
 class NavigationBar extends Component {
   constructor(props) {
     super(props);
-    this.state = { anchorEl: null, navBarColor: 'transparent' };
+    let initialColor = props.indexPage ?  'transparent' : '#435749';
+    this.state = { anchorEl: null, navBarColor: initialColor };
   }
 
   setAnchorEl(value) { this.setState({ anchorEl: value }); }
 
   componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll.bind(this), { passive: true });
+    if (this.props.indexPage) {
+      window.addEventListener('scroll', this.handleScroll.bind(this), { passive: true });
+    }
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll.bind(this));
+    if (this.props.indexPage) {
+      window.removeEventListener('scroll', this.handleScroll.bind(this));
+    }
   }
 
   handleScroll() {
-    const lastScroll = window.scrollY;
-    if (lastScroll > 160 && this.state.navBarColor === 'transparent') {
-      this.setState({ navBarColor: '#435749' })
-    }
-    if (lastScroll < 160 && this.state.navBarColor !== 'transparent') {
-      this.setState({ navBarColor: 'transparent' })
+    if (this.props.indexPage) {
+      const lastScroll = window.scrollY;
+      if (lastScroll > 160 && this.state.navBarColor === 'transparent') {
+        this.setState({ navBarColor: '#435749' })
+      }
+      if (lastScroll < 160 && this.state.navBarColor !== 'transparent') {
+        this.setState({ navBarColor: 'transparent' })
+      }
     }
   }
 
