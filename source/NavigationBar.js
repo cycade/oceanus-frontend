@@ -67,8 +67,8 @@ class NavigationBar extends Component {
               {/* <MenuIcon /> */}
             </IconButton>
             <Menu anchorEl={this.state.anchorEl} keepMounted open={Boolean(this.state.anchorEl)} onClose={this.handleClose.bind(this)}>
-              <MenuItem onClick={this.handleClose.bind(this)} href='/distributionmap'>Distribution Map</MenuItem>
-              <MenuItem onClick={this.handleClose.bind(this)} href='/clusteringmap'>Clustering Map</MenuItem>
+              <MenuItem onClick={this.handleClose.bind(this)} href='/distributionMap'>Distribution Map</MenuItem>
+              <MenuItem onClick={this.handleClose.bind(this)} href='/clusteringMap'>Clustering Map</MenuItem>
               <MenuItem onClick={this.handleClose.bind(this)} href='/news'>News</MenuItem>
               <MenuItem onClick={this.handleClose.bind(this)}>Logout</MenuItem>
             </Menu>
@@ -80,8 +80,8 @@ class NavigationBar extends Component {
             <Typography variant='h5' className={classes.title}>
               <Link href='/' underline='none' color='inherit'>PossumNest</Link>
             </Typography>
-            <Button color='inherit' href='/distributionmap'>Distribution Map</Button>
-            <Button color='inherit' href='/clusteringmap'>Clustering Map</Button>
+            <Button color='inherit' href='/distributionMap'>Distribution Map</Button>
+            <Button color='inherit' href='/clusteringMap'>Clustering Map</Button>
             <Button color='inherit' href='/news'>News</Button>
             <Button variant='outlined' color='inherit' className={classes.button}>Logout</Button>
           </Hidden>
