@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { AppBar, Toolbar, Button, Typography, Hidden, IconButton, Menu, MenuItem } from '@material-ui/core';
+import { AppBar, Toolbar, Button, Typography, Hidden, IconButton, Menu, MenuItem, Link } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/menu';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -67,18 +67,22 @@ class NavigationBar extends Component {
               <MenuIcon />
             </IconButton>
             <Menu anchorEl={this.state.anchorEl} keepMounted open={Boolean(this.state.anchorEl)} onClose={this.handleClose.bind(this)}>
-              <MenuItem onClick={this.handleClose.bind(this)}>Distribution Map</MenuItem>
-              <MenuItem onClick={this.handleClose.bind(this)}>Clustering Map</MenuItem>
-              <MenuItem onClick={this.handleClose.bind(this)}>News</MenuItem>
+              <MenuItem onClick={this.handleClose.bind(this)} href='/distributionmap'>Distribution Map</MenuItem>
+              <MenuItem onClick={this.handleClose.bind(this)} href='/clusteringmap'>Clustering Map</MenuItem>
+              <MenuItem onClick={this.handleClose.bind(this)} href='/news'>News</MenuItem>
               <MenuItem onClick={this.handleClose.bind(this)}>Logout</MenuItem>
             </Menu>
-            <Typography variant='h6' className={classes.title}>PossumNest</Typography>
+            <Typography variant='h6' className={classes.title}>
+              <Link href='/' underline='none' color='inherit'>PossumNest</Link>
+            </Typography>
           </Hidden>
           <Hidden xsDown>
-            <Typography variant='h5' className={classes.title}>PossumNest</Typography>
-            <Button color='inherit'>Distribution Map</Button>
-            <Button color='inherit'>Clustering Map</Button>
-            <Button color='inherit'>News</Button>
+            <Typography variant='h5' className={classes.title}>
+              <Link href='/' underline='none' color='inherit'>PossumNest</Link>
+            </Typography>
+            <Button color='inherit' href='/distributionmap'>Distribution Map</Button>
+            <Button color='inherit' href='/clusteringmap'>Clustering Map</Button>
+            <Button color='inherit' href='/news'>News</Button>
             <Button variant='outlined' color='inherit' className={classes.button}>Logout</Button>
           </Hidden>
         </Toolbar>

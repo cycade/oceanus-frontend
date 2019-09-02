@@ -1,6 +1,8 @@
 import Head from "next/head";
 import MapCollection from "../components/maps/MapCollection";
-import NavigationBar from '../source/NavigationBar.js';
+import Layout from "../components/layout/Layout";
+import Login from "../components/auth/Login";
+
 export default function distributionMap(props) {
   return (
     <div>
@@ -21,8 +23,9 @@ export default function distributionMap(props) {
         <link type="text/css" rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.0.6/dist/MarkerCluster.css"/>
         <link type="text/css" rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.0.6/dist/MarkerCluster.Default.css"/>
       </Head>
-      <NavigationBar />
-      <MapCollection type='distribution' />
+      <Login>
+        <MapCollection type='clustering' />
+      </Login>
     </div>
   )
 }

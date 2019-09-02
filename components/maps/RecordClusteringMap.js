@@ -3,7 +3,7 @@ import getDistanceFromLatLonInKm from '../../utils/getDistanceFromLatLonInKm.js'
 import getRecordPopup from '../../utils/getRecordPopup.js';
 
 const mapStyle = {
-    height: 600,
+    height: '92vh',
     width: "100%"
 }
 

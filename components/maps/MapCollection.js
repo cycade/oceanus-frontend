@@ -83,6 +83,7 @@ export default class MapCollection extends Component {
             } else if (this.props.type === 'distribution') {
                 return (
                     <div>
+                        <div className='mt-3'><br /></div>
                         <div style={{'position': 'relative'}}><br /></div>
                             <ChartWrapper style={{'position': 'fixed'}} onBarClick={this._handleMonthSelect.bind(this)} />
                             <div className='py-3' id='map'>
@@ -103,7 +104,7 @@ export default class MapCollection extends Component {
                 return (
                     <div>
                         <div className='mt-3'><br /></div>
-                        <div className='container col-12 d-flex justify-content-center mt-3 pt-3'>
+                        <div className='container col-12 d-flex justify-content-center mt-3'>
                             <p className='h2'>Occurrence Records amounts</p>
                         </div>
 
