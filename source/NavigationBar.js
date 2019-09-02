@@ -1,6 +1,6 @@
 import { Component } from 'react';
 import { AppBar, Toolbar, Button, Typography, Hidden, IconButton, Menu, MenuItem, Link } from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/menu';
+// import MenuIcon from '@material-ui/icons/menu';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
@@ -64,7 +64,7 @@ class NavigationBar extends Component {
         <Toolbar>
           <Hidden smUp>
             <IconButton edge="start" color="inherit" aria-label="open drawer" onClick={this.handleClick.bind(this)}>
-              <MenuIcon />
+              {/* <MenuIcon /> */}
             </IconButton>
             <Menu anchorEl={this.state.anchorEl} keepMounted open={Boolean(this.state.anchorEl)} onClose={this.handleClose.bind(this)}>
               <MenuItem onClick={this.handleClose.bind(this)} href='/distributionmap'>Distribution Map</MenuItem>
