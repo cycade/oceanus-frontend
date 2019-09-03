@@ -88,6 +88,7 @@ export default function Question(props) {
           )
         })
       }
+      </div>
       {answered
         ? <div>
           <Typography align='center' variant='subtitle1'>You got {props.q.items[userChoice].result} points</Typography>
@@ -95,7 +96,6 @@ export default function Question(props) {
         </div>
         : <div></div>
       }
-      </div>
     </Paper>
   )
 }
