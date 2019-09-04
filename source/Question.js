@@ -1,4 +1,4 @@
-import { Paper, Typography, Button, Tooltip } from '@material-ui/core';
+import { Paper, Typography, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useState } from 'react';
 
@@ -25,7 +25,29 @@ const useStyles = makeStyles(theme => ({
   },
   item: {
     margin: theme.spacing(1),
+    padding: theme.spacing(1),
     width: '30vw',
+  },
+  rightItem: {
+    margin: theme.spacing(1),
+    padding: theme.spacing(1),
+    width: '30vw',
+    "&:disabled": {
+      backgroundColor: "mediumseagreen",
+      color: "white",
+    },
+  },
+  selectedItem: {
+    margin: theme.spacing(1),
+    padding: theme.spacing(1),
+    width: '30vw',
+    "&:disabled": {
+      borderColor: 'orangered',
+      color: 'orangered',
+    },
+  },
+  result: {
+    marginTop: theme.spacing(2),
   },
 }));
 
@@ -38,7 +60,6 @@ export default function Question(props) {
     if (!answered) {
       props.addScore(num);
       setChoice(choice);
-      console.log(`You choose ${choice}`);
       setAnswered(true);
     }
   }
@@ -50,7 +71,9 @@ export default function Question(props) {
 
   const _getChoiceState = function(key, userChoice) {
     if (userChoice < 0) { return 'default'; }
-    if (userChoice === key) {
+    if (props.q.items[key].result > 0) {
+      return 'correct';
+    } else if (userChoice === key) {
       return 'selected';
     } else {
       return 'disabled';
@@ -62,37 +85,45 @@ export default function Question(props) {
     setChoice(-1);
   }
 
+  const _isCorrect = function() {
+    if (userChoice < 0 || props.q.items[userChoice].result > 0) { return false; }
+    return true;
+  }
+
   return (
     <Paper className={classes.root}>
+      {/* render the question */}
       <Typography variant='h6' className={classes.question}>{props.q.question}</Typography>
+
+      {/* render options for the question */}
       <div className={classes.items}>
       {
         props.q.items.map((e, i) => {
-          if (_getChoiceState(i, userChoice) === 'selected') {
+          if (_getChoiceState(i, userChoice) === 'correct') {
             return (
-              <Tooltip key={i+1} disableHoverListener title='item'>
-                <Button variant='outlined' color='primary' onClick={() => _onAnswer(i, e.result)} className={classes.item}>{e.content}</Button>
-              </Tooltip>
-            )
+              <Button disabled key={i+1} variant='contained' color='primary' className={classes.rightItem}>{e.content}</Button>
+            );
           } else if (_getChoiceState(i, userChoice) === 'disabled') {
             return (
-              <Tooltip key={i+1} disableHoverListener title='item'>
-                <Button variant='outlined' disabled onClick={() => _onAnswer(i, e.result)} className={classes.item}>{e.content}</Button>
-              </Tooltip>
+              <Button disabled key={i+1} variant='outlined' className={classes.item}>{e.content}</Button>
+            )
+          } else if (_getChoiceState(i, userChoice) === 'selected') {
+            return (
+              <Button disabled key={i+1} variant='outlined' className={classes.selectedItem}>{e.content}</Button>
             )
           }
           return (
-          <Tooltip key={i+1} disableHoverListener title='item'>
-            <Button variant='outlined' onClick={() => _onAnswer(i, e.result)} className={classes.item}>{e.content}</Button>
-          </Tooltip>
+            <Button focusRipple key={i+1} variant='outlined' onClick={() => _onAnswer(i, e.result)} className={classes.item}>{e.content}</Button>
           )
         })
       }
       </div>
+
+      {/* render the result after answer */}
       {answered
-        ? <div>
+        ? <div className={classes.result}>
           <Typography align='center' variant='subtitle1'>You got {props.q.items[userChoice].result} points</Typography>
-          <Button onClick={_goNext}>Go to Next Question</Button>
+          <Button variant='outlined' color='primary' onClick={_goNext}>Go to Next Question</Button>
         </div>
         : <div></div>
       }
