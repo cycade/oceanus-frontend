@@ -1,11 +1,16 @@
 import { Component } from 'react';
-import { AppBar, Toolbar, Button, Typography, Hidden, IconButton, Menu, MenuItem, Link } from '@material-ui/core';
+import { AppBar, Toolbar, Button, Typography, Hidden, IconButton, Menu, MenuItem, Link, CardMedia } from '@material-ui/core';
 // import MenuIcon from '@material-ui/icons/menu';
 import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
+  },
+  logo: {
+    width: 40,
+    height: 40,
+    marginRight: theme.spacing(2),
   },
   title: {
     flexGrow: 1,
@@ -77,6 +82,7 @@ class NavigationBar extends Component {
             </Typography>
           </Hidden>
           <Hidden xsDown>
+            <CardMedia image='../static/img/logo.png' className={classes.logo}/>
             <Typography variant='h5' className={classes.title}>
               <Link href='/' underline='none' color='inherit'>PossumNest</Link>
             </Typography>
