@@ -68,18 +68,19 @@ class NavigationBar extends Component {
       <AppBar style={{background: `${this.state.navBarColor}`, boxShadow: 'none'}}>
         <Toolbar>
           <Hidden smUp>
-            <IconButton edge="start" color="inherit" aria-label="open drawer" onClick={this.handleClick.bind(this)}>
-              {/* <MenuIcon /> */}
-            </IconButton>
-            <Menu anchorEl={this.state.anchorEl} keepMounted open={Boolean(this.state.anchorEl)} onClose={this.handleClose.bind(this)}>
-              <MenuItem onClick={this.handleClose.bind(this)} href='/distributionMap'>Distribution Map</MenuItem>
-              <MenuItem onClick={this.handleClose.bind(this)} href='/clusteringMap'>Clustering Map</MenuItem>
-              <MenuItem onClick={this.handleClose.bind(this)} href='/news'>News</MenuItem>
-              <MenuItem onClick={this.handleClose.bind(this)}>Logout</MenuItem>
-            </Menu>
-            <Typography variant='h6' className={classes.title}>
+          <Typography variant='h6' className={classes.title}>
               <Link href='/' underline='none' color='inherit'>PossumNest</Link>
             </Typography>
+            <IconButton edge="start" color="inherit" aria-label="open drawer" onClick={this.handleClick.bind(this)}>
+              {/* <MenuIcon /> */}
+              <Button color='inherit'>Menu</Button>
+            </IconButton>
+            <Menu anchorEl={this.state.anchorEl} keepMounted open={Boolean(this.state.anchorEl)} onClose={this.handleClose.bind(this)}>
+              <MenuItem onClick={this.handleClose.bind(this)}><Button href='/distributionMap'>Distribution Map</Button></MenuItem>
+              <MenuItem onClick={this.handleClose.bind(this)}><Button href='/clusteringMap'>Clustering Map</Button></MenuItem>
+              <MenuItem onClick={this.handleClose.bind(this)}><Button href='/news'>News</Button></MenuItem>
+              <MenuItem onClick={this.handleClose.bind(this)}><Button>Logout</Button></MenuItem>
+            </Menu>
           </Hidden>
           <Hidden xsDown>
             <CardMedia image='../static/img/logo.png' className={classes.logo}/>

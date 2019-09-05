@@ -16,6 +16,7 @@ const useStyles = makeStyles(theme => ({
   tagCollection: {
     display: 'flex',
     justifyContent: 'center',
+    flexWrap: 'wrap',
     marginTop: theme.spacing(3),
   },
   tagButton: {
@@ -84,7 +85,7 @@ export default function NewsCollection(props) {
             </div>
             <div className={classes.collection}>
               {renderedNews.map((e, i) => {
-                return <NewsCard title={e.title} desc={e.description} link={e.url} key={i+1} num={i+1} />
+                return <NewsCard title={e.title} desc={e.description} link={e.url} key={i+1} num={news.indexOf(e) + 1} />
               })}
             </div>
           </div>
