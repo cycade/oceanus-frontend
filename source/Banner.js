@@ -1,7 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Paper, Typography, Grid, Hidden } from '@material-ui/core';
-import Image from '../static/img/B001.jpg';
+import Image from '../static/img/B002.jpg';
 
 const useStyles = makeStyles(theme => ({
   root: {
