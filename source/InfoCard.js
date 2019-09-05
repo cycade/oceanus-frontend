@@ -42,12 +42,12 @@ const useStyles = makeStyles(theme => ({
 
 const tileData = [
   {type: 'img', img: image1, title: 'title', featured: true},
-  {type: 'text', content: 'Broken sustainable forest logging rules, low habitats protection, bush fire and predator threats are the main endanger parameters', title: 'Survival Threats'},
+  {type: 'text', content: "I'm the only species in the petaurid genus Gymnobelideus in an ancestral form.", title: 'Rarity'},
   {type: 'img', img: image2, title: 'title', featured: true},
-  {type: 'text', content: 'Ending logging of Mountain Ash forests for habitat protection is the best hope of survival.', title: 'Conservation'},
-  {type: 'text', content: '20 million years ago the only species in the petaurid genus Gymnobelideus with an ancestral form.', title: 'Rare Species'},
+  {type: 'text', content: 'The greatest threats to my conservation in the wild are logging, low habitats protection, bush fire and predator threats.', title: 'Threats'},
+  {type: 'text', content: 'I\'m listed as a "critically endangered" species under the EPBC Act in 2015.', title: 'Endanger'},
   {type: 'img', img: image3, title: 'title', featured: true},
-  {type: 'text', content: 'List of Threatened Animals 1994 endangered red lists in the IUCN (International Union for the Conservation of Nature).', title: 'Endanger Species'},
+  {type: 'text', content: 'My conservation includes montane ash forest (i.e. Mt Ritchie) and sub-alpine woodland (i.e. Mount Baw Baw).', title: 'Conservation'},
   {type: 'img', img: image4, title: 'title', featured: true},
 ]
 
@@ -58,7 +58,7 @@ export default function InfoCard() {
     <div className={classes.root}>
     <Paper className={classes.paper}>
       <Hidden smDown>
-        <Typography variant='h4' className={classes.title}>What is Leadbeater's Possum?</Typography>
+        <Typography variant='h4' className={classes.title}>Do you know me?</Typography>
         <GridList cellHeight={120} spacing={1} cols={4} className={classes.gridList}>
           {tileData.map((tile, i) => {
             if (tile.type == 'text') {

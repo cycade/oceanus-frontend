@@ -32,12 +32,12 @@ export default function Banner(props) {
       <Grid container justify='center'>
         <Grid item className={classes.title}>
           <Hidden smDown>
-            <Typography align='center' variant='h2' className={classes.text}>Possum Nest</Typography>
-            <Typography align='center' className={classes.text}>Leadbeater's Possum is the only member of the genus Gymnobelideus and wild populations are confined to Victoria.</Typography>
+            <Typography align='center' variant='h2' className={classes.text}>Leadbeater's Possum</Typography>
+            <Typography align='center' className={classes.text}>The only member of the genus Gymnobelideus and wild populations are confined to Victoria.</Typography>
           </Hidden>
           <Hidden mdUp>
-            <Typography align='center' variant='h3' className={classes.text}>Possum Nest</Typography>
-            <Typography align='center' className={classes.text}>Leadbeater's Possum is the only member of the genus Gymnobelideus and wild populations are confined to Victoria.</Typography>
+            <Typography align='center' variant='h3' className={classes.text}>Leadbeater's Possum</Typography>
+            <Typography align='center' className={classes.text}>The only member of the genus Gymnobelideus and wild populations are confined to Victoria.</Typography>
           </Hidden>
         </Grid>
       </Grid>

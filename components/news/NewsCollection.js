@@ -49,7 +49,7 @@ export default class NewsCollection extends Component {
       <div id='news' className='py-5 container'>
         <div className="container pt-3">
             <div className="d-flex justify-content-center mt-3 pt-3">
-                <p className='h2'>News about Leadbeater's Possum</p>
+                <p className='h2'>News about me</p>
             </div>
         </div>
 

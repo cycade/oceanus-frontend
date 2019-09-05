@@ -27,7 +27,7 @@ export default class ChartWrapper extends Component {
     return (
       <div className='container p-auto mt-3' id='chart'>
         <div className='container col-12 d-flex justify-content-center mt-3 pt-3'>
-          <p className='h2'>When to see a lovely Leadbeater’s Possum</p>
+          <p className='h2'>Best time to find me</p>
         </div>
         {
           this._isChartReady()
@@ -37,7 +37,7 @@ export default class ChartWrapper extends Component {
               </div>
               <div className='container col-lg-8 col-md-6 col-12 p-3'>
                 <p className='h4 mx-5'><strong>October</strong>, <strong>March</strong>, and <strong>April</strong> have a high possibility of finding Leadbeater’s Possum occurrence. It’s better to be there in these months!</p>
-                <p className='mx-5 mt-3 pt-3'><strong>The record would be highlighted when clicking the barchart</strong></p>
+                <p className='mx-5 mt-3 pt-3'><strong className='text-danger'>The record would be highlighted when clicking the barchart</strong></p>
               </div>
             </div>
           : <LoadingSpinner />
