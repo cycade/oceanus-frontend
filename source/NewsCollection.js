@@ -71,7 +71,7 @@ export default function NewsCollection(props) {
   return (
     <div>
       <div className={classes.root}>
-        <Typography variant='h4' align='center'>News about Leadbeater's Possum</Typography>
+        <Typography variant='h4' align='center'>News about me</Typography>
       </div>
 
       { _isNewsReady()
