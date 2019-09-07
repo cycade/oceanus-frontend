@@ -1,4 +1,4 @@
-import { Paper, Typography, Button } from '@material-ui/core';
+import { Paper, Typography, Button, CardMedia, Popover } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useState } from 'react';
 
@@ -28,6 +28,12 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(1),
     width: '30vw',
   },
+  imageItem: {
+    width: '20vw',
+    height: 0,
+    paddingTop: '56.25%', // 16:9,
+    marginTop:'30'
+  },
   rightItem: {
     margin: theme.spacing(1),
     padding: theme.spacing(1),
@@ -36,6 +42,12 @@ const useStyles = makeStyles(theme => ({
       backgroundColor: "mediumseagreen",
       color: "white",
     },
+  },
+  choicedItem: {
+    margin: theme.spacing(1),
+    padding: theme.spacing(1),
+    width: '30vw',
+    borderColor: 'SlateBlue',
   },
   selectedItem: {
     margin: theme.spacing(1),
@@ -49,81 +61,148 @@ const useStyles = makeStyles(theme => ({
   result: {
     marginTop: theme.spacing(2),
   },
+  hint: {
+    margin: theme.spacing(2),
+  },
 }));
 
 export default function Question(props) {
   const classes = useStyles();
-  const [answered, setAnswered] = useState(false);
   const [userChoice, setChoice] = useState(-1);
+  const [hinted, setHint] = useState(false);
+  const [submitted, setSubmit] = useState(false);
 
-  const _onAnswer = function(choice, num) {
-    if (!answered) {
-      props.addScore(num);
-      setChoice(choice);
-      setAnswered(true);
-    }
+
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  function handleClick(event) {
+    setHint(true);
+    setAnchorEl(event.currentTarget);
   }
 
-  const _goNext = function() {
-    props.getNext();
+  function handleClose() {
+    setAnchorEl(null);
+  }
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
+
+
+
+  const _handleChoice = function(choice) {
+    setChoice(choice);
+  }
+
+  const _handleHint = function() {
+    setHint(true);
+  }
+
+  const _handleSubmit = function(choice) {
+    setSubmit(true);
+    if (_isCorrect()) {
+      if (hinted) { props.onAddScore(3); } else { props.onAddScore(5); }
+    }
+  }
+  
+  const _handleGetNext = function() {
     _clearChoice();
-  }
-
-  const _getChoiceState = function(key, userChoice) {
-    if (userChoice < 0) { return 'default'; }
-    if (props.q.items[key].result > 0) {
-      return 'correct';
-    } else if (userChoice === key) {
-      return 'selected';
-    } else {
-      return 'disabled';
-    }
+    props.onNext();
   }
 
   const _clearChoice = function() {
-    setAnswered(false);
     setChoice(-1);
+    setHint(false);
+    setSubmit(false);
   }
 
   const _isCorrect = function() {
-    if (userChoice < 0 || props.q.items[userChoice].result > 0) { return false; }
-    return true;
+    return userChoice === props.question.answer;
+  }
+
+  const _getChoiceState = function(index) {
+    if (index === props.question.answer) {
+      return 'correct';
+    } else if (index === userChoice) {
+      return 'selected';
+    }
+    return 'disabled';
   }
 
   return (
     <Paper className={classes.root}>
       {/* render the question */}
-      <Typography variant='h6' className={classes.question}>{props.q.question}</Typography>
+      <Typography variant='h6' className={classes.question}>{props.question.question}</Typography>
+      <Button aria-describedby={id} variant="contained" onClick={handleClick}>
+        Get some Hint!
+      </Button>
+      <Popover id={id} open={open} anchorEl={anchorEl} onClose={handleClose}
+        anchorOrigin={{ vertical: 'bottom', horizontal: 'center', }}
+        transformOrigin={{ vertical: 'top', horizontal: 'center', }}
+      >
+        <Typography className={classes.hint}>{props.question.hint}</Typography>
+      </Popover>
+      {/* <Typography variant='subtitle1' className={classes.question}>{props.question.hint}</Typography> */}
 
       {/* render options for the question */}
       <div className={classes.items}>
       {
-        props.q.items.map((e, i) => {
-          if (_getChoiceState(i, userChoice) === 'correct') {
-            return (
-              <Button disabled key={i+1} variant='contained' color='primary' className={classes.rightItem}>{e.content}</Button>
-            );
-          } else if (_getChoiceState(i, userChoice) === 'disabled') {
-            return (
-              <Button disabled key={i+1} variant='outlined' className={classes.item}>{e.content}</Button>
-            )
-          } else if (_getChoiceState(i, userChoice) === 'selected') {
-            return (
-              <Button disabled key={i+1} variant='outlined' className={classes.selectedItem}>{e.content}</Button>
-            )
+        props.question.items.map((e, i) => {
+          if (submitted) {
+            if (_getChoiceState(i, userChoice) === 'correct') {
+              return (
+                <Button disabled key={i+1} variant='contained' color='primary' className={classes.rightItem}>
+                  {
+                    e.img !== null 
+                    ?<CardMedia className={classes.imageItem} image={`../static/img/${e.img}`} title="Contemplative Reptile" />
+                    : <div></div>
+                  }
+                  <Typography>{e.text}</Typography>
+                </Button>
+              );
+            } else if (_getChoiceState(i, userChoice) === 'disabled') {
+              return (
+                <Button disabled key={i+1} variant='outlined' className={classes.item}>
+                  {
+                    e.img !== null 
+                    ?<CardMedia className={classes.imageItem} image={`../static/img/${e.img}`} title="Contemplative Reptile" />
+                    : <div></div>
+                  }
+                  <Typography>{e.text}</Typography>
+                </Button>
+              )
+            } else if (_getChoiceState(i, userChoice) === 'selected') {
+              return (
+                <Button disabled key={i+1} variant='outlined' className={classes.selectedItem}>
+                  {
+                    e.img !== null 
+                    ?<CardMedia className={classes.imageItem} image={`../static/img/${e.img}`} title="Contemplative Reptile" />
+                    : <div></div>
+                  }
+                  <Typography>{e.text}</Typography>
+                </Button>
+              )
+            }
           }
+
           return (
-            <Button focusRipple key={i+1} variant='outlined' onClick={() => _onAnswer(i, e.result)} className={classes.item}>{e.content}</Button>
+            <Button focusRipple key={i+1} variant='outlined' onClick={() => _handleChoice(i)} className={i===userChoice ? classes.choicedItem : classes.item}>
+              {
+                e.img !== null 
+                ?<CardMedia className={classes.imageItem} image={`../static/img/${e.img}`} title="Contemplative Reptile" />
+                : <div></div>
+              }
+              <Typography>{e.text}</Typography>
+            </Button>
           )
         })
       }
       </div>
-
+      <Button variant='outlined' onClick={() => _handleSubmit(userChoice)}>Submit</Button>
       {/* render the result after answer */}
-      {answered
+      {submitted
         ? <div className={classes.result}>
-          <Typography align='center' variant='subtitle1'>You got {props.q.items[userChoice].result} points</Typography>
-          <Button variant='outlined' color='primary' onClick={_goNext}>Go to Next Question</Button>
+          <Button variant='outlined' color='primary' onClick={_handleGetNext}>Go to Next Question</Button>
         </div>
         : <div></div>
       }

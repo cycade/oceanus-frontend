@@ -5,24 +5,70 @@ import Question from './Question.js';
 
 const questions = [
   {
-    question: 'What is the capital of Egypt?',
+    question: 'The following which one is the Leadbeater’s Possum?',
+    hint: 'Leadbeater’s possums are grey to greyish-brown above and paler below with a dark mid-dorsal (along centre of back) stripe.',
     items: [
-      { type: 'text', content: 'Cairo', result: 3},
-      { type: 'text', content: 'Budapest', result: 0},
-      { type: 'text', content: 'Dili', result: 0},
-      { type: 'text', content: 'Dhaka', result: 0},
+      {img: 'Q1A.jpg', text: null },
+      {img: 'Q1B.jpg', text: null },
+      {img: 'Q1C.jpg', text: null },
+      {img: 'Q1D.jpg', text: null },
     ],
     answer: 0,
   },
   {
-    question: 'What is the capital of Qatar?',
+    question: 'What one is not Leadbeater’s Possum Diet?',
+    hint: 'Its primary diet consists of insects such as spiders, beetles, crickets. It also licks off the leaves of trees, enjoys the gum, nectar and sap of wattle trees and eucalyptus trees.',
     items: [
-      { type: 'text', content: 'Moroni', result: 0},
-      { type: 'text', content: 'Dublin', result: 0},
-      { type: 'text', content: 'Doha', result: 3},
-      { type: 'text', content: 'Kabul', result: 0},
+      {img: 'Q2A.jpg', text: 'Fern' },
+      {img: 'Q2B.jpg', text: 'Beetles' },
+      {img: 'Q2C.jpg', text: 'Cricket' },
+      {img: 'Q2D.jpg', text: 'Eucalyptus leaves "honey dew"' },
     ],
     answer: 0,
+  },
+  {
+    question: 'Which one is not a threat to the Leadbeater\'s possum?',
+    hint: 'The greatest threats to conservation in the wild are logging, low habitats protection, bush fire and predator threats.',
+    items: [
+      {img: 'Q3A.jpg', text: 'Feral cat' },
+      {img: 'Q3B.jpg', text: 'Bushfire' },
+      {img: 'Q3C.jpg', text: 'Arid landscape' },
+      {img: 'Q3D.jpg', text: 'Logging' },
+    ],
+    answer: 2,
+  },
+  {
+    question: 'Which one is not the suitable living condition for Leadbeater\'s possums?',
+    hint: 'Leadbeater’s Possums prefer the hollows of dead trees over those of live ones. This may be because dead tree hollows are less damp and better drained than those if live trees.',
+    items: [
+      {img: null, text: 'Old-growth tree over 150 years' },
+      {img: null, text: 'Dead tree hollows' },
+      {img: null, text: 'Damp hollows environment' },
+      {img: null, text: 'Dense vegetation environment' },
+    ],
+    answer: 2,
+  },
+  {
+    question: 'Which one cannot provide efficient conservation for Leadbeater\'s possums?',
+    hint: 'Forest must be neither too old nor too young, with conservation efforts for Leadbeater\'s possum involving protection of remaining old-growth stands, and maintenance of younger stands that are allowed to attain hollow-bearing age.',
+    items: [
+      {img: 'Q5A.jpg', text: 'Saplings planting' },
+      {img: 'Q5B.jpg', text: 'Nest box settlement' },
+      {img: 'Q5C.jpg', text: 'Captive breeding program' },
+      {img: 'Q5D.jpg', text: 'Feral cats reporting' },
+    ],
+    answer: 0,
+  },
+  {
+    question: 'Which fact is not correct?',
+    hint: null,
+    items: [
+      {img: null, text: 'By the time of the 1939 Black Friday fires, the species was thought to have been extinct.' },
+      {img: null, text: 'They live in small family colonies of up to 12 individuals.' },
+      {img: null, text: 'Mating occurs only once a year, with a maximum of two joeys being born to each pair.' },
+      {img: null, text: 'Polygamy breeding pair.' },
+    ],
+    answer: 3,
   },
 ];
 
@@ -61,6 +107,15 @@ export default function Quiz(props) {
     setQuestionNumber(0);
     changeScore(0);
   }
+  const _getResult = function() {
+    if (score >= 25) {
+      return `Well done! Your grade is ${score}/30 marks, you are a magnificent Leadbeater's Possum lover`;
+    } else if (score >= 13) {
+      return `Good job! Your grade is ${score}/30 marks. Your can learn more from our website.`;
+    } else {
+      return `Finally finished! Your grade is ${score}/30 marks. You’ve got a lot to learn.`;
+    }
+  }
 
   return (
     <div className={classes.root}>
@@ -69,11 +124,16 @@ export default function Quiz(props) {
       {
         questionNumber < questions.length
         ? <div>
-          <Question q={questions[questionNumber]} addScore={addScore} getNext={getNext}/>
+          <Question question={questions[questionNumber]} onNext={getNext} onAddScore={addScore}/>
         </div>
         : <div className={classes.finish}>
-            <Typography variant='h5'>Finished!</Typography>
-            <Button className={classes.redo} variant='outlined' onClick={redo}>Redo the quiz!</Button>
+            <Typography variant='h5'>{_getResult()}</Typography>
+            {
+              score < 25
+              ? <Button className={classes.redo} variant='outlined' href='/news'>Read More</Button>
+              : <div></div>
+            }
+            {/* <Button className={classes.redo} variant='outlined' onClick={redo}>Redo the quiz!</Button> */}
           </div>
       }
     </div>
