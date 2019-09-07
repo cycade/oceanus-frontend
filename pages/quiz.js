@@ -1,6 +1,6 @@
 import React from 'react';
-import NavigationBar from '../source/NavigationBar.js';
-import Quiz from '../source/Quiz.js';
+import NavigationBar from '../components/NavigationBar.js';
+import Quiz from '../components/Quiz.js';
 
 
 

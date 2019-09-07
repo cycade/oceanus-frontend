@@ -1,11 +1,11 @@
-import NavigationBar from '../source/NavigationBar.js';
-import CssBaseline from '@material-ui/core/CssBaseline/CssBaseline';
-import Banner from '../source/Banner.js';
 import React from 'react';
-import InfoCard from '../source/InfoCard.js';
-import Footer from '../source/Footer.js';
+import CssBaseline from '@material-ui/core/CssBaseline/CssBaseline';
+import NavigationBar from '../components/NavigationBar.js';
+import Banner from '../components/Banner.js';
+import InfoCard from '../components/InfoCard.js';
+import Footer from '../components/Footer.js';
 
-export default function test() {
+export default function index() {
   return (
     <React.Fragment>
       <CssBaseline />

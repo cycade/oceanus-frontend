@@ -3,6 +3,12 @@ import { AppBar, Toolbar, Button, Typography, Hidden, IconButton, Menu, MenuItem
 // import MenuIcon from '@material-ui/icons/menu';
 import { withStyles } from '@material-ui/core/styles';
 
+const routes = [
+  { name: 'Record Map', route: './recordmap' },
+  { name: 'Quiz', route: './quiz' },
+  { name: 'News', route: './news' },
+]
+
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -76,9 +82,11 @@ class NavigationBar extends Component {
               <Button color='inherit'>Menu</Button>
             </IconButton>
             <Menu anchorEl={this.state.anchorEl} keepMounted open={Boolean(this.state.anchorEl)} onClose={this.handleClose.bind(this)}>
-              <MenuItem onClick={this.handleClose.bind(this)}><Button href='/distributionMap'>Distribution Map</Button></MenuItem>
-              <MenuItem onClick={this.handleClose.bind(this)}><Button href='/clusteringMap'>Clustering Map</Button></MenuItem>
-              <MenuItem onClick={this.handleClose.bind(this)}><Button href='/news'>News</Button></MenuItem>
+              {
+                routes.map((e, i) => {
+                  return <MenuItem key={i+1} onClick={this.handleClose.bind(this)}><Button href={e.route}>{e.name}</Button></MenuItem>
+                })
+              }
               <MenuItem onClick={this.handleClose.bind(this)}><Button>Logout</Button></MenuItem>
             </Menu>
           </Hidden>
@@ -87,9 +95,11 @@ class NavigationBar extends Component {
             <Typography variant='h5' className={classes.title}>
               <Link href='/' underline='none' color='inherit'>PossumNest</Link>
             </Typography>
-            <Button color='inherit' href='/distributionMap'>Distribution Map</Button>
-            <Button color='inherit' href='/clusteringMap'>Clustering Map</Button>
-            <Button color='inherit' href='/news'>News</Button>
+            {
+              routes.map((e, i) => {
+                return <Button key={i+1} color='inherit' href={e.route}>{e.name}</Button>
+              })
+            }
             <Button variant='outlined' color='inherit' className={classes.button}>Logout</Button>
           </Hidden>
         </Toolbar>

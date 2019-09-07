@@ -92,7 +92,7 @@ export default function NewsCollection(props) {
         :
           <div className={classes.loadingBar}>
             <Typography variant='subtitle2' align='center' color='secondary'>Fetching News for you</Typography>
-            <LinearProgress color='#435749'/>
+            <LinearProgress color='primary'/>
           </div>
       }
     </div>

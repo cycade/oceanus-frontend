@@ -1,6 +1,5 @@
-import Head from "next/head";
-import NavigationBar from '../source/NavigationBar.js';
-import NewsCollection from '../source/NewsCollection.js';
+import NavigationBar from '../components/NavigationBar.js';
+import NewsCollection from '../components/NewsCollection.js';
 
 export default function news() {
   return (

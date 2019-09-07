@@ -1,17 +1,11 @@
 import react, { Component } from 'react';
-import getDistanceFromLatLonInKm from '../../utils/getDistanceFromLatLonInKm.js';
-import getRecordPopup from '../../utils/getRecordPopup.js';
+import getDistanceFromLatLonInKm from '../utils/getDistanceFromLatLonInKm.js';
+import getRecordPopup from '../utils/getRecordPopup.js';
 
 const mapStyle = {
     height: 600,
     width: "100%"
 }
-
-let monthSeries = [
-    'January', 'February', 'March', 'April',
-    'May', 'June', 'July', 'August',
-    'September', 'October', 'November', 'December'
-];
 
 export default class RecordMap extends Component {
     constructor(props) {
@@ -117,7 +111,7 @@ export default class RecordMap extends Component {
         }
     }
 
-    _
+    
 
     render() {
         return (
