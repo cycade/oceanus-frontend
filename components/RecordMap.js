@@ -2,6 +2,7 @@ import { Component } from 'react';
 import getRecordPopup from '../utils/getRecordPopup.js';
 import * as turf from '@turf/turf';
 import getUnion from '../utils/getUnionBuffer.js';
+import bushwalking from '../static/json/bushwalking.json';
 
 export default class RecordMap extends Component {
   constructor(props) {
@@ -43,13 +44,13 @@ export default class RecordMap extends Component {
       this.props.data.map(e => {
         return [e.latitude, e.longitude, e.count]
       }),
-      {radiue: 25, blur: 5}
+      {radiue: 25, blur: 5, gradient: {0.1: 'blue', 0.3: 'lime', 0.45: 'red'}}
     )
 
     // render the distribution map
     this.map = L.mapquest.map('recordmap', {
       center: [-37.631482, 145.913061],
-      layers: [L.mapquest.tileLayer('map'), this.layers.distribution, this.layers.heatmap],
+      layers: [L.mapquest.tileLayer('light'), this.layers.distribution, this.layers.heatmap],
       zoom: 10
     })
 
@@ -65,14 +66,17 @@ export default class RecordMap extends Component {
       }
     }).addTo(this.map);
 
-    // add 200m buffer around the record
-    let polygons = getUnion(this.props.data.map(e => {
-      return [e.latitude, e.longitude];
-    }));
+    // add bushwalking bushwalking on the map
+    L.geoJSON(bushwalking).addTo(this.map);
 
-    for (let p of polygons) {
-      L.polygon(p).addTo(this.map);
-    }
+    // add 200m buffer around the record
+    // let polygons = getUnion(this.props.data.map(e => {
+    //   return [e.latitude, e.longitude];
+    // }));
+
+    // for (let p of polygons) {
+    //   L.polygon(p).addTo(this.map);
+    // }
 
     L.control.layers({}, {"Records": this.layers.distribution, "Heatmap": this.layers.heatmap}).addTo(this.map);
   }
