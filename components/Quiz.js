@@ -109,7 +109,7 @@ export default function Quiz(props) {
   }
   const _getResult = function() {
     if (score >= 25) {
-      return `Well done! Your grade is ${score}/30 marks, you are a magnificent Leadbeater's Possum lover`;
+      return `Well done! Your grade is ${score}/30 marks, you are a knowledgeable Leadbeater's Possum lover`;
     } else if (score >= 13) {
       return `Good job! Your grade is ${score}/30 marks. Your can learn more from our website.`;
     } else {

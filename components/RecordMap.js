@@ -1,8 +1,19 @@
 import { Component } from 'react';
 import getRecordPopup from '../utils/getRecordPopup.js';
-import * as turf from '@turf/turf';
-import getUnion from '../utils/getUnionBuffer.js';
 import bushwalking from '../static/json/bushwalking.json';
+
+function makeGeojson(coords) {
+  return ({
+    "type": "FeatureCollection",
+    "features": [
+      {
+        "type": "Feature",
+        "properties": {},
+        "geometry": { "type": "LineString", "coordinates": coords }
+      }
+    ]
+  });
+}
 
 export default class RecordMap extends Component {
   constructor(props) {
@@ -27,9 +38,9 @@ export default class RecordMap extends Component {
     // highlight the rest of occurrence records
     for (let record of this.props.data) {
       L.marker([record['latitude'], record['longitude']], {
-        icon: L.mapquest.icons.flag({
+        icon: L.mapquest.icons.via({
           primaryColor: this.state.baseColor,
-          secondaryColor: '#3B5998',
+          secondaryColor: '#ABA998',
           shadow: true,
           size: 'sm',
           symbol: `${record['count']}`
@@ -66,8 +77,11 @@ export default class RecordMap extends Component {
       }
     }).addTo(this.map);
 
-    // add bushwalking bushwalking on the map
-    L.geoJSON(bushwalking).addTo(this.map);
+    for (let route of bushwalking.content) {
+      L.geoJSON(makeGeojson(route['route']))
+      .bindPopup(route['name'])
+      .addTo(this.map);
+    }
 
     // add 200m buffer around the record
     // let polygons = getUnion(this.props.data.map(e => {
@@ -82,6 +96,6 @@ export default class RecordMap extends Component {
   }
 
   render() {
-    return <div id='recordmap' style={{height: '92vh', width: '100vw'}}></div>
+    return <div id='recordmap' style={{height: '92vh', width: '100vw'}}></div>;
   }
 }

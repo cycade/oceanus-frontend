@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core';
+import { makeStyles, Button, Drawer } from '@material-ui/core';
 
 import RecordMap from './RecordMap.js';
 import RecordChartByMonth from './RecordChartByMonth.js';
+import ReportFrom from './ReportForm.js';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,6 +19,7 @@ export default function RecordMapWrapper(props) {
   const [userLocation, setUserLocation] = useState([]);
   const [records, setRecords] = useState([]);
   const [recordsByMonth, setMonthRecords] = useState([]);
+  const [drawerState, setDrawerState] = useState(false);
 
   function _isUserLocationReady() {
     return userLocation.length > 0;
@@ -29,6 +31,14 @@ export default function RecordMapWrapper(props) {
 
   function _isMonthRecordsReady() {
     return recordsByMonth.length > 0;
+  }
+
+  function _handleOpenDrawer() {
+    setDrawerState(true);
+  }
+
+  function _handleCloseDrawer() {
+    setDrawerState(false);
   }
 
   useEffect(() => {
@@ -60,9 +70,17 @@ export default function RecordMapWrapper(props) {
     <div className={classes.root}>
       {
         _isRecordsReady()
+        // true
         ? <div className={classes.mapcontainer}>
           <div style={{ position: 'absolute', zIndex: 1000, marginLeft: 50 }}><RecordChartByMonth /></div>
           <RecordMap data={records} userLocation={userLocation} />
+          {/* <div style={{ height: '92vh', width: '100vw', backgroundColor: 'black'}}></div> */}
+          <div style={{ position: 'absolute', zIndex: 1000, marginTop: -80, width:'100vw', display: 'flex', justifyContent: 'center' }}>
+            <Button variant='contained' color='primary' onClick={_handleOpenDrawer}>Report</Button>
+          </div>
+          <Drawer open={drawerState} onClose={_handleCloseDrawer}>
+            <ReportFrom />
+          </Drawer>
         </div>
         : <div>loading</div>
       }

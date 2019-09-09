@@ -22,6 +22,7 @@
   "dependencies": {
     "@material-ui/core": "^4.3.3",
     "@material-ui/icons": "^4.2.1",
+    "@material-ui/pickers": "^3.2.5",
     "@turf/buffer": "^5.1.5",
     "@turf/helpers": "^6.1.4",
     "@turf/turf": "^5.1.6",
