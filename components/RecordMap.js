@@ -31,6 +31,11 @@ export default class RecordMap extends Component {
     };
   }
 
+  _toggleEnableSelect = (e) => {
+    console.log(this);
+    this.props.onSelect([e.latlng.lat, e.latlng.lng]);
+  }
+
   componentDidMount() {
     L.mapquest.key = 'jGneTJYe7bEeRvHy69LvAtGcADwoiNZ1';
 
@@ -71,9 +76,9 @@ export default class RecordMap extends Component {
       position: 'right',
       type: 'marker',
       icon: {
-          primaryColor: '#333333',
-          secondaryColor: '#333333',
-          size: 'sm'
+        primaryColor: '#333333',
+        secondaryColor: '#333333',
+        size: 'sm'
       }
     }).addTo(this.map);
 
@@ -93,6 +98,20 @@ export default class RecordMap extends Component {
     // }
 
     L.control.layers({}, {"Records": this.layers.distribution, "Heatmap": this.layers.heatmap}).addTo(this.map);
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log(`This props: ${this.props.enableSelect}, Next props: ${nextProps.enableSelect}`);
+    return nextProps.enableSelect !== this.props.enableSelect;
+  }
+
+  componentDidUpdate(prevProps) {
+    console.log(this.props.enableSelect);
+    if (this.props.enableSelect) {
+      this.map.on('click', this._toggleEnableSelect);
+    } else {
+      this.map.off('click', this._toggleEnableSelect);
+    }
   }
 
   render() {

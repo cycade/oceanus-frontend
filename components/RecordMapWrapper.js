@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { makeStyles, Button, Drawer } from '@material-ui/core';
+import { makeStyles, Button, Drawer, Snackbar } from '@material-ui/core';
 
 import RecordMap from './RecordMap.js';
 import RecordChartByMonth from './RecordChartByMonth.js';
@@ -16,10 +16,21 @@ const useStyles = makeStyles(theme => ({
 
 export default function RecordMapWrapper(props) {
   const classes = useStyles();
+  // the location of users
   const [userLocation, setUserLocation] = useState([]);
+
+  // if the record is fetched successfully
   const [records, setRecords] = useState([]);
   const [recordsByMonth, setMonthRecords] = useState([]);
+
+  // if drawer should open to user
   const [drawerState, setDrawerState] = useState(false);
+  
+  // if user start to report a record
+  const [selectState, setSelectState] = useState(false);
+
+  // if a location has been chosen for possum record
+  const [selectedLocation, setLocation] = useState([]);
 
   function _isUserLocationReady() {
     return userLocation.length > 0;
@@ -39,6 +50,26 @@ export default function RecordMapWrapper(props) {
 
   function _handleCloseDrawer() {
     setDrawerState(false);
+  }
+
+  function _handleSelectLocation(data) {
+    setLocation(data);
+    _handleOpenDrawer();
+    console.log(data);
+  }
+  
+  function _handleReport(data) {
+    // axios.post('psmapi.lcquest.com/user', data)
+    // .then(function (response) {
+    //   console.log(response);
+    // })
+    // .catch(function (error) {
+    //   console.log(error);
+    // });
+    _handleCloseDrawer();
+    setSelectState(false);
+
+    console.log(`${data.situation} post successfully!`);
   }
 
   useEffect(() => {
@@ -70,16 +101,25 @@ export default function RecordMapWrapper(props) {
     <div className={classes.root}>
       {
         _isRecordsReady()
-        // true
         ? <div className={classes.mapcontainer}>
           <div style={{ position: 'absolute', zIndex: 1000, marginLeft: 50 }}><RecordChartByMonth /></div>
-          <RecordMap data={records} userLocation={userLocation} />
-          {/* <div style={{ height: '92vh', width: '100vw', backgroundColor: 'black'}}></div> */}
+          <RecordMap data={records} userLocation={userLocation} onSelect={_handleSelectLocation} enableSelect={selectState} />
           <div style={{ position: 'absolute', zIndex: 1000, marginTop: -80, width:'100vw', display: 'flex', justifyContent: 'center' }}>
-            <Button variant='contained' color='primary' onClick={_handleOpenDrawer}>Report</Button>
+            <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+              open={selectState}
+              autoHideDuration={5000}
+              onClose={() => {}}
+              ContentProps={{ 'aria-describedby': 'message-id', }}
+              message={<span id="message-id">Click map to report a record</span>}
+            />
+            {
+              selectState
+              ? <Button variant='contained' color='primary' onClick={() => setSelectState(false)}>Quit Report</Button>
+              : <Button variant='contained' color='primary' onClick={() => setSelectState(true)}>Report</Button>
+            }
           </div>
           <Drawer open={drawerState} onClose={_handleCloseDrawer}>
-            <ReportFrom />
+            <ReportFrom latlng={selectedLocation} onReport={_handleReport}/>
           </Drawer>
         </div>
         : <div>loading</div>
