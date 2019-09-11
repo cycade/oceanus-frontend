@@ -58,7 +58,6 @@ export default function RecordMapWrapper(props) {
   function _handleSelectLocation(data) {
     setLocation(data);
     _handleOpenDrawer();
-    console.log(data);
   }
   
   function _handleReport(data) {
@@ -72,8 +71,14 @@ export default function RecordMapWrapper(props) {
     _handleCloseDrawer();
     setSelectState(false);
     setUserRecords([ ...recordsFromUser, data ]);
+  }
 
-    console.log(`${data.situation} post successfully!`);
+  function _getUserRecordByMonth() {
+    let recordByMonth = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    for (let record of recordsFromUser) {
+      recordByMonth[record.datetime.getMonth() + 1] += 1;
+    }
+    return recordByMonth;
   }
 
   useEffect(() => {
@@ -106,7 +111,11 @@ export default function RecordMapWrapper(props) {
       {
         _isRecordsReady()
         ? <div className={classes.mapcontainer}>
-          <div style={{ position: 'absolute', zIndex: 1000, marginLeft: 50 }}><RecordChartByMonth /></div>
+          
+          <div style={{ position: 'absolute', zIndex: 1000 }}>
+            <RecordChartByMonth recordFromUser={_getUserRecordByMonth()}/>
+          </div>
+
           <RecordMap
             data={records}
             recordsFromUser={recordsFromUser}
@@ -115,6 +124,7 @@ export default function RecordMapWrapper(props) {
             enableTemp={drawerState}
             onSelect={_handleSelectLocation}
           />
+
           <div style={{ position: 'absolute', zIndex: 1000, marginTop: -80, width:'100vw', display: 'flex', justifyContent: 'center' }}>
             <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
               open={selectState}
@@ -129,6 +139,7 @@ export default function RecordMapWrapper(props) {
               : <Button variant='contained' color='primary' onClick={() => setSelectState(true)}>Report</Button>
             }
           </div>
+
           <Drawer open={drawerState} onClose={_handleCloseDrawer}>
             <ReportFrom latlng={selectedLocation} onReport={_handleReport}/>
           </Drawer>

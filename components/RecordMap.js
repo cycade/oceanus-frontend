@@ -15,6 +15,16 @@ function makeGeojson(coords) {
   });
 }
 
+function getMessageFromRecord(record) {
+  return `
+    Time: ${record.datetime.getFullYear()}-${record.datetime.getMonth()+1}-${record.datetime.getDate()}<br/>
+    Weather: ${record.weather}<br/>
+    Situation: ${record.situation}<br/>
+    Hollow: ${record.hollow}<br/>
+
+  `;
+}
+
 export default class RecordMap extends Component {
   constructor(props) {
     super(props);
@@ -60,7 +70,9 @@ export default class RecordMap extends Component {
         size: 'sm',
         symbol: `${record['count']}`
       })
-    }).addTo(this.layers.recordsFromUser);
+    })
+    .bindPopup(getMessageFromRecord(record))
+    .addTo(this.layers.recordsFromUser);
   }
 
   _toggleEnableSelect = (e) => {
@@ -102,6 +114,7 @@ export default class RecordMap extends Component {
       .addTo(this.layers.bushwalking);
     }
 
+    // add click event for bushwalking icon
     this.layers.bushwalking.on("click", (event) => {
       if (event.layer._popup) {
         if (this.visibleBushwalkingId > 0) {
@@ -113,10 +126,10 @@ export default class RecordMap extends Component {
         let layer = L.geoJSON(makeGeojson(route['route']))
         .bindPopup(route['info'])
         .addTo(this.layers.bushwalking);
-        console.log(this.layers.bushwalking.getLayerId(layer));
 
         this.visibleBushwalkingId = this.layers.bushwalking.getLayerId(layer);
       }
+      this.map.flyTo([event.latlng.lat, event.latlng.lng], 12);
     });
 
     this.layers.distribution = L.layerGroup();
@@ -174,7 +187,6 @@ export default class RecordMap extends Component {
     L.control.layers({}, {
       "Records": this.layers.distribution,
       "Heatmap": this.layers.heatmap,
-      "Temp": this.layers.temp,
       "Upload": this.layers.recordsFromUser,
       "Bushwalking": this.layers.bushwalking,
     }).addTo(this.map);
@@ -202,7 +214,9 @@ export default class RecordMap extends Component {
 
     let currentLength = this.props.recordsFromUser.length;
     if (currentLength > prevProps.recordsFromUser.length) {
-      this._addRecordFromUser(this.props.recordsFromUser[currentLength - 1]);
+      let newRecord = this.props.recordsFromUser[currentLength - 1];
+      this._addRecordFromUser(newRecord);
+      this.layers.heatmap.addLatLng(newRecord.latlng);
     }
   }
 
