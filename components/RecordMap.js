@@ -20,6 +20,10 @@ export default class RecordMap extends Component {
     super(props);
     this.map = null;
 
+    this.bushwalking = {};
+
+    this.visibleBushwalkingId = -1;
+
     this.layers = {
       // show each record
       distribution: null,
@@ -29,7 +33,7 @@ export default class RecordMap extends Component {
       
       // show records reported by user #render
       recordsFromUser: null,
-      
+
       // show bushwalking route when icon selected
       bushwalking: null,
 
@@ -75,6 +79,45 @@ export default class RecordMap extends Component {
     // initialize layer to store user generate plot
     this.layers.recordsFromUser = L.featureGroup();
 
+    this.layers.bushwalking = L.featureGroup();
+    // add bushwalking route
+    for (let route of bushwalking.content) {
+      this.bushwalking[route['name']] = {
+        'route': route['route'],
+        'info': route['info'],
+      }
+
+      let coord = [route['route'][0][1], route['route'][0][0]];
+      L.marker(coord, {
+        icon: L.mapquest.icons.incident({
+          primaryColor: this.state.baseColor,
+          secondaryColor: '#ABA998',
+          shadow: true,
+          size: 'sm',
+        })
+      })
+
+      // L.geoJSON(makeGeojson(route['route']))
+      .bindPopup(route['name'])
+      .addTo(this.layers.bushwalking);
+    }
+
+    this.layers.bushwalking.on("click", (event) => {
+      if (event.layer._popup) {
+        if (this.visibleBushwalkingId > 0) {
+          this.layers.bushwalking.removeLayer(this.visibleBushwalkingId);
+        }
+
+        let bushwalkingName = event.layer._popup._content;
+        let route = this.bushwalking[bushwalkingName];
+        let layer = L.geoJSON(makeGeojson(route['route']))
+        .bindPopup(route['info'])
+        .addTo(this.layers.bushwalking);
+        console.log(this.layers.bushwalking.getLayerId(layer));
+
+        this.visibleBushwalkingId = this.layers.bushwalking.getLayerId(layer);
+      }
+    });
 
     this.layers.distribution = L.layerGroup();
     // highlight the rest of occurrence records
@@ -109,6 +152,7 @@ export default class RecordMap extends Component {
         this.layers.heatmap,
         this.layers.temp,
         this.layers.recordsFromUser,
+        this.layers.bushwalking,
       ],
       zoom: 10
     })
@@ -125,12 +169,6 @@ export default class RecordMap extends Component {
       }
     }).addTo(this.map);
 
-    // add bushwalking route
-    for (let route of bushwalking.content) {
-      L.geoJSON(makeGeojson(route['route']))
-      .bindPopup(route['name'])
-      .addTo(this.map);
-    }
 
     // add layer control tool on topright
     L.control.layers({}, {
@@ -138,6 +176,7 @@ export default class RecordMap extends Component {
       "Heatmap": this.layers.heatmap,
       "Temp": this.layers.temp,
       "Upload": this.layers.recordsFromUser,
+      "Bushwalking": this.layers.bushwalking,
     }).addTo(this.map);
   }
 
