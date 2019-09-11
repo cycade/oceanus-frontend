@@ -51,6 +51,7 @@ export default function ReportFrom(props) {
 
   const _getRecordInfo = () => {
     return ({
+      latlng: props.latlng,
       count: count,
       weather: weather,
       situation: situation,

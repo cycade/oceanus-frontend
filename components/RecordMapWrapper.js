@@ -32,6 +32,9 @@ export default function RecordMapWrapper(props) {
   // if a location has been chosen for possum record
   const [selectedLocation, setLocation] = useState([]);
 
+  // store all records uploaded by users
+  const [recordsFromUser, setUserRecords] = useState([]);
+
   function _isUserLocationReady() {
     return userLocation.length > 0;
   }
@@ -68,6 +71,7 @@ export default function RecordMapWrapper(props) {
     // });
     _handleCloseDrawer();
     setSelectState(false);
+    setUserRecords([ ...recordsFromUser, data ]);
 
     console.log(`${data.situation} post successfully!`);
   }
@@ -103,7 +107,14 @@ export default function RecordMapWrapper(props) {
         _isRecordsReady()
         ? <div className={classes.mapcontainer}>
           <div style={{ position: 'absolute', zIndex: 1000, marginLeft: 50 }}><RecordChartByMonth /></div>
-          <RecordMap data={records} userLocation={userLocation} onSelect={_handleSelectLocation} enableSelect={selectState} />
+          <RecordMap
+            data={records}
+            recordsFromUser={recordsFromUser}
+            userLocation={userLocation}
+            enableSelect={selectState}
+            enableTemp={drawerState}
+            onSelect={_handleSelectLocation}
+          />
           <div style={{ position: 'absolute', zIndex: 1000, marginTop: -80, width:'100vw', display: 'flex', justifyContent: 'center' }}>
             <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
               open={selectState}
