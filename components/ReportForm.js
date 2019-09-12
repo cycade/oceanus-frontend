@@ -113,16 +113,17 @@ export default function ReportFrom(props) {
             aria-labelledby="input-slider"
           />
         </Grid>
-        {/* <Grid item>
-          <Input
+        <Grid item>
+          {/* <Input
             className={classes.input}
             value={count}
             margin="dense"
             onChange={handleCountInputChange}
             onBlur={handleCountBlur}
             inputProps={{ step: 2, min: 0, max: maxCount, type: 'number', 'aria-labelledby': 'input-slider', }}
-          />
-        </Grid> */}
+          /> */}
+          <Typography>{count}</Typography>
+        </Grid>
       </Grid>
 
       {/* weather selector */}
