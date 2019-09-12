@@ -1,7 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { makeStyles, Typography, Grid, Slider, Input, InputLabel, Select, MenuItem, FormHelperText, Button } from '@material-ui/core';
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker } from '@material-ui/pickers';
+import axios from 'axios';
+import getDistanceFromLatLonInKm from '../utils/getDistanceFromLatLonInKm.js';
+
+const popularText = {
+  'pending': '',
+  'popular': 'It\'s a popular place!',
+  'unpopular': 'It\'s amazing to see it here!', 
+}
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,6 +31,7 @@ export default function ReportFrom(props) {
   const [weather, setWeather] = useState('Sunny');
   const [situation, setSituation] = useState('On the tree');
   const [hollow, setHollow] = useState(1);
+  const [isPopular, setPopular] = useState('pending');
 
   const handleCountSliderChange = (event, newValue) => {
     setCount(newValue);
@@ -59,11 +68,23 @@ export default function ReportFrom(props) {
     });
   }
 
+  useEffect(() => {
+    axios.get(`https://psmapi.lcquest.com/api/v1/records/nearest?lat=${props.latlng[0]}&lng=${props.latlng[1]}`)
+    .then(function (response) {
+      let lat = response.data.latitude;
+      let lng = response.data.longitude;
+      setPopular(getDistanceFromLatLonInKm(props.latlng[0], props.latlng[1], lat, lng) < 2 ? 'popular' : 'unpopular');
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }, [])
+
   return (
     <div className={classes.root}>
       
       <Typography>Report A Leadbeater's Possum</Typography>
-      <Typography>location: {props.latlng}</Typography>
+      <Typography variant='subtitle2'>{popularText[isPopular]}</Typography>
 
       {/* date and time selector */}
       <MuiPickersUtilsProvider utils={DateFnsUtils} style={{ display: 'flex' }}>
