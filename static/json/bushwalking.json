@@ -3,6 +3,11 @@
     {
       "name": "Baw Baw Summit",
       "info":"Mount Baw Baw Summit is a 3.5km, grade 3 Circuit hike located in Baw Baw National Park Victoria. The hike should take approximately 1hrs to complete.",
+      "Distance":"3.5km",
+      "Level":"3",
+      "Type":"Circuit",
+      "Time":"1hrs",
+      "Reigon":"Baw Baw National Park",
       "route": [
         [ 146.26471, -37.840732 ],
         [ 146.264845, -37.840708 ],
@@ -326,6 +331,11 @@
     {
       "name": "Big Pats Creek to Starlings Gap",
       "info":"Big Pats Creek to Starlings Gap is a 9.6km, grade 3 One Way hike located in Yarra State Forest Victoria. The hike should take approximately 3hrs to complete.",
+      "Distance":"9.6km",
+      "Level":"3",
+      "Type":"One Way",
+      "Time":"3hrs",
+      "Reigon":"Yarra State Forest",
       "route": [
         [ 145.7531036, -37.76377934 ],
         [ 145.753157363, -37.7636961143 ],
@@ -1232,6 +1242,11 @@
     {
       "name": "Cathedral Range - Cathedral Jawbones",
       "info":"Cathedral Range – Cathedral Jawbones is a 12.8km, grade 3 Circuit hike located in Cathedral Range State Park Victoria. The hike should take approximately 5hrs to complete.",
+      "Distance":"12.8km",
+      "Level":"3",
+      "Type":"Circuit",
+      "Time":"5hrs",
+      "Reigon":"Cathedral Range State Park", 
       "route": [
         [ 145.753252774, -37.3557306273 ],
         [ 145.753385641, -37.3556506036 ],
@@ -2432,6 +2447,11 @@
     {
       "name": "Great Walhalla Alpine Trail",
       "info":"Great Walhalla Alpine Trail is a 41.4km, grade 4 One way hike located in Alpine National Park Victoria. The hike should take approximately 2 days to complete.",
+      "Distance":"41.4km",
+      "Level":"4",
+      "Type":"One Way",
+      "Time":"2days",
+      "Reigon":"Alpine National Park",
       "route": [
         [ 146.264420142, -37.840652307 ],
         [ 146.264469763, -37.840661947 ],
@@ -5447,6 +5467,11 @@
     {
       "name": "High Lead to Powelltown via Reids Tramline",
       "info":"High Lead to Powelltown via Reids Tramline is a 13.7km, grade 3 One Way hike located in Yarra State Forest Victoria. The hike should take approximately 4-5hrs to complete.",
+      "Distance":"13.7km",
+      "Level":"3",
+      "Type":"One Way",
+      "Time":"4-5hrs",
+      "Reigon":"Yarra State Forest",   
       "route": [
         [ 145.84945427, -37.87887126 ],
         [ 145.849156011, -37.8787762881 ],
@@ -5761,6 +5786,11 @@
     {
       "name": "Keppell Lookout & Steavenson Falls",
       "info":"Keppell Lookout and Steavenson Falls is a 15.5km, grade 3 Circuit hike located in Marysville Reserve Victoria. The hike should take approximately 5hrs to complete.",
+      "Distance":"15.5km",
+      "Level":"3",
+      "Type":"Circuit",
+      "Time":"5hrs",
+      "Reigon":"Marysville Reserve", 
       "route": [
         [ 145.74735403, -37.51482355 ],
         [ 145.747344, -37.514812 ],
@@ -6285,6 +6315,11 @@
     {
       "name": "Lake Mountain and Keppel Hut",
       "info":"Lake Mountain and Keppel Hut is a 21.7km, grade 3 circuit hike located in Yarra Ranges National Park Victoria. The hike should take approximately 7hrs to complete.",
+      "Distance":"21.7km",
+      "Level":"3",
+      "Type":"Circuit",
+      "Time":"7hrs",
+      "Reigon":"Yarra Ranges National Park", 
       "route": [
         [ 145.87327838, -37.51305343 ],
         [ 145.873276, -37.513053 ],
@@ -7032,6 +7067,11 @@
     {
       "name": "Lake Mountain Woolbutt Loop",
       "info":"Lake Mountain Woolybutt Loop is a 14.2km, grade 3 Circuit hike located in Yarra Ranges National Park Victoria. The hike should take approximately 5hrs to complete.",
+      "Distance":"14.2km",
+      "Level":"3",
+      "Type":"Circuit",
+      "Time":"5hrs",
+      "Reigon":"Yarra Ranges National Park", 
       "route": [
         [ 145.87742507, -37.49542233 ],
         [ 145.877439, -37.495414 ],
@@ -7466,6 +7506,11 @@
     {
       "name": "Mount Donna Buang via Cement Creek and Mt Victoria Circuit",
       "info":"Mount Donna Buang via Cement Creek and Mt Victoria Circuit is a 7.7km, grade 3 One Way hike located in Mt Donna Buang Victoria. The hike should take approximately 4hrs to complete.",
+      "Distance":"7.7km",
+      "Level":"3",
+      "Type":"One Way",
+      "Time":"4hrs",
+      "Reigon":"Mt Donna Buang", 
       "route": [
         [ 145.70715845, -37.7117921 ],
         [ 145.70680976, -37.71175815 ],
@@ -7792,6 +7837,11 @@
     {
       "name": "Mt Donna Buang",
       "info":"Mt Donna Buang is a 18km, grade 4 Return hike located in Warburton Victoria. The hike should take approximately 7hrs to complete.",
+      "Distance":"18km",
+      "Level":"4",
+      "Type":"Return",
+      "Time":"7hrs",
+      "Reigon":"Warburton", 
       "route": [
         [ 145.6881347950548, -37.75395451113582 ],
         [ 145.6880941428244, -37.75392877869308 ],
@@ -9661,6 +9711,11 @@
     {
       "name": "Mt Donna Buang - Short",
       "info":"Mt Donna Buang - Short is a 6km, Return hike located in Warburton Victoria.",
+      "Distance":"6km",
+      "Level":"",
+      "Type":"Return",
+      "Time":"",
+      "Reigon":"Warburton", 
       "route": [
         [ 145.68138191476464, -37.70664386451244 ],
         [ 145.68139750510454, -37.70661989226937 ],
@@ -10538,6 +10593,11 @@
     {
       "name": "Mount Donna Buang - 10 Mile Turntable to Summit",
       "info":"Mount Donna Buang – 10 Mile Turntable to Summit is a 2.8km, grade 2 Circuit hike located in Mt Donna Buang Victoria. The hike should take approximately 1.5hrs to complete.",
+      "Distance":"2.8km",
+      "Level":"2",
+      "Type":"Circuit",
+      "Time":"1.5hrs",
+      "Reigon":"Mt Donna Buang", 
       "route": [
         [ 145.68702579, -37.7129846 ],
         [ 145.68724036, -37.71306523 ],
@@ -10626,6 +10686,11 @@
     {
       "name": "Monda Track",
       "info":"Monda Track is a 18.1km, grade 3 Circuit hike located in Black Range State Forest Victoria. The hike should take approximately 5-6hrs to complete.",
+      "Distance":"18.1km",
+      "Level":"3",
+      "Type":"Circuit",
+      "Time":"5-6hrs",
+      "Reigon":"Black Range State Forest", 
       "route": [
         [ 145.642808607, -37.5922513608 ],
         [ 145.64288946, -37.5923253731 ],
@@ -12324,6 +12389,11 @@
     {
       "name": "Mount Saint Gwinear",
       "info":"Mount St Gwinear is a 8km, grade 4 Return hike located in Baw Baw National Park Victoria. The hike should take approximately 3hrs to complete.",
+      "Distance":"8km",
+      "Level":"4",
+      "Type":"Return",
+      "Time":"3hrs",
+      "Reigon":"Baw Baw National Park", 
       "route": [
         [ 146.331812, -37.840344 ],
         [ 146.331798, -37.840347 ],
@@ -13962,6 +14032,11 @@
     {
       "name": "Mount Torbreck Circuit",
       "info":"Mount Torbreck Circuit is a 9km, grade 4 Circuit hike located in Mount Torbreck Scenic Reserve Victoria. The hike should take approximately 4hrs to complete.",
+      "Distance":"9km",
+      "Level":"4",
+      "Type":"Circuit",
+      "Time":"4hrs",
+      "Reigon":"Mount Torbreck Scenic Reserve", 
       "route": [
         [145.927994, -37.368408 ],
         [ 145.927356, -37.368192 ],
@@ -14171,6 +14246,11 @@
     {
       "name": "Mount Torbreck",
       "info":"Mount Torbreck is a 7.3km, grade 3 Circuit hike located in Mount Torbreck Scenic Reserve Victoria. The hike should take approximately 4hrs to complete.",
+      "Distance":"7.3km",
+      "Level":"3",
+      "Type":"Circuit",
+      "Time":"4hrs",
+      "Reigon":" Mount Torbreck Scenic Reserve", 
       "route": [
         [ 145.928006, -37.368499 ],
         [ 145.928015, -37.368393 ],
@@ -14603,6 +14683,11 @@
     {
       "name": "Mushroom Rocks",
       "info":"Mushroom Rocks is a 4.25km, grade 3 Return hike located in Baw Baw National Park Victoria. The hike should take approximately 2hrs to complete.",
+      "Distance":"4.25km",
+      "Level":"3",
+      "Type":"Return",
+      "Time":"2hrs",
+      "Reigon":"Baw Baw National Park", 
       "route": [
         [ 146.355323, -37.89284 ],
         [ 146.355348, -37.892829 ],
@@ -15325,6 +15410,11 @@
     {
       "name": "Cathedral Range Northern Circuit",
       "info":"Cathedral Range – Northern Circuit is a 14.7km, grade 4 Circuit hike located in Cathedral Range State Park Victoria. The hike should take approximately 6hrs to complete.",
+      "Distance":"14.7km",
+      "Level":"4",
+      "Type":"Circuit",
+      "Time":"6hrs",
+      "Reigon":"Cathedral Range State Park", 
       "route": [
         [ 145.76087236, -37.37947185 ],
         [ 145.760711, -37.379451 ],
@@ -15770,6 +15860,11 @@
     {
       "name": "Nojee Trestle Bridge",
       "info":"Nojee Trestle Bridge is a 5.3km, grade 1 Return hike located in Yarra State Forest VIC. The hike should take approximately 1.5hrs to complete.",
+      "Distance":"5.3km",
+      "Level":"1",
+      "Type":"Return",
+      "Time":"1.5hrs",
+      "Reigon":"Yarra State Forest", 
       "route": [
         [ 145.99936903, -37.8936095 ],
         [ 145.99943876, -37.8935714 ],
@@ -15890,6 +15985,11 @@
     {
       "name": "Poverty Point Bridge",
       "info":"Poverty Point Bridge is a 8.8km, grade 3 Circuit hike located in Walhalla Historic Area Victoria. The hike should take approximately 3hrs to complete.",
+      "Distance":"8.8km",
+      "Level":"3",
+      "Type":"Circuit",
+      "Time":"3hrs",
+      "Reigon":"Walhalla Historic Area", 
       "route": [
         [ 146.419895, -37.958229 ],
         [ 146.419891, -37.958246 ],
@@ -17008,6 +17108,11 @@
     {
       "name": "Rubicon Aqueducts",
       "info":"Rubicon Aqueducts is a 17.3km, grade 3 Circuit hike located in Rubicon Historic Area Victoria. The hike should take approximately 5-6hrs to complete.",
+      "Distance":"17.3km",
+      "Level":"3",
+      "Type":"Circuit",
+      "Time":"5-6hrs",
+      "Reigon":"Rubicon Historic Area", 
       "route": [
         [ 145.8683703974, -37.3581550091 ],
         [ 145.8682228612, -37.358274979 ],
@@ -18080,6 +18185,11 @@
     {
       "name": "Cathedral Range - Ridgeline Circuit",
       "info":"Cathedral Range – Ridgeline Circuit is a 18.2km, grade 4 Circuit hike located in Cathedral Range Victoria. The hike should take approximately 7hrs to complete.",
+      "Distance":"18.2km",
+      "Level":"4",
+      "Type":"Circuit",
+      "Time":"7hrs",
+      "Reigon":"Cathedral Range", 
       "route": [
         [ 145.7604758782, -37.3789146037 ],
         [ 145.760550892, -37.3789736623 ],
@@ -20593,6 +20703,11 @@
     {
       "name": "Rubicon Power Stations",
       "info":"Rubicon Power Station is a 24km .",
+      "Distance":"24m",
+      "Level":"",
+      "Type":"Circuit",
+      "Time":"",
+      "Reigon":"Rubicon Historic Area ", 
       "route": [
         [ 145.8605969, -37.32614735 ],
         [ 145.860603, -37.326154 ],
@@ -21364,6 +21479,11 @@
     {
       "name": "Richards Tramline",
       "info":"Richard’s Tramline is a 22.6km, grade 4 Return hike located in Warburton Victoria. The hike should take approximately 8hrs to complete.",
+      "Distance":"22.6km",
+      "Level":"4",
+      "Type":"Return",
+      "Time":"8hrs",
+      "Reigon":"Warburton", 
       "route": [
         [ 145.82118527032435, -37.77315041050315 ],
         [ 145.82118686288595, -37.77314906939864 ],
@@ -22488,6 +22608,11 @@
     {
       "name": "Starling Gap to High Lead Carpark",
       "info":"Starling Gap to High Lead Carpark is a 17.9km, grade 4 One Way hike located in Yarra State Forest Victoria. The hike should take approximately 6hrs to complete.",
+      "Distance":"17.9km",
+      "Level":"4",
+      "Type":"One Way",
+      "Time":"6hrs",
+      "Reigon":"Yarra State Forest", 
       "route": [
         [ 145.80157971, -37.81411898 ],
         [ 145.80171592, -37.81413128 ],
@@ -24150,6 +24275,11 @@
     {
       "name": "Cathedral Range - Southern Circuit",
       "info":"Cathedral Range – Southern Circuit is a 11km, grade 4-5 circuit hike located in Cathedral Range Victoria. The hike should take approximately 3-4hrs to complete but can take longer due to the steep and challenging ascent.",
+      "Distance":"11km",
+      "Level":"4-5",
+      "Type":"Circuit",
+      "Time":"3-4hrs",
+      "Reigon":"Cathedral Range", 
       "route": [
         [ 145.76174154, -37.37892716 ],
         [ 145.76166729, -37.37894742 ],
