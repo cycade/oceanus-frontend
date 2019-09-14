@@ -1,6 +1,8 @@
 import { Paper, Typography, Button, CardMedia, Popover } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCheckCircle } from '@fortawesome/free-regular-svg-icons';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -199,6 +201,7 @@ export default function Question(props) {
       }
       </div>
       <Button variant='outlined' onClick={() => _handleSubmit(userChoice)}>Submit</Button>
+      <FontAwesomeIcon icon={faCheckCircle}/>
       {/* render the result after answer */}
       {submitted
         ? <div className={classes.result}>
