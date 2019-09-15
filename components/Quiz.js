@@ -101,7 +101,7 @@ export default function Quiz(props) {
   const [questionNumber, setQuestionNumber] = useState(0);
   const classes = useStyles();
 
-  const addScore = function(num) { console.log(num); changeScore(score + num); }
+  const addScore = function(num) { changeScore(score + num); }
   const getNext = function() { setQuestionNumber(questionNumber + 1); }
   const redo = function() {
     setQuestionNumber(0);

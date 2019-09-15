@@ -4,6 +4,7 @@ import { makeStyles, Button, Drawer, Snackbar } from '@material-ui/core';
 import RecordMap from './RecordMap.js';
 import RecordChartByMonth from './RecordChartByMonth.js';
 import ReportFrom from './ReportForm.js';
+import Dialog from './Dialog.js';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,6 +29,9 @@ export default function RecordMapWrapper(props) {
 
   // if drawer should open to user
   const [drawerState, setDrawerState] = useState(false);
+
+  // if congratulation dialog shows
+  const [dialogState, setDialogState] = useState(false);
   
   // if a location has been chosen for possum record
   const [selectedLocation, setLocation] = useState([]);
@@ -70,6 +74,7 @@ export default function RecordMapWrapper(props) {
     // });
     _handleCloseDrawer();
     setSelectState(false);
+    setDialogState(true);
     setUserRecords([ ...recordsFromUser, data ]);
   }
 
@@ -143,6 +148,8 @@ export default function RecordMapWrapper(props) {
           <Drawer open={drawerState} onClose={_handleCloseDrawer}>
             <ReportFrom latlng={selectedLocation} onReport={_handleReport}/>
           </Drawer>
+
+          <Dialog open={dialogState} onClose={() => setDialogState(false)} count={recordsFromUser.length > 0 ? recordsFromUser[recordsFromUser.length - 1].count : 0} />
         </div>
         : <div>loading</div>
       }
