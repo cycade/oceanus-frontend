@@ -116,7 +116,7 @@ export default class RecordMap extends Component {
       })
 
       // L.geoJSON(makeGeojson(route['route']))
-      .bindPopup(`${route['name']}</br>Distance: ${route['Distance']}, Level: ${route['Level']}, Time: ${route['Time']}, Region: ${route['Reigon']}`)
+      .bindPopup(`${route['name']}</br>Distance: ${route['distance']}, Level: ${route['level']}, Time: ${route['time']}, Region: ${route['region']}`)
       .addTo(this.layers.bushwalking);
     }
 
