@@ -56,7 +56,7 @@ export default function Question(props) {
   const _handleChoose = function(index) {
     setChoice(index);
     if (index === props.question.answer) {
-      if (hinted) { props.onAddScore(3); }
+      if (hinted && props.question.hint !== null) { props.onAddScore(3); }
       else { props.onAddScore(5); }
     }
   }
@@ -97,7 +97,7 @@ export default function Question(props) {
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center', }}
         transformOrigin={{ vertical: 'top', horizontal: 'center', }}
       >
-        <Typography className={classes.hint}>{props.question.hint}</Typography>
+        <Typography className={classes.hint}>{props.question.hint || 'Nothing to hint!'}</Typography>
       </Popover>
       {/* <Typography variant='subtitle1' className={classes.question}>{props.question.hint}</Typography> */}
 

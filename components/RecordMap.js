@@ -57,7 +57,6 @@ export default class RecordMap extends Component {
     this.state = {
       baseColor: '#22407F',
       markColor: '#c43a31',
-      lastPoint: null,
       layerState: {
         'distribution': true,
         'recordsFromUser': true,
