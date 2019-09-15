@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import getRecordPopup from '../utils/getRecordPopup.js';
 import bushwalking from '../static/json/bushwalking.json';
-import MapControlLabel from './mapControlLabel.js';
+import MapControlLabel from './MapControlLabel.js';
 
 function makeGeojson(coords) {
   return ({
