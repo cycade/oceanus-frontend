@@ -55,7 +55,7 @@ export default function Question(props) {
 
   const _handleChoose = function(index) {
     setChoice(index);
-    if (userChoice === props.question.answer) {
+    if (index === props.question.answer) {
       if (hinted) { props.onAddScore(3); }
       else { props.onAddScore(5); }
     }

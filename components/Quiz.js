@@ -101,7 +101,7 @@ export default function Quiz(props) {
   const [questionNumber, setQuestionNumber] = useState(0);
   const classes = useStyles();
 
-  const addScore = function(num) { changeScore(score + num); }
+  const addScore = function(num) { console.log(num); changeScore(score + num); }
   const getNext = function() { setQuestionNumber(questionNumber + 1); }
   const redo = function() {
     setQuestionNumber(0);
@@ -111,7 +111,7 @@ export default function Quiz(props) {
     if (score >= 25) {
       return `Well done! Your grade is ${score}/30 marks, you are a knowledgeable Leadbeater's Possum lover`;
     } else if (score >= 13) {
-      return `Good job! Your grade is ${score}/30 marks. Your can learn more from our website.`;
+      return `Good job! Your grade is ${score}/30 marks. You can learn more from our website.`;
     } else {
       return `Finally finished! Your grade is ${score}/30 marks. You’ve got a lot to learn.`;
     }
@@ -124,7 +124,7 @@ export default function Quiz(props) {
       {
         questionNumber < questions.length
         ? <div>
-          <Question question={questions[questionNumber]} onNext={getNext} onAddScore={addScore}/>
+          <Question key={questionNumber+1} question={questions[questionNumber]} onNext={getNext} onAddScore={addScore}/>
         </div>
         : <div className={classes.finish}>
             <Typography variant='h5'>{_getResult()}</Typography>
