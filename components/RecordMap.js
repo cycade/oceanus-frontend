@@ -116,7 +116,7 @@ export default class RecordMap extends Component {
       })
 
       // L.geoJSON(makeGeojson(route['route']))
-      .bindPopup(`${route['name']}</br>Distance: ${route['Distance']}, Grade: ${route['Level']}, Time: ${route['Time']}, Location: ${route['Reigon']}`)
+      .bindPopup(`${route['name']}</br>Distance: ${route['Distance']}, Level: ${route['Level']}, Time: ${route['Time']}, Region: ${route['Reigon']}`)
       .addTo(this.layers.bushwalking);
     }
 
@@ -127,7 +127,8 @@ export default class RecordMap extends Component {
           this.layers.bushwalking.removeLayer(this.visibleBushwalkingId);
         }
 
-        let bushwalkingName = event.layer._popup._content;
+        let bushwalkingName = event.layer._popup._content.split('</br>')[0];
+        console.log(bushwalkingName);
         let route = this.bushwalking[bushwalkingName];
         let layer = L.geoJSON(makeGeojson(route['route']))
         .addTo(this.layers.bushwalking);
