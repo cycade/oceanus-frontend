@@ -122,19 +122,18 @@ export default class RecordMap extends Component {
 
     // add click event for bushwalking icon
     this.layers.bushwalking.on("click", (event) => {
-      // if (event.layer._popup) {
-      //   if (this.visibleBushwalkingId > 0) {
-      //     this.layers.bushwalking.removeLayer(this.visibleBushwalkingId);
-      //   }
+      if (event.layer._popup) {
+        if (this.visibleBushwalkingId > 0) {
+          this.layers.bushwalking.removeLayer(this.visibleBushwalkingId);
+        }
 
-      //   let bushwalkingName = event.layer._popup._content;
-      //   let route = this.bushwalking[bushwalkingName];
-      //   let layer = L.geoJSON(makeGeojson(route['route']))
-      //   .bindPopup(`${route['name']}</br>Distance: ${route['Distance']}, Grade: ${route['Level']}, Time: ${route['Time']}, Location: ${route['Region']}`)
-      //   .addTo(this.layers.bushwalking);
+        let bushwalkingName = event.layer._popup._content;
+        let route = this.bushwalking[bushwalkingName];
+        let layer = L.geoJSON(makeGeojson(route['route']))
+        .addTo(this.layers.bushwalking);
 
-      //   this.visibleBushwalkingId = this.layers.bushwalking.getLayerId(layer);
-      // }
+        this.visibleBushwalkingId = this.layers.bushwalking.getLayerId(layer);
+      }
       this.map.flyTo([event.latlng.lat, event.latlng.lng], 12);
     });
 
