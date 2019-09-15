@@ -13,6 +13,8 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+    // clipPath: 'polygon(0 0, 100% 0, 100% calc(100% - 3vw), 0% 100%)',
+    clipPath: "ellipse(110% 85% at 50% 15%)"
   },
   title: {
     paddingTop: theme.spacing(9),

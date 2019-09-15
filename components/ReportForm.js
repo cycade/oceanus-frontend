@@ -27,7 +27,7 @@ export default function ReportFrom(props) {
   const maxCount = 20;
 
   const [selectedDate, setSelectedDate] = useState(new Date());
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(1);
   const [weather, setWeather] = useState('Sunny');
   const [situation, setSituation] = useState('On the tree');
   const [hollow, setHollow] = useState(1);
@@ -107,8 +107,8 @@ export default function ReportFrom(props) {
       <Grid container spacing={2} alignItems="center">
         <Grid item xs>
           <Slider
-            value={typeof count === 'number' ? count : 0}
-            max={maxCount}
+            value={typeof count === 'number' ? count : 1}
+            min={1} max={maxCount}
             onChange={handleCountSliderChange}
             aria-labelledby="input-slider"
           />

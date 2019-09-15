@@ -1,6 +1,7 @@
 import { Component } from 'react';
 import getRecordPopup from '../utils/getRecordPopup.js';
 import bushwalking from '../static/json/bushwalking.json';
+import MapControlLabel from './mapControlLabel.js';
 
 function makeGeojson(coords) {
   return ({
@@ -21,7 +22,6 @@ function getMessageFromRecord(record) {
     Weather: ${record.weather}<br/>
     Situation: ${record.situation}<br/>
     Hollow: ${record.hollow}<br/>
-
   `;
 }
 
@@ -58,6 +58,12 @@ export default class RecordMap extends Component {
       baseColor: '#22407F',
       markColor: '#c43a31',
       lastPoint: null,
+      layerState: {
+        'distribution': true,
+        'recordsFromUser': true,
+        'bushwalking': true,
+        'heatmap': true,
+      },
     };
   }
 
@@ -161,11 +167,7 @@ export default class RecordMap extends Component {
       center: [-37.631482, 145.913061],
       layers: [
         L.mapquest.tileLayer('light'),
-        this.layers.distribution,
-        this.layers.heatmap,
-        this.layers.temp,
-        this.layers.recordsFromUser,
-        this.layers.bushwalking,
+        ...(Object.values(this.layers).filter(e => e !== null)),
       ],
       zoom: 10
     })
@@ -175,29 +177,8 @@ export default class RecordMap extends Component {
       text: 'Your Location',
       position: 'right',
       type: 'marker',
-      icon: {
-        primaryColor: '#333333',
-        secondaryColor: '#333333',
-        size: 'sm'
-      }
+      icon: { primaryColor: '#DD3333', secondaryColor: '#DD3333', size: 'sm' }
     }).addTo(this.map);
-
-
-    // add layer control tool on topright
-    L.control.layers({}, {
-      "Records": this.layers.distribution,
-      "Heatmap": this.layers.heatmap,
-      "Upload": this.layers.recordsFromUser,
-      "Bushwalking": this.layers.bushwalking,
-    }).addTo(this.map);
-  }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    return (
-      nextProps.enableSelect !== this.props.enableSelect ||
-      nextProps.recordsFromUser.length !== this.props.recordsFromUser.length || 
-      nextProps.enableTemp !== this.props.enableTemp
-    );
   }
 
   componentDidUpdate(prevProps) {
@@ -220,7 +201,33 @@ export default class RecordMap extends Component {
     }
   }
 
+  _handleMapLayerChange(event, layer) {
+    if (this.map.hasLayer(this.layers[layer])) {
+      this.map.removeLayer(this.layers[layer]);
+    } else {
+      this.map.addLayer(this.layers[layer]);
+    }
+    let nextLayerState = this.state.layerState; nextLayerState[layer] = event.target.checked;
+    this.setState({ layerState: nextLayerState});
+  }
+
   render() {
-    return <div id='recordmap' style={{height: '92vh', width: '100vw'}}></div>;
+    return (
+      <div>
+        <div style={{'position': 'absolute', 'top': '2vw', 'right': 10, 'zIndex': 1000, 'display': 'flex', 'flexDirection': 'column'}}>
+        {
+          Object.keys(this.state.layerState).map((e, i) => {
+            return <MapControlLabel key={i+1}
+              state={this.state.layerState[e]}
+              setState={((event) => this._handleMapLayerChange(event, e)).bind(this)}
+              name={e}
+            />;
+          })
+        }
+        </div>
+        <div id='recordmap' style={{height: '92vh', width: '100vw'}}></div>
+
+      </div>
+    );
   }
 }

@@ -8,7 +8,7 @@ import image4 from '../static/img/S4.jpg'
 
 const useStyles = makeStyles(theme => ({
   root: {
-    marginTop: theme.spacing(-5),
+    marginTop: theme.spacing(1),
     display: 'flex',
     justifyContent: 'center',
   },

@@ -23,12 +23,12 @@ export default function RecordMapWrapper(props) {
   const [records, setRecords] = useState([]);
   const [recordsByMonth, setMonthRecords] = useState([]);
 
-  // if drawer should open to user
-  const [drawerState, setDrawerState] = useState(false);
-  
   // if user start to report a record
   const [selectState, setSelectState] = useState(false);
 
+  // if drawer should open to user
+  const [drawerState, setDrawerState] = useState(false);
+  
   // if a location has been chosen for possum record
   const [selectedLocation, setLocation] = useState([]);
 
