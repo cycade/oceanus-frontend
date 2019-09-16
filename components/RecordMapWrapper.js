@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
 import { makeStyles, Button, Drawer, Snackbar } from '@material-ui/core';
 
 import RecordMap from './RecordMap.js';
@@ -44,7 +45,7 @@ export default function RecordMapWrapper(props) {
   }
 
   function _isRecordsReady() {
-    return records.length > 0;
+    return records.length > 0 && recordsFromUser.length > 0;
   }
 
   function _isMonthRecordsReady() {
@@ -65,13 +66,14 @@ export default function RecordMapWrapper(props) {
   }
   
   function _handleReport(data) {
-    // axios.post('psmapi.lcquest.com/user', data)
-    // .then(function (response) {
-    //   console.log(response);
-    // })
-    // .catch(function (error) {
-    //   console.log(error);
-    // });
+    axios.post('https://psmapi.lcquest.com/recordsfromuser', data)
+    .then(function (response) {
+
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+
     _handleCloseDrawer();
     setSelectState(false);
     setDialogState(true);
@@ -81,7 +83,7 @@ export default function RecordMapWrapper(props) {
   function _getUserRecordByMonth() {
     let recordByMonth = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     for (let record of recordsFromUser) {
-      recordByMonth[record.datetime.getMonth() + 1] += 1;
+      recordByMonth[parseInt(record.datetime.split('-')[1])] += record.count;
     }
     return recordByMonth;
   }
@@ -108,6 +110,14 @@ export default function RecordMapWrapper(props) {
       return res.json();
     }).then(data => {
       setMonthRecords(data);
+    })
+
+    // fetch occurrence records by month from backend
+    fetch("https://psmapi.lcquest.com/recordsfromuser")
+    .then(res => {
+      return res.json();
+    }).then(data => {
+      setUserRecords(data);
     })
   }, [])
 

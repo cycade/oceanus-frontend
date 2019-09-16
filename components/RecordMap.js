@@ -18,7 +18,7 @@ function makeGeojson(coords) {
 
 function getMessageFromRecord(record) {
   return `
-    Time: ${record.datetime.getFullYear()}-${record.datetime.getMonth()+1}-${record.datetime.getDate()}<br/>
+    Time: ${record.datetime}<br/>
     Weather: ${record.weather}<br/>
     Situation: ${record.situation}<br/>
     Hollow: ${record.hollow}<br/>
@@ -67,7 +67,7 @@ export default class RecordMap extends Component {
   }
 
   _addRecordFromUser(record) {
-    L.marker(record.latlng, {
+    L.marker([record.latitude, record.longitude], {
       icon: L.mapquest.icons.flag({
         primaryColor: this.state.baseColor,
         secondaryColor: '#ABA998',
@@ -153,6 +153,11 @@ export default class RecordMap extends Component {
       .addTo(this.layers.distribution);
     }
 
+    // add record retrieved from database
+    for (let record of this.props.recordsFromUser) {
+      this._addRecordFromUser(record);
+    }
+
     // add heatmap 
     this.layers.heatmap = L.heatLayer(
       this.props.data.map(e => {
@@ -160,6 +165,11 @@ export default class RecordMap extends Component {
       }),
       {radiue: 25, blur: 5, gradient: {0.1: 'blue', 0.3: 'lime', 0.45: 'red'}}
     )
+
+    // add record retrieved from database
+    for (let record of this.props.recordsFromUser) {
+      this.layers.heatmap.addLatLng([record.latitude, record.longitude]);
+    }
 
     // render the total map
     this.map = L.mapquest.map('recordmap', {
@@ -196,7 +206,7 @@ export default class RecordMap extends Component {
     if (currentLength > prevProps.recordsFromUser.length) {
       let newRecord = this.props.recordsFromUser[currentLength - 1];
       this._addRecordFromUser(newRecord);
-      this.layers.heatmap.addLatLng(newRecord.latlng);
+      this.layers.heatmap.addLatLng([newRecord.latitude, newRecord.longitude]);
     }
   }
 

@@ -60,11 +60,13 @@ export default function ReportFrom(props) {
 
   const _getRecordInfo = () => {
     return ({
-      latlng: props.latlng,
-      datetime: selectedDate,
+      latitude: props.latlng[0],
+      longitude: props.latlng[1],
+      datetime: selectedDate.toJSON(),
       count: count,
       weather: weather,
       situation: situation,
+      hollow: hollow === 1,
     });
   }
 
@@ -114,14 +116,6 @@ export default function ReportFrom(props) {
           />
         </Grid>
         <Grid item>
-          {/* <Input
-            className={classes.input}
-            value={count}
-            margin="dense"
-            onChange={handleCountInputChange}
-            onBlur={handleCountBlur}
-            inputProps={{ step: 2, min: 0, max: maxCount, type: 'number', 'aria-labelledby': 'input-slider', }}
-          /> */}
           <Typography>{count}</Typography>
         </Grid>
       </Grid>
@@ -153,7 +147,7 @@ export default function ReportFrom(props) {
         <InputLabel htmlFor="hollow-helper">Hollow around?</InputLabel>
         <Select value={hollow} onChange={handleHollowChange} inputProps={{ name: 'hollow', id: 'hollow-helper' }}>
           <MenuItem value={1}>Yes</MenuItem>
-          <MenuItem value={2}>No</MenuItem>
+          <MenuItem value={0}>No</MenuItem>
         </Select>
       </div>
 
