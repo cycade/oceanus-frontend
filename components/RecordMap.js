@@ -59,8 +59,8 @@ export default class RecordMap extends Component {
       markColor: '#c43a31',
       layerState: {
         'distribution': true,
-        'recordsFromUser': true,
-        'bushwalking': true,
+        'recordsFromUser': false,
+        'bushwalking': false,
         'heatmap': true,
       },
     };
@@ -176,7 +176,11 @@ export default class RecordMap extends Component {
       center: [-37.631482, 145.913061],
       layers: [
         L.mapquest.tileLayer('light'),
-        ...(Object.values(this.layers).filter(e => e !== null)),
+        ...(
+          Object.keys(this.layers)
+            .filter(e => this.layers[e] !== null && this.state.layerState[e])
+            .map(e => this.layers[e])
+        ),
       ],
       zoom: 10
     })

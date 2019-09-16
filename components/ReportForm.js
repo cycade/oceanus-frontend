@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { makeStyles, Typography, Grid, Slider, Input, InputLabel, Select, MenuItem, FormHelperText, Button } from '@material-ui/core';
 import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker } from '@material-ui/pickers';
+import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker, KeyboardDateTimePicker } from '@material-ui/pickers';
 import axios from 'axios';
 import getDistanceFromLatLonInKm from '../utils/getDistanceFromLatLonInKm.js';
 
@@ -91,13 +91,10 @@ export default function ReportFrom(props) {
       {/* date and time selector */}
       <MuiPickersUtilsProvider utils={DateFnsUtils} style={{ display: 'flex' }}>
         <Grid container direction='column'>
-          <KeyboardDatePicker margin="normal" id="date-picker-dialog" label="Date"
-            format="dd/MMM/yyyy" value={selectedDate} onChange={setSelectedDate}
+          <KeyboardDateTimePicker margin="normal" id="date-picker-dialog" label="Date"
+            format="dd/MMM/yyyy hh:mm:ss" value={selectedDate} onChange={setSelectedDate}
+            maxDate={new Date()}
             KeyboardButtonProps={{ 'aria-label': 'change date', }}
-          />
-          <KeyboardTimePicker margin="normal" id="time-picker" label="Time"
-            value={selectedDate} onChange={setSelectedDate}
-            KeyboardButtonProps={{ 'aria-label': 'change time', }}
           />
         </Grid>
       </MuiPickersUtilsProvider>

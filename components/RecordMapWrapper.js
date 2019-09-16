@@ -83,7 +83,7 @@ export default function RecordMapWrapper(props) {
   function _getUserRecordByMonth() {
     let recordByMonth = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     for (let record of recordsFromUser) {
-      recordByMonth[parseInt(record.datetime.split('-')[1])] += record.count;
+      recordByMonth[parseInt(record.datetime.split('-')[1])-1] += record.count;
     }
     return recordByMonth;
   }

@@ -109,11 +109,11 @@ export default function Quiz(props) {
   }
   const _getResult = function() {
     if (score >= 25) {
-      return `Well done! Your grade is ${score}/30 marks, you are a knowledgeable Leadbeater's Possum lover`;
+      return `Well done! Your score is ${score}/30, you are a knowledgeable Leadbeater's Possum lover`;
     } else if (score >= 13) {
-      return `Good job! Your grade is ${score}/30 marks. You can learn more from our website.`;
+      return `Good job! Your score is ${score}/30. You can learn more from our website.`;
     } else {
-      return `Finally finished! Your grade is ${score}/30 marks. You’ve got a lot to learn.`;
+      return `Finally finished! Your score is ${score}/30. You’ve got a lot to learn.`;
     }
   }
 
@@ -128,9 +128,10 @@ export default function Quiz(props) {
         </div>
         : <div className={classes.finish}>
             <Typography variant='h5'>{_getResult()}</Typography>
+            <Button className={classes.redo} variant='outlined' href='/news'>Read More</Button>
             {
-              score < 25
-              ? <Button className={classes.redo} variant='outlined' href='/news'>Read More</Button>
+              score > 25
+              ? <Button className={classes.redo} variant='outlined' href='/recordmap'>Go to find them</Button>
               : <div></div>
             }
             {/* <Button className={classes.redo} variant='outlined' onClick={redo}>Redo the quiz!</Button> */}
