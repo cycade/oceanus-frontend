@@ -44,6 +44,7 @@ export default function(props) {
       <Typography>Occurrence Record of Leadbeater's Possum</Typography>
       <HorizontalBar data={data} height={300}
         options={{ scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] } }}
+        onElementsClick={e => props.onChooseMonth(e[0]['_index']+1)}
       />
     </div>
   );

@@ -119,12 +119,12 @@ export default function Quiz(props) {
 
   return (
     <div className={classes.root}>
-      <Typography variant='h4'>Let's check if you know much about the possum</Typography>
+      <Typography variant='h4'>What do you know about me?</Typography>
       <Typography variant='subtitle1'>Your current score: {score}</Typography>
       {
         questionNumber < questions.length
         ? <div>
-          <Question key={questionNumber+1} question={questions[questionNumber]} onNext={getNext} onAddScore={addScore}/>
+          <Question key={questionNumber+1} num={questionNumber+1} question={questions[questionNumber]} onNext={getNext} onAddScore={addScore}/>
         </div>
         : <div className={classes.finish}>
             <Typography variant='h5'>{_getResult()}</Typography>

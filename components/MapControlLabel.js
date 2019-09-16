@@ -8,6 +8,7 @@ export default function MapControlLabel(props) {
         <Switch
           checked={props.state}
           onChange={props.setState}
+          color='primary'
         />
       }
       label={props.name}

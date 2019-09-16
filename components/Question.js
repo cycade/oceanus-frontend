@@ -91,7 +91,7 @@ export default function Question(props) {
       {/* render the question */}
       <Typography variant='h6' className={classes.question}>{props.question.question}</Typography>
       <Button aria-describedby={id} variant="contained" onClick={handleClick}>
-        Some Hint?
+        Hint?
       </Button>
       <Popover id={id} open={open} anchorEl={anchorEl} onClose={handleClose}
         anchorOrigin={{ vertical: 'bottom', horizontal: 'center', }}
@@ -120,7 +120,9 @@ export default function Question(props) {
       {/* render the result after answer */}
       {userChoice >= 0
         ? <div className={classes.result}>
-          <Button variant='outlined' color='primary' onClick={_handleGetNext}>Go to Next Question</Button>
+          <Button variant='outlined' color='primary' onClick={_handleGetNext}>
+            {props.num === 6 ? 'Show result' : 'Go to Next Question'}
+          </Button>
         </div>
         : <div></div>
       }

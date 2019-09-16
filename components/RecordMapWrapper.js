@@ -23,7 +23,7 @@ export default function RecordMapWrapper(props) {
 
   // if the record is fetched successfully
   const [records, setRecords] = useState([]);
-  const [recordsByMonth, setMonthRecords] = useState([]);
+  const [recordsByMonth, setMonthRecords] = useState(0);
 
   // if user start to report a record
   const [selectState, setSelectState] = useState(false);
@@ -40,6 +40,9 @@ export default function RecordMapWrapper(props) {
   // store all records uploaded by users
   const [recordsFromUser, setUserRecords] = useState([]);
 
+  // if the last record is popular
+  const [isLastPopular, setPopular] = useState('pending');
+
   function _isUserLocationReady() {
     return userLocation.length > 0;
   }
@@ -49,7 +52,7 @@ export default function RecordMapWrapper(props) {
   }
 
   function _isMonthRecordsReady() {
-    return recordsByMonth.length > 0;
+    return recordsByMonth > 0;
   }
 
   function _handleOpenDrawer() {
@@ -65,7 +68,7 @@ export default function RecordMapWrapper(props) {
     _handleOpenDrawer();
   }
   
-  function _handleReport(data) {
+  function _handleReport(data, isPopular) {
     axios.post('https://psmapi.lcquest.com/recordsfromuser', data)
     .then(function (response) {
 
@@ -74,6 +77,7 @@ export default function RecordMapWrapper(props) {
       console.log(error);
     });
 
+    setPopular(isPopular);
     _handleCloseDrawer();
     setSelectState(false);
     setDialogState(true);
@@ -128,7 +132,7 @@ export default function RecordMapWrapper(props) {
         ? <div className={classes.mapcontainer}>
           
           <div style={{ position: 'absolute', zIndex: 1000 }}>
-            <RecordChartByMonth recordFromUser={_getUserRecordByMonth()}/>
+            <RecordChartByMonth recordFromUser={_getUserRecordByMonth()} onChooseMonth={(m) => setMonthRecords(m)}/>
           </div>
 
           <RecordMap
@@ -137,6 +141,7 @@ export default function RecordMapWrapper(props) {
             userLocation={userLocation}
             enableSelect={selectState}
             enableTemp={drawerState}
+            monthSelected={recordsByMonth}
             onSelect={_handleSelectLocation}
           />
 
@@ -159,7 +164,12 @@ export default function RecordMapWrapper(props) {
             <ReportFrom latlng={selectedLocation} onReport={_handleReport}/>
           </Drawer>
 
-          <Dialog open={dialogState} onClose={() => setDialogState(false)} count={recordsFromUser.length > 0 ? recordsFromUser[recordsFromUser.length - 1].count : 0} />
+          <Dialog
+            open={dialogState}
+            onClose={() => setDialogState(false)}
+            isPopular={isLastPopular}
+            count={recordsFromUser.length > 0 ? recordsFromUser[recordsFromUser.length - 1].count : 0}
+          />
         </div>
         : <div>loading</div>
       }

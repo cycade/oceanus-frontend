@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { makeStyles, Typography, Grid, Slider, Input, InputLabel, Select, MenuItem, FormHelperText, Button } from '@material-ui/core';
 import DateFnsUtils from '@date-io/date-fns';
-import { MuiPickersUtilsProvider, KeyboardTimePicker, KeyboardDatePicker, KeyboardDateTimePicker } from '@material-ui/pickers';
+import { MuiPickersUtilsProvider, KeyboardDateTimePicker } from '@material-ui/pickers';
 import axios from 'axios';
 import getDistanceFromLatLonInKm from '../utils/getDistanceFromLatLonInKm.js';
 
@@ -67,6 +67,7 @@ export default function ReportFrom(props) {
       weather: weather,
       situation: situation,
       hollow: hollow === 1,
+      isPopular: isPopular,
     });
   }
 
@@ -86,7 +87,7 @@ export default function ReportFrom(props) {
     <div className={classes.root}>
       
       <Typography>Report A Leadbeater's Possum</Typography>
-      <Typography variant='subtitle2'>{popularText[isPopular]}</Typography>
+      {/* <Typography variant='subtitle2'>{popularText[isPopular]}</Typography> */}
 
       {/* date and time selector */}
       <MuiPickersUtilsProvider utils={DateFnsUtils} style={{ display: 'flex' }}>
@@ -148,7 +149,7 @@ export default function ReportFrom(props) {
         </Select>
       </div>
 
-      <Button variant='contained' onClick={() => props.onReport(_getRecordInfo())}>Submit</Button>
+      <Button variant='contained' onClick={() => props.onReport(_getRecordInfo(), isPopular)}>Submit</Button>
     </div>
   )
 }

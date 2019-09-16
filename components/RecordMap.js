@@ -18,10 +18,9 @@ function makeGeojson(coords) {
 
 function getMessageFromRecord(record) {
   return `
-    Time: ${record.datetime}<br/>
-    Weather: ${record.weather}<br/>
-    Situation: ${record.situation}<br/>
-    Hollow: ${record.hollow}<br/>
+    Time: ${record.datetime ? record.datetime.slice(0, 10) : record['year'] + '-' + record['month'] + '-' + record['day']}<br/>
+    Count: ${record.count}<br/>
+    Location: [${Math.round(record.latitude*1000)/1000}, ${Math.round(record.longitude*1000)/1000}]<br/>
   `;
 }
 
@@ -80,6 +79,20 @@ export default class RecordMap extends Component {
     .addTo(this.layers.recordsFromUser);
   }
 
+  _addHighlightRecord(record) {
+    L.marker([record['latitude'], record['longitude']], {
+      icon: L.mapquest.icons.via({
+        primaryColor: '#ff6347',
+        secondaryColor: '#CCCCCC',
+        shadow: true,
+        size: 'md',
+        symbol: `${record['count']}`
+      })
+    })
+    .bindPopup(getMessageFromRecord(record))
+    .addTo(this.layers.recordsByMonth);
+  }
+
   _toggleEnableSelect = (e) => {
     this.layers.temp.clearLayers();
     L.marker([e.latlng.lat, e.latlng.lng]).addTo(this.layers.temp);
@@ -92,6 +105,8 @@ export default class RecordMap extends Component {
 
     // initialize layer to store temperorary plot
     this.layers.temp = L.featureGroup();
+
+    this.layers.recordsByMonth = L.featureGroup();
 
     // initialize layer to store user generate plot
     this.layers.recordsFromUser = L.featureGroup();
@@ -107,7 +122,7 @@ export default class RecordMap extends Component {
       let coord = [route['route'][0][1], route['route'][0][0]];
       let hikingIcon = L.icon({
         iconUrl: '/static/img/hiking.svg',
-        iconSize: [25, 25], // size of the icon
+        iconSize: [30, 30], // size of the icon
       });
 
       L.marker(coord, {
@@ -127,7 +142,6 @@ export default class RecordMap extends Component {
         }
 
         let bushwalkingName = event.layer._popup._content.split('</br>')[0];
-        console.log(bushwalkingName);
         let route = this.bushwalking[bushwalkingName];
         let layer = L.geoJSON(makeGeojson(route['route']))
         .addTo(this.layers.bushwalking);
@@ -149,7 +163,7 @@ export default class RecordMap extends Component {
           symbol: `${record['count']}`
         })
       })
-      .bindPopup(getRecordPopup(record))
+      .bindPopup(getMessageFromRecord(record))
       .addTo(this.layers.distribution);
     }
 
@@ -181,6 +195,7 @@ export default class RecordMap extends Component {
             .filter(e => this.layers[e] !== null && this.state.layerState[e])
             .map(e => this.layers[e])
         ),
+        this.layers.recordsByMonth,
       ],
       zoom: 10
     })
@@ -211,6 +226,15 @@ export default class RecordMap extends Component {
       let newRecord = this.props.recordsFromUser[currentLength - 1];
       this._addRecordFromUser(newRecord);
       this.layers.heatmap.addLatLng([newRecord.latitude, newRecord.longitude]);
+    }
+
+    if (this.props.monthSelected !== prevProps.monthSelected && this.props.monthSelected !== 0) {
+      this.layers.recordsByMonth.clearLayers();
+      for (let record of this.props.data) {
+        if (parseInt(record['month']) === this.props.monthSelected) {
+          this._addHighlightRecord(record);
+        }
+      }
     }
   }
 

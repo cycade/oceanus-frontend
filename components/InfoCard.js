@@ -1,4 +1,4 @@
-import { Hidden, Paper, GridList, GridListTile, Typography } from '@material-ui/core';
+import { Hidden, Paper, GridList, GridListTile, Typography, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import image1 from '../static/img/S1.jpg'
 import image2 from '../static/img/S2.jpg'
@@ -42,12 +42,12 @@ const useStyles = makeStyles(theme => ({
 
 const tileData = [
   {type: 'img', img: image1, title: 'title', featured: true},
-  {type: 'text', content: "I'm the only species in the petaurid genus Gymnobelideus in an ancestral form.", title: 'Rarity'},
+  {type: 'text', content: "I'm the only species in the petaurid genus Gymnobelideus in an ancestral form.", title: 'Rarity', button: 'Find Me', href: './recordmap'},
   {type: 'img', img: image2, title: 'title', featured: true},
-  {type: 'text', content: 'The greatest threats to my conservation in the wild are logging, low habitats protection, bush fire and predator threats.', title: 'Threats'},
-  {type: 'text', content: 'I\'m listed as a "critically endangered" species under the EPBC Act in 2015.', title: 'Endanger'},
+  {type: 'text', content: 'The greatest threats to my conservation in the wild are logging, low habitats protection, bush fire and predator threats.', title: 'Threats', button: 'Attempt Quiz', href: './quiz'},
+  {type: 'text', content: 'I\'m listed as a "critically endangered" species under the EPBC Act in 2015.', title: 'Endanger', button: 'Report', href: './recordmap'},
   {type: 'img', img: image3, title: 'title', featured: true},
-  {type: 'text', content: 'My conservation includes montane ash forest (i.e. Mt Ritchie) and sub-alpine woodland (i.e. Mount Baw Baw).', title: 'Conservation'},
+  {type: 'text', content: 'My conservation includes montane ash forest (i.e. Mt Ritchie) and sub-alpine woodland (i.e. Mount Baw Baw).', title: 'Conservation', button: 'News', href: './news'},
   {type: 'img', img: image4, title: 'title', featured: true},
 ]
 
@@ -71,6 +71,9 @@ export default function InfoCard() {
                     <Typography align='center' variant="body2" color="textSecondary" component="p">
                       {tile.content}
                     </Typography>
+                    <div style={{'display': 'flex', 'justifyContent': 'center'}}>
+                      <Button variant='contained' color='primary' href={tile.href} style={{'width': '60%'}}>{tile.button}</Button>
+                    </div>
                   </div>
                 </GridListTile>
               )

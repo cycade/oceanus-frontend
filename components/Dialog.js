@@ -16,7 +16,7 @@ export default function DialogComponent(props) {
         </DialogContentText>
         <DialogContentText id="alert-dialog-slide-description">
         {
-          false
+          props.isPopular === 'unpopular'
           ? `It's amazing to see it here!`
           : `It's a popular area!`
         }
