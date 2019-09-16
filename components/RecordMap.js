@@ -229,11 +229,13 @@ export default class RecordMap extends Component {
     }
 
     if (this.props.monthSelected !== prevProps.monthSelected && this.props.monthSelected !== 0) {
-      this.layers.recordsByMonth.clearLayers();
-      for (let record of this.props.data) {
-        if (parseInt(record['month']) === this.props.monthSelected) {
-          this._addHighlightRecord(record);
-        }
+      if (this.map.hasLayer(this.layers.distribution)) {
+        this.layers.recordsByMonth.clearLayers();
+        for (let record of this.props.data) {
+          if (parseInt(record['month']) === this.props.monthSelected) {
+            this._addHighlightRecord(record);
+          }
+        }  
       }
     }
   }
@@ -241,6 +243,9 @@ export default class RecordMap extends Component {
   _handleMapLayerChange(event, layer) {
     if (this.map.hasLayer(this.layers[layer])) {
       this.map.removeLayer(this.layers[layer]);
+      if (this.layers[layer] === this.layers.distribution) {
+        this.layers.recordsByMonth.clearLayers();
+      }
     } else {
       this.map.addLayer(this.layers[layer]);
     }
