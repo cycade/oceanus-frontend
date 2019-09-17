@@ -9,7 +9,7 @@ export default function index() {
   return (
     <React.Fragment>
       <CssBaseline />
-      <NavigationBar indexPage/>
+      <NavigationBar indexPage currentPage=''/>
       <Banner />
       <InfoCard />
       <Footer />

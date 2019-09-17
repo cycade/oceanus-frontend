@@ -51,7 +51,7 @@ export default function NewsCard(props) {
       </div>
       <div>
       <CardActions>
-        <Button size="small" color="primary" href={props.link}>
+        <Button size="small" color="secondary" variant='outlined' href={props.link}>
           Learn More
         </Button>
       </CardActions>

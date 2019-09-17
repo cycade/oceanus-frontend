@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { makeStyles, Button, Drawer, Snackbar } from '@material-ui/core';
+import { makeStyles, Button, Drawer, Snackbar, Typography } from '@material-ui/core';
 
 import RecordMap from './RecordMap.js';
 import RecordChartByMonth from './RecordChartByMonth.js';
@@ -146,12 +146,13 @@ export default function RecordMapWrapper(props) {
           />
 
           <div style={{ position: 'absolute', zIndex: 1000, marginTop: -80, width:'100vw', display: 'flex', justifyContent: 'center' }}>
-            <Snackbar anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+            <Snackbar style={{ marginTop: '120px' }}
+              anchorOrigin={{'vertical': 'top', 'horizontal': 'center'}}
               open={selectState}
               autoHideDuration={5000}
               onClose={() => {}}
               ContentProps={{ 'aria-describedby': 'message-id', }}
-              message={<span id="message-id">Click map to report a record</span>}
+              message={<Typography variant='h6' id="message-id">Click map to report a record</Typography>}
             />
             {
               selectState

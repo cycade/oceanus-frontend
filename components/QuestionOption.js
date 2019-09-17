@@ -8,8 +8,9 @@ export default function QuestionOption(props) {
     root: {
       // width: '32vw',
       // height: '12vw',
+      width: '100%',
       minWidth: 320,
-      minHeight: 120,
+      minHeight: 150,
       border: '1px solid #aaa',
       position: 'relative',
       backgroundImage: `url(../static/img/${props.bgImage})`,
@@ -45,7 +46,7 @@ export default function QuestionOption(props) {
         : <div></div>
       }
       {
-        props.state === 'selected'
+        props.state === 'wrong'
         ? <FontAwesomeIcon icon={faTimesCircle} color='Salmon' transform='grow-120 right-110' className={classes.icon}/>
         : <div></div>
       }

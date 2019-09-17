@@ -38,7 +38,13 @@ const useStyles = makeStyles(theme => ({
   icon: {
     color: 'white',
   },
+  buttonContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: theme.spacing(1),
+  },
   button: {
+    width: '60%',
     backgroundColor: theme.palette.primary.light,
     color: 'white',
     '&:hover': {
@@ -78,8 +84,8 @@ export default function InfoCard() {
                     <Typography align='center' variant="body2" color="textSecondary" component="p">
                       {tile.content}
                     </Typography>
-                    <div style={{'display': 'flex', 'justifyContent': 'center'}}>
-                      <Button variant='contained' className={classes.button} href={tile.href} style={{'width': '60%'}}>{tile.button}</Button>
+                    <div className={classes.buttonContainer}>
+                      <Button variant='contained' className={classes.button} href={tile.href}>{tile.button}</Button>
                     </div>
                   </div>
                 </GridListTile>

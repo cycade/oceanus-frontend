@@ -84,7 +84,7 @@ export default function NewsCollection(props) {
                 return <Chip key={i+1} size="medium" variant={selectedTag === e ? 'default' : 'outlined'} color='secondary' className={classes.tagButton} label={e} onClick={() => _onTagSelected(e)} />
               })
             }
-              <Chip size="medium" variant='outlined' className={classes.tagButton} color='primary' label="All" onClick={_clearTag} />
+              <Chip size="medium" variant={selectedTag.length === 0 ? 'default' : 'outlined'} className={classes.tagButton} color='secondary' label="All" onClick={_clearTag} />
             </div>
             <div className={classes.collection}>
               {renderedNews.map((e, i) => {

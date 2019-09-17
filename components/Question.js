@@ -1,7 +1,8 @@
-import { Paper, Typography, Button, CardMedia, Popover } from '@material-ui/core';
+import { Paper, Typography, Button, CardMedia, Popover, Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { useState } from 'react';
 import QuestionOption from './QuestionOption.js';
+import QuestionHint from './QuestionHint.js';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -81,16 +82,18 @@ export default function Question(props) {
     } else if (index === props.question.answer) {
       return 'correct';
     } else if (index === userChoice) {
-      return 'selected';
+      return 'wrong';
     }
-    return 'pending';
+    return 'selected';
   }
 
   return (
     <Paper className={classes.root}>
       {/* render the question */}
       <Typography variant='h6' className={classes.question}>{props.question.question}</Typography>
-      <Button aria-describedby={id} variant="contained" onClick={handleClick} color='primary'>
+      
+      <QuestionHint open={open} onClick={handleClick} hint={props.question.hint} />
+      {/* <Button aria-describedby={id} variant="outlined" onClick={handleClick} color='primary'>
         Hint?
       </Button>
       <Popover id={id} open={open} anchorEl={anchorEl} onClose={handleClose}
@@ -98,29 +101,31 @@ export default function Question(props) {
         transformOrigin={{ vertical: 'top', horizontal: 'center', }}
       >
         <Typography className={classes.hint}>{props.question.hint || 'Nothing to hint!'}</Typography>
-      </Popover>
+      </Popover> */}
       {/* <Typography variant='subtitle1' className={classes.question}>{props.question.hint}</Typography> */}
 
       {/* render options for the question */}
       <div className={classes.items}>
+        <Grid container>
         {
           props.question.items.map((e, i) => 
-            <div className={classes.item}>
+            <Grid item md={6} xs={12} spacing={3} key={i+1}>
               <QuestionOption key={i+1}
                 bgImage={e.img}
                 text={e.text}
                 state={_getChoiceState(i)}
                 onClick={() => _handleChoose(i)}
               />
-            </div>
+            </Grid>
           )
         }
+        </Grid>
       </div>
 
       {/* render the result after answer */}
       {userChoice >= 0
         ? <div className={classes.result}>
-          <Button variant='outlined' color='primary' onClick={_handleGetNext}>
+          <Button variant='contained' color='primary' onClick={_handleGetNext}>
             {props.num === 6 ? 'Show result' : 'Go to Next Question'}
           </Button>
         </div>

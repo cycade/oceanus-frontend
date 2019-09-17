@@ -4,6 +4,7 @@ import { AppBar, Toolbar, Button, Typography, Hidden, IconButton, Menu, MenuItem
 import { withStyles } from '@material-ui/core/styles';
 
 const routes = [
+  { name: 'Home', route: './' },
   { name: 'Record Map', route: './recordmap' },
   { name: 'Quiz', route: './quiz' },
   { name: 'News', route: './news' },
