@@ -1,5 +1,5 @@
 import { Box, Button, Paper, makeStyles, Typography } from "@material-ui/core";
-
+import Head from 'next/head';
 
 const description = [
   "There are total 6 quesitons.",
@@ -27,6 +27,7 @@ const useStyles = makeStyles(theme => ({
   },
   description: {
     margin: theme.spacing(2),
+    fontFamily: 'Convergence',
   }
 }))
 
@@ -35,6 +36,10 @@ export default function QuizWelcome(props) {
 
   return (
     <div className={classes.root}>
+      <Head>
+        <link href='https://fonts.googleapis.com/css?family=Convergence' rel='stylesheet' type='text/css' />
+      </Head>
+
       <Paper className={classes.content}>
         <Typography variant='h5' className={classes.description} align='center'>{description}</Typography>
         <Button variant='contained' onClick={props.onStart} color='primary'>Attemp Quiz</Button>

@@ -38,6 +38,13 @@ const useStyles = makeStyles(theme => ({
   icon: {
     color: 'white',
   },
+  button: {
+    backgroundColor: theme.palette.primary.light,
+    color: 'white',
+    '&:hover': {
+      backgroundColor: theme.palette.primary.dark,
+    },
+  },
 }));
 
 const tileData = [
@@ -72,7 +79,7 @@ export default function InfoCard() {
                       {tile.content}
                     </Typography>
                     <div style={{'display': 'flex', 'justifyContent': 'center'}}>
-                      <Button variant='contained' color='primary' href={tile.href} style={{'width': '60%'}}>{tile.button}</Button>
+                      <Button variant='contained' className={classes.button} href={tile.href} style={{'width': '60%'}}>{tile.button}</Button>
                     </div>
                   </div>
                 </GridListTile>

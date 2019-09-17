@@ -5,7 +5,7 @@ const useStyles = makeStyles(theme => ({
   root: {
     marginTop: theme.spacing(5),
     height: 180,
-    background: '#435749',
+    background: theme.palette.primary.main,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',

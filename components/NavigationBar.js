@@ -29,7 +29,7 @@ const styles = theme => ({
 class NavigationBar extends Component {
   constructor(props) {
     super(props);
-    let initialColor = props.indexPage ?  'transparent' : '#435749';
+    let initialColor = props.indexPage ?  'transparent' : 'primary';
     this.state = { anchorEl: null, navBarColor: initialColor };
   }
 
@@ -51,7 +51,7 @@ class NavigationBar extends Component {
     if (this.props.indexPage) {
       const lastScroll = window.scrollY;
       if (lastScroll > 160 && this.state.navBarColor === 'transparent') {
-        this.setState({ navBarColor: '#435749' })
+        this.setState({ navBarColor: '#404f3e' })
       }
       if (lastScroll < 160 && this.state.navBarColor !== 'transparent') {
         this.setState({ navBarColor: 'transparent' })
