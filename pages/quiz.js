@@ -7,7 +7,7 @@ import Quiz from '../components/Quiz.js';
 export default function quiz(props) {
   return (
     <React.Fragment>
-      <NavigationBar />
+      <NavigationBar currentPage='quiz'/>
       <Quiz />
     </React.Fragment>
   )

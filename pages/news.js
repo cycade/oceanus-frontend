@@ -4,7 +4,7 @@ import NewsCollection from '../components/NewsCollection.js';
 export default function news() {
   return (
     <div>
-      <NavigationBar />
+      <NavigationBar currentPage='news' />
       <NewsCollection />
     </div>
   )

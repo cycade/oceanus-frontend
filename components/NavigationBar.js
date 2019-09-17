@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { AppBar, Toolbar, Button, Typography, Hidden, IconButton, Menu, MenuItem, Link, CardMedia } from '@material-ui/core';
+import { AppBar, Toolbar, Button, Typography, Hidden, IconButton, Menu, MenuItem, Link, CardMedia, Box } from '@material-ui/core';
 // import MenuIcon from '@material-ui/icons/menu';
 import { withStyles } from '@material-ui/core/styles';
 
@@ -23,6 +23,10 @@ const styles = theme => ({
   },
   button: {
     marginLeft: theme.spacing(2),
+  },
+  link: {
+    border: '1px solid white',
+    color: '#333333',
   }
 })
 
@@ -84,7 +88,11 @@ class NavigationBar extends Component {
             <Menu anchorEl={this.state.anchorEl} keepMounted open={Boolean(this.state.anchorEl)} onClose={this.handleClose.bind(this)}>
               {
                 routes.map((e, i) => {
-                  return <MenuItem key={i+1} onClick={this.handleClose.bind(this)}><Button href={e.route}>{e.name}</Button></MenuItem>
+                  return (
+                    <MenuItem key={i+1} onClick={this.handleClose.bind(this)}>
+                      <Button href={e.route}>{e.name}</Button>
+                    </MenuItem>
+                  )
                 })
               }
               <MenuItem onClick={this.handleClose.bind(this)}><Button>Logout</Button></MenuItem>
@@ -97,10 +105,16 @@ class NavigationBar extends Component {
             </Typography>
             {
               routes.map((e, i) => {
-                return <Button key={i+1} color='inherit' href={e.route}>{e.name}</Button>
+                return (
+                <Box borderBottom={this.props.currentPage === e.route.slice(2) ? 1 : 0}>
+                  <Button key={i+1} color='inherit' href={e.route}>
+                    {e.name}
+                  </Button>
+                </Box>
+                )
               })
             }
-            <Button variant='outlined' color='inherit' className={classes.button}>Logout</Button>
+            <Button variant='contained' color='secondary' className={classes.button}>Logout</Button>
           </Hidden>
         </Toolbar>
       </AppBar>

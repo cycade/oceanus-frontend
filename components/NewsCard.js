@@ -15,6 +15,12 @@ const useStyles = makeStyles(theme => ({
     maxWidth: 320,
     margin: theme.spacing(2),
   },
+  content: {
+    height: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+  },
   media: {
     height: 140,
   },
@@ -25,6 +31,8 @@ export default function NewsCard(props) {
 
   return (
     <Card className={classes.card}>
+      <div className={classes.content}>
+      <div>
       <CardActionArea>
         <CardMedia
           className={classes.media}
@@ -40,11 +48,15 @@ export default function NewsCard(props) {
           </Typography>
         </CardContent>
       </CardActionArea>
+      </div>
+      <div>
       <CardActions>
         <Button size="small" color="primary" href={props.link}>
           Learn More
         </Button>
       </CardActions>
+      </div>
+      </div>
     </Card>
   );
 }

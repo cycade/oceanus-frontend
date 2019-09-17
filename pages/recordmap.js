@@ -14,7 +14,7 @@ export default function distributionMap(props) {
         <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
         {/* <script src="https://cdn.jsdelivr.net/npm/@turf/turf@5/turf.min.js"></script> */}
       </Head>
-      <NavigationBar />
+      <NavigationBar currentPage='recordmap'/>
       <RecordMapWrapper />
     </div>
   )
