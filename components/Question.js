@@ -90,7 +90,7 @@ export default function Question(props) {
     <Paper className={classes.root}>
       {/* render the question */}
       <Typography variant='h6' className={classes.question}>{props.question.question}</Typography>
-      <Button aria-describedby={id} variant="contained" onClick={handleClick}>
+      <Button aria-describedby={id} variant="contained" onClick={handleClick} color='primary'>
         Hint?
       </Button>
       <Popover id={id} open={open} anchorEl={anchorEl} onClose={handleClose}
