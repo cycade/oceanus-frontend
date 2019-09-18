@@ -2,11 +2,11 @@ import { Box, Button, Paper, makeStyles, Typography } from "@material-ui/core";
 import Head from 'next/head';
 
 const description = [
-  "There are total 6 quesitons.",
-  "Each question equals 5 marks.",
+  "There are totally 6 quesitons and each question is worth 5 marks.",
+  " The total marks for all questions in the quiz are 30 marks.",
   "There are some hints for each question.",
-  "If you get right answer based on the hint, you will get 3 marks for this question.",
-  "Good luck for your quiz.",
+  " If you get the right answer based on the hint, you will get 3 marks for this question.",
+  " Let's get start!",
 ].join(' ');
 
 const useStyles = makeStyles(theme => ({

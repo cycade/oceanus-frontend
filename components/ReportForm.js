@@ -67,7 +67,7 @@ export default function ReportFrom(props) {
       weather: weather,
       situation: situation,
       hollow: hollow === 1,
-      isPopular: isPopular,
+      // isPopular: isPopular,
     });
   }
 

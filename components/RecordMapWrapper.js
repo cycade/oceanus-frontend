@@ -152,7 +152,7 @@ export default function RecordMapWrapper(props) {
               autoHideDuration={5000}
               onClose={() => {}}
               ContentProps={{ 'aria-describedby': 'message-id', }}
-              message={<Typography variant='h6' id="message-id">Click map to report a record</Typography>}
+              message={<Typography variant='h6' id="message-id">Click on the specific location of the sighting on the map</Typography>}
             />
             {
               selectState
