@@ -42,6 +42,7 @@ export default function Question(props) {
   const classes = useStyles();
   const [userChoice, setChoice] = useState(-1);
   const [hinted, setHint] = useState(false);
+  const [score, setScore] = useState(0);
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   function handleClick(event) {
@@ -59,17 +60,11 @@ export default function Question(props) {
   const _handleChoose = function(index) {
     setChoice(index);
     if (index === props.question.answer) {
-      if (hinted && props.question.hint !== null) { props.onAddScore(3); }
-      else { props.onAddScore(5); }
+      if (hinted && props.question.hint !== null) { props.onAddScore(3); setScore(3); }
+      else { props.onAddScore(5); setScore(5); }
     }
-  }
-  
-  const getScore = function() {
-    if (userChoice === props.question.answer) {
-      if (hinted && props.question.hint !== null) { return 3; }
-      return 5;
-    }
-    return 0;
+    setAnchorEl(event.currentTarget);
+
   }
 
   const _handleGetNext = function() {
@@ -99,7 +94,7 @@ export default function Question(props) {
       <Typography variant='h6' className={classes.question}>{props.question.question}</Typography>
       {
         userChoice >= 0
-        ? <QuestionResult value={getScore()}/>
+        ? <QuestionResult value={score} />
         : <div></div>
       }
       <QuestionHint open={open} onClick={handleClick} hint={props.question.hint} />
