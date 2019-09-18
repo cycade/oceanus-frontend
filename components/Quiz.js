@@ -71,13 +71,12 @@ export default function Quiz(props) {
             </div>
             : <div className={classes.finish}>
                 <Typography variant='h5'>{_getResult()}</Typography>
-                <Button className={classes.redo} variant='outlined' href='/news'>Read More</Button>
+                <Button className={classes.redo} variant='contained' href='/news'>Read More</Button>
                 {
                   score > 25
-                  ? <Button className={classes.redo} variant='outlined' href='/recordmap'>Go to find them</Button>
+                  ? <Button className={classes.redo} variant='contained' href='/recordmap'>Go to find them</Button>
                   : <div></div>
                 }
-                {/* <Button className={classes.redo} variant='outlined' onClick={redo}>Redo the quiz!</Button> */}
               </div>
           }
         </div>

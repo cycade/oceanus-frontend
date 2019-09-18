@@ -3,6 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { useState } from 'react';
 import QuestionOption from './QuestionOption.js';
 import QuestionHint from './QuestionHint.js';
+import QuestionResult from './QuestionResult.js';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -15,6 +16,7 @@ const useStyles = makeStyles(theme => ({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
+    position: 'relative',
   },
   question: {
     paddingBottom: theme.spacing(2),
@@ -61,11 +63,15 @@ export default function Question(props) {
       else { props.onAddScore(5); }
     }
   }
-
-  const _handleHint = function() {
-    setHint(true);
-  }
   
+  const getScore = function() {
+    if (userChoice === props.question.answer) {
+      if (hinted && props.question.hint !== null) { return 3; }
+      return 5;
+    }
+    return 0;
+  }
+
   const _handleGetNext = function() {
     _clearChoice();
     props.onNext();
@@ -91,18 +97,12 @@ export default function Question(props) {
     <Paper className={classes.root}>
       {/* render the question */}
       <Typography variant='h6' className={classes.question}>{props.question.question}</Typography>
-      
+      {
+        userChoice >= 0
+        ? <QuestionResult value={getScore()}/>
+        : <div></div>
+      }
       <QuestionHint open={open} onClick={handleClick} hint={props.question.hint} />
-      {/* <Button aria-describedby={id} variant="outlined" onClick={handleClick} color='primary'>
-        Hint?
-      </Button>
-      <Popover id={id} open={open} anchorEl={anchorEl} onClose={handleClose}
-        anchorOrigin={{ vertical: 'bottom', horizontal: 'center', }}
-        transformOrigin={{ vertical: 'top', horizontal: 'center', }}
-      >
-        <Typography className={classes.hint}>{props.question.hint || 'Nothing to hint!'}</Typography>
-      </Popover> */}
-      {/* <Typography variant='subtitle1' className={classes.question}>{props.question.hint}</Typography> */}
 
       {/* render options for the question */}
       <div className={classes.items}>
@@ -121,6 +121,7 @@ export default function Question(props) {
         }
         </Grid>
       </div>
+
 
       {/* render the result after answer */}
       {userChoice >= 0
