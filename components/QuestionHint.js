@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
 
 export default function QuestionHint(props) {
   const classes = useStyles();
-  const content = props.hint === null ? 'No hint here, you have to rely on yourself!' : props.hint;
+  const content = props.hint === null ? 'No hint here. Try your best!' : props.hint;
 
   return (
     <div className={classes.root}>
