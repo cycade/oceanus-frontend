@@ -29,7 +29,6 @@ export default function Quiz(props) {
 
   const addScore = function(num) { changeScore(score + num); }
   const getNext = function() {
-    console.log(`Question Number: ${questionNumber}`);
     if (questionNumber === questions.length - 1) {
       setQuizStatus('QuizEnd');
     } else {
