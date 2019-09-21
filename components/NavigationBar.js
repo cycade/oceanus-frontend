@@ -105,15 +105,13 @@ class NavigationBar extends Component {
               <Link href='/' underline='none' color='inherit'>PossumNest</Link>
             </Typography>
             {
-              routes.map((e, i) => {
-                return (
-                <Box borderBottom={this.props.currentPage === e.route.slice(2) ? 1 : 0}>
+              routes.map((e, i) => 
+                <Box key={i+1} borderBottom={this.props.currentPage === e.route.slice(2) ? 1 : 0}>
                   <Button key={i+1} color='inherit' href={e.route}>
                     {e.name}
                   </Button>
                 </Box>
-                )
-              })
+              )
             }
             <Button variant='contained' color='secondary' className={classes.button}>Logout</Button>
           </Hidden>

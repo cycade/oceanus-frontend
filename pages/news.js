@@ -1,11 +1,11 @@
 import NavigationBar from '../components/NavigationBar.js';
-import NewsCollection from '../components/NewsCollection.js';
+import NewsWrapper from '../components/news/NewsWrapper.js';
 
 export default function news() {
   return (
     <div>
       <NavigationBar currentPage='news' />
-      <NewsCollection />
+      <NewsWrapper />
     </div>
   )
 }

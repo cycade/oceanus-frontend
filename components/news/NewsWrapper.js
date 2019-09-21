@@ -1,7 +1,10 @@
-import react, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Typography, LinearProgress, Button, Chip } from '@material-ui/core';
+import Chip from '@material-ui/core/Chip';
+import Typography from '@material-ui/core/Typography';
+
 import NewsCard from './NewsCard.js';
+import NewsLoadingBar from './NewsLoadingBar.js';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -9,9 +12,6 @@ const useStyles = makeStyles(theme => ({
     flexWrap: 'wrap',
     justifyContent: 'center',
     marginTop: theme.spacing(10),
-  },
-  loadingBar: {
-    margin: theme.spacing(8),
   },
   tagCollection: {
     display: 'flex',
@@ -92,11 +92,7 @@ export default function NewsCollection(props) {
               })}
             </div>
           </div>
-        :
-          <div className={classes.loadingBar}>
-            <Typography variant='subtitle2' align='center' color='secondary'>Fetching News for you</Typography>
-            <LinearProgress color='primary'/>
-          </div>
+        : <NewsLoadingBar />
       }
     </div>
   );
