@@ -3,7 +3,7 @@ import { makeStyles, Typography, Grid, Slider, Input, InputLabel, Select, MenuIt
 import DateFnsUtils from '@date-io/date-fns';
 import { MuiPickersUtilsProvider, KeyboardDateTimePicker } from '@material-ui/pickers';
 import axios from 'axios';
-import getDistanceFromLatLonInKm from '../utils/getDistanceFromLatLonInKm.js';
+import getDistanceFromLatLonInKm from '../../utils/getDistanceFromLatLonInKm.js';
 
 const popularText = {
   'pending': '',

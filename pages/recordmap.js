@@ -1,6 +1,6 @@
 import Head from "next/head";
 import NavigationBar from '../components/NavigationBar.js';
-import RecordMapWrapper from "../components/RecordMapWrapper.js";
+import RecordMapWrapper from "../components/map/RecordMapWrapper.js";
 
 export default function distributionMap(props) {
   return (
