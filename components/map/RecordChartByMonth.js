@@ -24,9 +24,9 @@ export default function(props) {
     datasets: [
       {
         label: `Official Occurrence Record`,
-        backgroundColor: `rgba(255, 99, 132, 0.4)`,
+        backgroundColor: `rgba(78, 97, 90, 0.7)`,
         borderWidth: 2,
-        hoverBackgroundColor: `rgba(255, 99, 132, 1)`,
+        hoverBackgroundColor: `rgba(45, 56, 52, 1)`,
         data: [63, 54, 80, 80, 61, 27, 19, 41, 62, 107, 47, 5]
       },
       {
@@ -44,7 +44,7 @@ export default function(props) {
       <Typography>Occurrence Record of Leadbeater's Possum</Typography>
       <HorizontalBar data={data} height={300}
         options={{ scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] } }}
-        onElementsClick={e => props.onChooseMonth(e[0]['_index']+1)}
+        onElementsClick={e => { if (e[0]) { props.onChooseMonth(e[0]['_index']+1) }}}
       />
     </div>
   );
