@@ -1,5 +1,6 @@
 let camera, controls, scene, renderer, stats;
-let objects = [];
+let objects = [], edges = new Map();
+let planeColor = 0x6b7b69, distanceLimit = 0.18;
 
 // CSG util method
 const makeCSG = function(a, b, op, mat) {
@@ -10,6 +11,39 @@ const makeCSG = function(a, b, op, mat) {
   return result;
 }
 
+const makePlane = function(geometry, location, rotation) {
+  let planeGeometry = new THREE.BoxGeometry(...geometry);
+  let planeMaterial = new THREE.MeshPhysicalMaterial({ color: planeColor });
+  let plane = new THREE.Mesh(planeGeometry, planeMaterial);
+  if (location !== undefined) {
+    plane.position.add(new THREE.Vector3(...location));
+    plane.updateMatrix();
+  }
+  if (rotation !== undefined) {
+    if (rotation[0] > 0) { plane.rotateX(Math.PI * rotation[0] / 180); }
+    if (rotation[1] > 0) { plane.rotateY(Math.PI * rotation[1] / 180); }
+    if (rotation[2] > 0) { plane.rotateZ(Math.PI * rotation[2] / 180); }
+    plane.updateMatrix();
+  }
+  return plane;
+}
+
+const makeBackPlane = function(location) {
+  let basePlane = makePlane([23, 55, 0.7], location);
+
+  let fixedhole = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 3, 32));
+  fixedhole.rotateX(Math.PI / 2);
+  fixedhole.position.add(new THREE.Vector3(...location));
+  fixedhole.position.add(new THREE.Vector3(0, 25, 0));
+  fixedhole.updateMatrix();
+
+  let prePlane = makeCSG(basePlane, fixedhole, 'subtract', basePlane.material);
+  fixedhole.position.add(new THREE.Vector3(0, -50, 0));
+  fixedhole.updateMatrix();
+
+  return makeCSG(prePlane, fixedhole, 'subtract', prePlane.material);
+}
+
 const getDistance = function(p1, p2) {
   return Math.sqrt(Math.pow(p1.x - p2.x, 2) + Math.pow(p1.y - p2.y, 2) + Math.pow(p1.z - p2.z, 2));
 }
@@ -17,7 +51,8 @@ const getDistance = function(p1, p2) {
 function init() {
   // Initialize camera
   camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
-  camera.position.z = 500;
+  camera.position.y = 40;
+  camera.position.z = 200;
 
   // Initialzie world
   scene = new THREE.Scene();
@@ -25,34 +60,30 @@ function init() {
   scene.fog = new THREE.FogExp2(0xcccccc, 0.002);
 
   // add sample plane
-  let frontPlaneGeometry = new THREE.BoxGeometry(23, 55, 0.7);
-  let frontPlaneMaterial = new THREE.MeshPhysicalMaterial({ color: 0x6b7b69 });
-  let frontPlane = new THREE.Mesh(frontPlaneGeometry, frontPlaneMaterial);
+  let backPlane = makeBackPlane([-100, 0, 0]);
+  scene.add(backPlane);
+  objects.push(backPlane);
 
-  let fixedhole = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 3, 32));
-  fixedhole.rotateX(Math.PI / 2);
-  fixedhole.position.add(new THREE.Vector3(0, 25, 0));
-  fixedhole.updateMatrix();
+  let bottomPenal = makePlane([23, 0.7, 20], [-50, 0, 0]);
+  scene.add(bottomPenal);
+  objects.push(bottomPenal);
 
-  let tot = makeCSG(frontPlane, fixedhole, 'subtract', frontPlane.material);
-  fixedhole.position.add(new THREE.Vector3(0, -50, 0));
-  fixedhole.updateMatrix();
-  let tot2 = makeCSG(tot, fixedhole, 'subtract', frontPlane.material);
+  let frontPenal = makePlane([23, 55, 0.7], [0, 0, 0]);
+  scene.add(frontPenal);
+  objects.push(frontPenal);
 
-  scene.add(tot2);
-  objects.push(tot2);
+  edges.set(backPlane, new Map([
+    [bottomPenal, [0, -27.5, 10]],
+  ]));
 
-  let groups = new THREE.Object3D();
-  let topBasepoint = new THREE.Points(new THREE.BoxGeometry(23, 0.7, 19.6), new THREE.PointsMaterial({ color: 0x0080ff, size: 1}));
-  topBasepoint.position.add(new THREE.Vector3(10, 1, 20));
-  groups.add(topBasepoint);
+  edges.set(bottomPenal, new Map([
+    [backPlane, [0, 27.5, -10]],
+    [frontPenal, [0, 27.5, 10]],
+  ]));
 
-  let topGeometry = new THREE.BoxGeometry(23, 0.7, 19.6);
-  let topMaterial = new THREE.MeshPhysicalMaterial({ color: 0x6b7b69 });
-  let top = new THREE.Mesh(topGeometry, topMaterial);
-  groups.add(top);
-  scene.add(groups);
-  objects.push(groups);
+  edges.set(frontPenal, new Map([
+    [bottomPenal, [0, -27.5, -10]],
+  ]))
 
   // lights
   let light = new THREE.DirectionalLight(0xffffff);
@@ -88,12 +119,16 @@ function init() {
   });
 
   dragControls.addEventListener('drag', function (e) {
-    let current = e.object.position.clone();
-    let topWorldCoord = top.position.clone();
-    
-    if (getDistance(current.project(camera), topWorldCoord.project(camera)) < 0.2) {
-      e.object.position.set(top.position.x, top.position.y, top.position.z);
-      e.object.updateMatrix();
+    let current = e.object.position;
+    if (!edges.has(e.object)) { return; }
+    for (let [item, vec] of edges.get(e.object)) {
+      let currentPosition = current.clone().add(new THREE.Vector3(...vec));
+      let targetPosition = item.position.clone();
+      if (getDistance(currentPosition.project(camera), targetPosition.project(camera)) < distanceLimit) {
+        current.set(item.position.x - vec[0], item.position.y - vec[1], item.position.z - vec[2]);
+        e.object.updateMatrix();
+        break;
+      }
     }
   });
 
