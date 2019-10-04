@@ -1,5 +1,5 @@
 let camera, controls, scene, renderer, stats;
-let objects = [], edges = new Map();
+let boards = [], edges = new Map();
 let planeColor = 0x6b7b69, distanceLimit = 0.18;
 
 // CSG util method
@@ -11,7 +11,7 @@ const makeCSG = function(a, b, op, mat) {
   return result;
 }
 
-const makePlane = function(geometry, location, rotation) {
+const makeBoard = function(geometry, location, rotation) {
   let planeGeometry = new THREE.BoxGeometry(...geometry);
   let planeMaterial = new THREE.MeshPhysicalMaterial({ color: planeColor });
   let plane = new THREE.Mesh(planeGeometry, planeMaterial);
@@ -28,8 +28,8 @@ const makePlane = function(geometry, location, rotation) {
   return plane;
 }
 
-const makeBackPlane = function(location) {
-  let basePlane = makePlane([23, 55, 0.7], location);
+const makeBackBoard = function(location) {
+  let basePlane = makeBoard([23, 55, 1], location);
 
   let fixedhole = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 3, 32));
   fixedhole.rotateX(Math.PI / 2);
@@ -42,6 +42,28 @@ const makeBackPlane = function(location) {
   fixedhole.updateMatrix();
 
   return makeCSG(prePlane, fixedhole, 'subtract', prePlane.material);
+}
+
+const makeSideBoard = function(location, right=false) {
+  let basePlane = makeBoard([1, 40, 22], location);
+
+  let dividend = new THREE.Mesh(new THREE.BoxGeometry(2, 2, 30));
+  dividend.rotateX(6/180*Math.PI);
+  dividend.position.add(new THREE.Vector3(...location));
+  dividend.position.add(new THREE.Vector3(0, 20.25, 0));
+  dividend.updateMatrix();
+
+  let sideBoard = makeCSG(basePlane, dividend, 'subtract', basePlane.material);
+  if (right) {
+    let fixedhole = new THREE.Mesh(new THREE.CylinderGeometry(2.5, 2.5, 3, 32));
+    fixedhole.rotateZ(Math.PI / 2);
+    fixedhole.position.add(new THREE.Vector3(...location));
+    fixedhole.position.add(new THREE.Vector3(0, -15, -7));
+    fixedhole.updateMatrix();
+
+    return makeCSG(sideBoard, fixedhole, 'subtract', sideBoard.material);
+  }
+  return sideBoard;
 }
 
 const getDistance = function(p1, p2) {
@@ -60,29 +82,56 @@ function init() {
   scene.fog = new THREE.FogExp2(0xcccccc, 0.002);
 
   // add sample plane
-  let backPlane = makeBackPlane([-100, 0, 0]);
-  scene.add(backPlane);
-  objects.push(backPlane);
+  let backBoard = makeBackBoard([0, 0, 0]);
+  scene.add(backBoard);
+  boards.push(backBoard);
 
-  let bottomPenal = makePlane([23, 0.7, 20], [-50, 0, 0]);
-  scene.add(bottomPenal);
-  objects.push(bottomPenal);
+  let baseBoard = makeBoard([23, 1, 20], [0, -50, 0]);
+  scene.add(baseBoard);
+  boards.push(baseBoard);
 
-  let frontPenal = makePlane([23, 55, 0.7], [0, 0, 0]);
-  scene.add(frontPenal);
-  objects.push(frontPenal);
+  let frontBoard = makeBoard([23, 38, 1], [100, 0, 0]);
+  scene.add(frontBoard);
+  boards.push(frontBoard);
 
-  edges.set(backPlane, new Map([
-    [bottomPenal, [0, -27.5, 10]],
+  let rightBoard = makeSideBoard([50, 0, 0], true)
+  scene.add(rightBoard);
+  boards.push(rightBoard);
+
+  let lidBoard = makeBoard([23, 1, 26], [0, 50, 0], [6, 0, 0]);
+  scene.add(lidBoard);
+  boards.push(lidBoard);
+
+  let leftBoard = makeSideBoard([-50, 0, 0])
+  scene.add(leftBoard);
+  boards.push(leftBoard);
+
+  edges.set(backBoard, new Map([
+    [baseBoard, [0, -19.5, 10]],
+    [lidBoard, [0, 19.25, 12.92]],
+    [rightBoard, [11, 0, 11]],
+    [leftBoard, [-11, 0, 11]],
+  ]));
+  
+  edges.set(lidBoard, new Map([
+    [backBoard, [0, -19.25, -12.92]],
+  ]))
+
+  edges.set(baseBoard, new Map([
+    [backBoard, [0, 19.5, -10]],
+    [frontBoard, [0, 19, 9.5]],
   ]));
 
-  edges.set(bottomPenal, new Map([
-    [backPlane, [0, 27.5, -10]],
-    [frontPenal, [0, 27.5, 10]],
-  ]));
+  edges.set(leftBoard, new Map([
+    [backBoard, [11, 0, -11]],
+  ]))
 
-  edges.set(frontPenal, new Map([
-    [bottomPenal, [0, -27.5, -10]],
+  edges.set(rightBoard, new Map([
+    [backBoard, [-11, 0, -11]],
+  ]))
+
+  edges.set(frontBoard, new Map([
+    [baseBoard, [0, -19, -9.5]],
   ]))
 
   // lights
@@ -112,7 +161,7 @@ function init() {
   controls.dynamicDampingFactor = 0.3;
 
   // add drag control
-  let dragControls = new THREE.DragControls(objects, camera, renderer.domElement);
+  let dragControls = new THREE.DragControls(boards, camera, renderer.domElement);
 
   dragControls.addEventListener('dragstart', function () {
     controls.enabled = false;
