@@ -65,8 +65,7 @@ const description = {
 
 const useStyles = makeStyles(theme => ({
   root: {
-    margin: theme.spacing(2),
-    // backgroundColor: theme.palette.secondary.main,
+    margin: theme.spacing(3),
   },
   tab: {
 

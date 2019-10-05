@@ -1,16 +1,18 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import StepContent from '@material-ui/core/StepContent';
 import Typography from '@material-ui/core/Typography';
+import CardMedia from '@material-ui/core/CardMedia';
 import clsx from 'clsx';
-
 
 const useColorlibStepIconStyles = makeStyles({
   root: {
-    backgroundColor: '#6b7b46',
+    backgroundColor: '#6b7b69',
     zIndex: 1,
     color: '#fff',
     width: 28,
@@ -19,13 +21,14 @@ const useColorlibStepIconStyles = makeStyles({
     borderRadius: '50%',
     justifyContent: 'center',
     alignItems: 'center',
+    
   },
   active: {
-    backgroundColor: '#6b7b46',
+    backgroundColor: '#6b7b69',
     boxShadow: '0 4px 10px 0 rgba(0,0,0,.25)',
   },
   completed: {
-    backgroundColor: '#6b7b46',
+    backgroundColor: '#6b7b69',
   },
 });
 
@@ -45,10 +48,9 @@ function SinuoStepIcon(props) {
   );
 }
 
-
  const useStyles = makeStyles(theme => ({
     root: {
-      width: '90%',
+      margin: theme.spacing(3),
     },
     button: {
       marginTop: theme.spacing(1),
@@ -67,7 +69,15 @@ function SinuoStepIcon(props) {
       },
       color: '#000',
       padding: theme.spacing(2),
-    }
+    },
+    tipContent: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+    },
+    img: {
+
+    },
   }));
 
 function getSteps() {
@@ -92,14 +102,38 @@ function getStepContent(step) {
   }
 }
 
+const equipments = {
+  'Hiking Poles': {
+    'desc': [
+      'Choose the correct size hiking pole help to walk safer, as you may need extra stability because at night time even the most experienced hikers can feel off-balance.',
+      '(Basically, the top of the handle should be at the waist/hip level and the elbow should be at 90 degrees.)',
+    ].join(' '),
+    'img': 'poles.jpg',
+  },
+  'Illumination': {
+    'desc': [
+      'Bring plenty of lights for night hiking, so you know where you are going on a moonless night, such as the headlamp, flashlight and spares batteries.',
+    ].join(' '),
+    'img': 'illumination.jpg',
+  },
+  'Thermal imaging cameras': {
+    'desc': [
+      'Many warm-blooded animals are mostly active at night, under the complete darkness to remain undetected.',
+      'The thermal imager converts the energy of the infrared wavelength into a visible light display in all wether condition.',
+      'Thermal cameras can see people running in the night, even through the cover of trees.',
+    ].join(' '),
+    'img': 'camera.jpg',
+  },
+}
+
 export default function VerticalLinearStepper() {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(-1);
-  const steps = getSteps();
+  const steps = Object.keys(equipments);
 
   return (
-    <div className={classes.root}>
-      <Stepper activeStep={activeStep} orientation="vertical"  >
+    <Paper className={classes.root}>
+      <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((label, index) => (
           <Step key={label} disabled={false}>
             <StepLabel
@@ -110,13 +144,18 @@ export default function VerticalLinearStepper() {
               <div style={{color: '#000', fontWeight:500}}>{label}</div>
             </StepLabel>
             <StepContent>
-              <Typography>{getStepContent(index)}</Typography>
-              
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={10} className={classes.tipContent}>
+                  <Typography>{equipments[label]['desc']}</Typography>
+                </Grid>
+                <Grid item xs={12} sm={2}>
+                  <CardMedia style={{height: 180}} image={`../../static/img/equipment/${equipments[label]['img']}`} />
+                </Grid>              
+              </Grid>
             </StepContent>
           </Step>
         ))}
       </Stepper>
-      
-    </div>
+    </Paper>
   );
 }
