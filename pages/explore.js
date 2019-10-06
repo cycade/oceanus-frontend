@@ -9,11 +9,7 @@ export default function explore() {
     return (
       <div>
         <NavigationBar currentPage='explore' />
-        <Grid container spacing={1}>
-          <Grid item xs={12} md={6}>
-            <RecordChartByMonth onChooseMonth={() => {}}/>
-          </Grid>
-        </Grid>
+        <RecordChartByMonth onChooseMonth={() => {}}/>
         <EucalyptusInfo />
         <ExploreTip />
       </div>
