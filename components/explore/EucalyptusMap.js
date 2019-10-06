@@ -24,9 +24,12 @@ export default class EucalyptusMap extends Component {
         L.mapquest.tileLayer('light'),
         this.heatmap,
       ],
-      zoom: 10
+      zoom: 9
     })
+
+    this.map.options.minZoom = 9;
   }
+  
 
   componentDidUpdate(nextProps) {
     this.map.removeLayer(this.heatmap);
@@ -44,7 +47,7 @@ export default class EucalyptusMap extends Component {
           <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"/>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
         </Head>
-        <div id='eucalyptus-map' style={{height: '48vh'}}></div>
+        <div id='eucalyptus-map' style={{height: '28vw'}}></div>
       </div>
     );
   }

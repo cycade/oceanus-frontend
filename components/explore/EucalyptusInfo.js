@@ -1,3 +1,5 @@
+import CardMedia from '@material-ui/core/CardMedia';
+import Grid from '@material-ui/core/Grid';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Paper from '@material-ui/core/Paper';
@@ -6,12 +8,14 @@ import { useState } from 'react';
 
 import EucalyptusTab from './EucalyptusTab.js';
 import EucalyptusMap from './EucalyptusMap.js';
+import { Typography } from '@material-ui/core';
 
 const description = {
   'Eucalyptus regnans': {
     nickname: 'Mountain Ash',
     trunk: 'reg-trunk.jpg',
     leaves: 'reg-leaves.jpg',
+    fruit: 'reg-fruit.jpg',
     desc: [
       'It is a species of Eucalyptus native in Tasmania and south eastern Australian sate of Victoria.',
       'In Victoria tall tress are found in the Otway, Dandenong, Yarra and Strzelecki ranges, as well as East Gippsland.',
@@ -26,6 +30,7 @@ const description = {
     nickname: 'Alpine Ash',
     trunk: 'del-trunk.jpg',
     leaves: 'del-leaves.jpg',
+    fruit: 'del-fruit.jpg',
     desc: [
       'Known as alpine ash, woollybutt, gum-topped stringybark, and white-top.',
       'It is a sub-alpine or temperate tree in Victoria, is a member of the Stringybark Group of eucalypts and the 10th tallest species of tree in the world.',
@@ -39,6 +44,7 @@ const description = {
     nickname: 'Shining Gum',
     trunk: 'nit-trunk.jpg',
     leaves: 'nit-leaves.jpg',
+    fruit: 'nit-fruit.jpg',
     desc: [
       'It is a very tall forest tree growing to 60 m, in Victoria reach to 90m.',
       'Eucalyptus is one of the most important plantation species in Tasmania.',
@@ -53,6 +59,7 @@ const description = {
     nickname: 'Snow Gum',
     trunk: 'pau-trunk.jpg',
     leaves: 'pau-leaves.jpg',
+    fruit: 'pau-fruit.jpg',
     desc: [
       'Known as snow gum or white sallee, it is a sub-alpine or temperate tree in Victoria, and a species of flowering plant in the family Myrtaceae.',
     ].join(' '),
@@ -67,13 +74,32 @@ const useStyles = makeStyles(theme => ({
   root: {
     margin: theme.spacing(3),
   },
+  title: {
+    borderBottom: '1px solid #eee',
+    textAlign: 'center',
+    padding: theme.spacing(2),
+  },
   tab: {
-
+    paddingBottom: theme.spacing(0),
   },
   desc: {
-    padding: theme.spacing(2),
-    marginBottom: theme.spacing(2),
+    paddingLeft: theme.spacing(2),
+    paddingBottom: theme.spacing(2),
+    // marginBottom: theme.spacing(2),
   },
+  map: {
+    paddingTop: theme.spacing(2),
+  },
+  imgBox: {
+    paddingLeft: theme.spacing(3),
+    paddingRight: theme.spacing(3),
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-evenly',
+  },
+  img: {
+    padding: theme.spacing(2),
+  }
 }))
 
 export default function EucalyptusInfo(props) {
@@ -100,27 +126,41 @@ export default function EucalyptusInfo(props) {
     setSpecies(newValue);
   }
 
+  let speciesName = Object.keys(description)[species];
+
   return (
     <Paper className={classes.root}>
+      <Typography variant='h4' color='secondary' className={classes.title}>Where to find Leadbeater's Possum?</Typography>
       <Tabs className={classes.tab} value={species} onChange={handleChange} centered={true}>
         <Tab label='Eucalyptus regnans' {...ariaTabProps(0)}/>
         <Tab label='Eucalyptus delegatensis' {...ariaTabProps(1)}/>
         <Tab label='Eucalyptus nitens' {...ariaTabProps(2)}/>
         <Tab label='Eucalyptus pauciflora' {...ariaTabProps(3)}/>
       </Tabs>
-      <div className={classes.desc} {...ariaPanelProps(0)}>
-        <EucalyptusTab name='Eucalyptus regnans' {...description['Eucalyptus regnans']} />
-      </div>
-      <div className={classes.desc} {...ariaPanelProps(1)}>
-        <EucalyptusTab name='Eucalyptus delegatensis' {...description['Eucalyptus delegatensis']} />
-      </div>
-      <div className={classes.desc} {...ariaPanelProps(2)}>
-        <EucalyptusTab name='Eucalyptus nitens' {...description['Eucalyptus nitens']} />
-      </div>
-      <div className={classes.desc} {...ariaPanelProps(3)}>
-        <EucalyptusTab name='Eucalyptus pauciflora' {...description['Eucalyptus pauciflora']} />
-      </div>
-      <EucalyptusMap species={Object.keys(description)[species]} />
+      <Grid container spacing={0}>
+        <Grid item xs={12} sm={8}>
+          <div className={classes.desc} {...ariaPanelProps(0)}>
+            <EucalyptusTab name='Eucalyptus regnans' {...description['Eucalyptus regnans']} />
+          </div>
+          <div className={classes.desc} {...ariaPanelProps(1)}>
+            <EucalyptusTab name='Eucalyptus delegatensis' {...description['Eucalyptus delegatensis']} />
+          </div>
+          <div className={classes.desc} {...ariaPanelProps(2)}>
+            <EucalyptusTab name='Eucalyptus nitens' {...description['Eucalyptus nitens']} />
+          </div>
+          <div className={classes.desc} {...ariaPanelProps(3)}>
+            <EucalyptusTab name='Eucalyptus pauciflora' {...description['Eucalyptus pauciflora']} />
+          </div>
+          <EucalyptusMap species={speciesName} className={classes.map}/>
+        </Grid>
+      
+        <Grid item xs={12} sm={4} className={classes.imgBox}>
+          <CardMedia className={classes.img} style={{minHeight: 150}} image={`../../static/img/forest/${description[speciesName]['trunk']}`} />
+          <CardMedia className={classes.img} style={{minHeight: 150}} image={`../../static/img/forest/${description[speciesName]['leaves']}`} />
+          <CardMedia className={classes.img} style={{minHeight: 150}} image={`../../static/img/forest/${description[speciesName]['fruit']}`} />
+        </Grid>
+      </Grid>
+
     </Paper>
   )
 }

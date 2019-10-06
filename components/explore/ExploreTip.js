@@ -52,6 +52,11 @@ function SinuoStepIcon(props) {
     root: {
       margin: theme.spacing(3),
     },
+    title: {
+      display: 'flex',
+      flexDirection: 'column',
+      justifyContent: 'center',
+    },
     button: {
       marginTop: theme.spacing(1),
       marginRight: theme.spacing(1),
@@ -133,6 +138,11 @@ export default function VerticalLinearStepper() {
 
   return (
     <Paper className={classes.root}>
+      <Grid container spacing={3}>
+        <Grid item xs={12} sm={6} className={classes.title}>
+          <Typography variant='h4' style={{textAlign: 'center'}} color='secondary'>What equipment should I take?</Typography>
+        </Grid>
+        <Grid item xs={12} sm={6}>
       <Stepper activeStep={activeStep} orientation="vertical">
         {steps.map((label, index) => (
           <Step key={label} disabled={false}>
@@ -156,6 +166,7 @@ export default function VerticalLinearStepper() {
           </Step>
         ))}
       </Stepper>
+      </Grid></Grid>
     </Paper>
   );
 }
