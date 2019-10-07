@@ -16,7 +16,7 @@ const styles = theme => ({
     flexGrow: 1,
   },
   logo: {
-    width: 40,
+    width: 20,
     height: 40,
     marginRight: theme.spacing(2),
   },
