@@ -91,14 +91,14 @@ const useStyles = makeStyles(theme => ({
     paddingTop: theme.spacing(2),
   },
   imgBox: {
-    paddingLeft: theme.spacing(3),
-    paddingRight: theme.spacing(3),
+    marginTop: theme.spacing(3),
     display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'space-evenly',
+    justifyContent: 'space-between',
   },
   img: {
     padding: theme.spacing(2),
+    minHeight: 150,
+    width: '30%',
   }
 }))
 
@@ -132,10 +132,10 @@ export default function EucalyptusInfo(props) {
     <Paper className={classes.root}>
       <Typography variant='h4' color='secondary' className={classes.title}>Where to find Leadbeater's Possum?</Typography>
       <Tabs className={classes.tab} value={species} onChange={handleChange} centered={true}>
-        <Tab label='Eucalyptus regnans' {...ariaTabProps(0)}/>
-        <Tab label='Eucalyptus delegatensis' {...ariaTabProps(1)}/>
-        <Tab label='Eucalyptus nitens' {...ariaTabProps(2)}/>
-        <Tab label='Eucalyptus pauciflora' {...ariaTabProps(3)}/>
+        <Tab label={description['Eucalyptus regnans']['nickname']} {...ariaTabProps(0)}/>
+        <Tab label={description['Eucalyptus delegatensis']['nickname']} {...ariaTabProps(1)}/>
+        <Tab label={description['Eucalyptus nitens']['nickname']} {...ariaTabProps(2)}/>
+        <Tab label={description['Eucalyptus pauciflora']['nickname']} {...ariaTabProps(3)}/>
       </Tabs>
       <Grid container spacing={0}>
         <Grid item xs={12} sm={8}>
@@ -151,13 +151,15 @@ export default function EucalyptusInfo(props) {
           <div className={classes.desc} {...ariaPanelProps(3)}>
             <EucalyptusTab name='Eucalyptus pauciflora' {...description['Eucalyptus pauciflora']} />
           </div>
-          <EucalyptusMap species={speciesName} className={classes.map}/>
+          <div className={classes.imgBox}>
+          <CardMedia className={classes.img} image={`../../static/img/forest/${description[speciesName]['trunk']}`} />
+          <CardMedia className={classes.img} image={`../../static/img/forest/${description[speciesName]['leaves']}`} />
+          <CardMedia className={classes.img} image={`../../static/img/forest/${description[speciesName]['fruit']}`} />
+          </div>
         </Grid>
       
-        <Grid item xs={12} sm={4} className={classes.imgBox}>
-          <CardMedia className={classes.img} style={{minHeight: 150}} image={`../../static/img/forest/${description[speciesName]['trunk']}`} />
-          <CardMedia className={classes.img} style={{minHeight: 150}} image={`../../static/img/forest/${description[speciesName]['leaves']}`} />
-          <CardMedia className={classes.img} style={{minHeight: 150}} image={`../../static/img/forest/${description[speciesName]['fruit']}`} />
+        <Grid item xs={12} sm={4}>
+          <EucalyptusMap species={speciesName} className={classes.map}/>
         </Grid>
       </Grid>
 

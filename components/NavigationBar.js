@@ -5,10 +5,10 @@ import { withStyles } from '@material-ui/core/styles';
 
 const routes = [
   { name: 'Home', route: './' },
+  { name: 'Explore', route: './explore' },
   { name: 'Record Map', route: './recordmap' },
   { name: 'Quiz', route: './quiz' },
   { name: 'News', route: './news' },
-  { name: 'Explore', route: './explore' },
 ]
 
 const styles = theme => ({

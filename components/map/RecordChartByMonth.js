@@ -1,12 +1,13 @@
 import { Bar } from 'react-chartjs-2';
 import { Typography, makeStyles } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+
 const useStyles = makeStyles(theme => ({
   root: {
-    paddingLeft: theme.spacing(8),
-    paddingRight: theme.spacing(3),
-    paddingTop: theme.spacing(12),
-    paddingBottom: theme.spacing(2),
+    margin: theme.spacing(3),
+    marginTop: theme.spacing(10),
+    padding: theme.spacing(3),
     backgroundColor: 'white',
     // opacity: 0.8,
   },
@@ -49,17 +50,9 @@ export default function(props) {
   };
 
   return (
-    <div className={classes.root}>
+    <Paper className={classes.root}>
       <Grid container spacing={2}>
-        <Grid item xs={12} md={6} style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-          <Typography variant="h6" style={{textAlign: 'center', paddingTop: '20px'}}>Monthly Occurrence Record of Leadbeater's Possum</Typography>
-
-          <Bar data={data} height={200}
-            options={{ scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] } }}
-            onElementsClick={e => { if (e[0]) { props.onChooseMonth(e[0]['_index']+1) }}}
-          />
-        </Grid>
-        <Grid item xs={12} md={6} className={classes.desc}>
+        <Grid item xs={12} md={4} xl={2} className={classes.desc}>
           <Typography variant="h4" color='secondary' className={classes.title}>
             When to find possum? 
           </Typography >
@@ -70,15 +63,24 @@ export default function(props) {
           October, March, and April have the <strong>most</strong> records and it can infer that these months are easier to find possums.
           The exudates and saps that are produced by plants and insects are Leadbeater’s Possums main food source. In these months, food is enough and the probability of finding possums is high. 
             
-          <br />
+          {/* <br />
           In June, July and December, records are quite low. That may due to two reasons. One is the reduction of humans exploration. In winter, the cold weather may make people decrease outdoor activities. Some of the habitats fall snow during the winter which makes people visual narrow. Hence, the observation of possums might decrease as well. 
           The other reason might be the food reduction. In winter, food resources may be critically low. 
           Some feeding stations are established to assist possums. Hence, possums activities may decrease as well.
-          In these months, it may hard to find possums.
+          In these months, it may hard to find possums. */}
           </Typography >
         
         </Grid>
+        <Grid item xs={12} md={8} xl={10} style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
+          <Typography variant="h6" style={{textAlign: 'center', paddingTop: '20px'}}>Monthly Occurrence Record of Leadbeater's Possum</Typography>
+
+          <Bar data={data} height={90}
+            options={{ scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] } }}
+            onElementsClick={e => { if (e[0]) { props.onChooseMonth(e[0]['_index']+1) }}}
+          />
+        </Grid>
+
       </Grid>
-    </div>
+    </Paper>
   );
 }

@@ -1,6 +1,13 @@
 import Head from 'next/head';
 import { Component } from 'react';
 import forest from '../../static/json/filteredForest.json';
+import { makeStyles } from '@material-ui/core';
+
+const useStyles = makeStyles(theme => ({
+  legend: {
+    background: 'linear-gradient(#e66465, #9198e5)',
+  },
+}))
 
 export default class EucalyptusMap extends Component {
   constructor(props) {
@@ -40,6 +47,7 @@ export default class EucalyptusMap extends Component {
   }
 
   render() {
+    // const classes = useStyles();
     return (
       <div>
         <Head>
@@ -47,7 +55,22 @@ export default class EucalyptusMap extends Component {
           <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"/>
           <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
         </Head>
-        <div id='eucalyptus-map' style={{height: '28vw'}}></div>
+
+        <div style={{display: 'flex', justifyContent: 'space-between', position: 'absolute', zIndex: 1000}}>
+          <div></div>
+          <div style={{display: 'flex', flexDirection:'column', width: '60%', margin: '5px'}}>
+            <div style={{textAlign: 'center'}}><strong>Density of Eucalyptus</strong></div>
+            <div style={{display: 'flex', justifyContent:'space-between'}}>
+              <div>Higher</div><div>Lower</div>
+            </div>
+            <div style={{
+              background: 'linear-gradient(0.25turn, rgba(255, 0, 0, 0.35), rgba(0, 255, 0, 0.35), rgba(0, 0, 255, 0.35))',
+              height: '0.7vw',
+            }}></div>
+          </div>
+        </div>
+
+        <div id='eucalyptus-map' style={{height: '26vw'}}></div>
       </div>
     );
   }
