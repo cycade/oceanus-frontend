@@ -1,6 +1,7 @@
 let camera, controls, scene, renderer, stats;
 let boards = [], edges = new Map();
-let planeColor = 0x6b7b69, distanceLimit = 0.18;
+let planeColor = 0x6b7b69, distanceLimit = 0.08;
+let combination = new Set(), displayResult = false;
 
 // CSG util method
 const makeCSG = function(a, b, op, mat) {
@@ -13,7 +14,12 @@ const makeCSG = function(a, b, op, mat) {
 
 const makeBoard = function(geometry, location, rotation) {
   let planeGeometry = new THREE.BoxGeometry(...geometry);
-  let planeMaterial = new THREE.MeshPhysicalMaterial({ color: planeColor });
+  let texture = THREE.ImageUtils.loadTexture("/static/img/material.png");
+  let planeMaterial = new THREE.MeshLambertMaterial({
+    map:texture,
+    side:THREE.DoubleSide,
+  });
+
   let plane = new THREE.Mesh(planeGeometry, planeMaterial);
   if (location !== undefined) {
     plane.position.add(new THREE.Vector3(...location));
@@ -85,6 +91,7 @@ function init() {
   let backBoard = makeBackBoard([0, 0, 0]);
   scene.add(backBoard);
   boards.push(backBoard);
+  combination.add(backBoard);
 
   let baseBoard = makeBoard([23, 1, 20], [0, -50, 0]);
   scene.add(baseBoard);
@@ -143,6 +150,9 @@ function init() {
   scene.add(light);
   light = new THREE.AmbientLight(0x222222);
   scene.add(light);
+  light = new THREE.DirectionalLight(0x002288);
+  light.position.set(-50, 50, 20);
+  scene.add(light);
 
   // renderer
   renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -168,16 +178,26 @@ function init() {
   });
 
   dragControls.addEventListener('drag', function (e) {
-    let current = e.object.position;
+    let current = e.object.position, foundNearest = false;
     if (!edges.has(e.object)) { return; }
     for (let [item, vec] of edges.get(e.object)) {
       let currentPosition = current.clone().add(new THREE.Vector3(...vec));
       let targetPosition = item.position.clone();
       if (getDistance(currentPosition.project(camera), targetPosition.project(camera)) < distanceLimit) {
+        foundNearest = true;
         current.set(item.position.x - vec[0], item.position.y - vec[1], item.position.z - vec[2]);
         e.object.updateMatrix();
+        if (e.object !== backBoard && item === backBoard) { combination.add(e.object); }
+        if (e.object === backBoard && item !== backBoard) { combination.add(item); }
+        if (combination.has(baseBoard) && e.object === frontBoard) { combination.add(e.object); }
         break;
       }
+      if (!foundNearest && combination.has(e.object)) { combination.delete(e.object); }
+    }
+
+    if (combination.size === 6 && !displayResult) {
+      displayResult = true;
+      setTimeout(() => alert('Congratulations!'), 500);
     }
   });
 

@@ -50,6 +50,7 @@ function SinuoStepIcon(props) {
 
  const useStyles = makeStyles(theme => ({
     root: {
+      marginTop: theme.spacing(5),
       margin: theme.spacing(3),
     },
     title: {

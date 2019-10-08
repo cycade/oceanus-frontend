@@ -9,6 +9,7 @@ const routes = [
   { name: 'Record Map', route: './recordmap' },
   { name: 'Quiz', route: './quiz' },
   { name: 'News', route: './news' },
+  { name: 'Nestbox', route: './nestbox' },
 ]
 
 const styles = theme => ({
@@ -114,7 +115,7 @@ class NavigationBar extends Component {
                 </Box>
               )
             }
-            <Button variant='contained' color='secondary' className={classes.button}>Logout</Button>
+            {/* <Button variant='contained' color='secondary' className={classes.button}>Logout</Button> */}
           </Hidden>
         </Toolbar>
       </AppBar>
