@@ -86,7 +86,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2),
   },
   map: {
-    paddingTop: theme.spacing(2),
+    padding: theme.spacing(2),
   },
   imgBox: {
     padding: theme.spacing(3),
@@ -95,7 +95,7 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: theme.spacing(1),
   },
   img: {
-    minHeight: 150,
+    minHeight: 240,
   }
 }))
 
@@ -134,8 +134,8 @@ export default function EucalyptusInfo(props) {
         <Tab label={description['Eucalyptus nitens']['nickname']} {...ariaTabProps(2)}/>
         <Tab label={description['Eucalyptus pauciflora']['nickname']} {...ariaTabProps(3)}/>
       </Tabs>
-      <Grid container spacing={5}>
-        <Grid item xs={12} md={6} xl={4} style={{display: 'flex', flexDirection:'column', justifyContent: 'space-between'}}>
+      <Grid container spacing={1}>
+        <Grid item xs={12} md={8} style={{display: 'flex', flexDirection:'column', justifyContent: 'space-between'}}>
           <div className={classes.desc} {...ariaPanelProps(0)}>
             <EucalyptusTab name='Eucalyptus regnans' {...description['Eucalyptus regnans']} />
           </div>
@@ -166,8 +166,8 @@ export default function EucalyptusInfo(props) {
 
         </Grid>
       
-        <Grid item xs={12} md={6} xl={8}>
-          <EucalyptusMap species={speciesName} className={classes.map}/>
+        <Grid item xs={12} md={4} className={classes.map}>
+          <EucalyptusMap species={speciesName}/>
         </Grid>
       </Grid>
 
