@@ -19,6 +19,9 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
+  },
+  emp: {
+    fontSize: 18,
   }
 }))
 
@@ -54,13 +57,13 @@ export default function(props) {
       <Grid container spacing={2}>
         <Grid item xs={12} md={4} xl={2} className={classes.desc}>
           <Typography variant="h4" color='secondary' className={classes.title}>
-            When to find possum? 
+            When to find the Leadbeater’s Possum? 
           </Typography >
 
           <Typography variant="body1">
           The chart shows monthly distribution about  Leadbeater’s Possum observation record.
-          <strong>Spring and Autumn </strong>might be two best seasons to find possum. 
-          October, March, and April have the <strong>most</strong> records and it can infer that these months are easier to find possums.
+          <strong className={classes.emp}>Spring</strong> and <strong className={classes.emp}>Autumn </strong>might be two best seasons to find possum. 
+          <strong className={classes.emp}>October</strong>, <strong className={classes.emp}>March</strong>, and <strong className={classes.emp}>April</strong> have the <strong className={classes.emp}>most</strong> records and it can infer that these months are easier to find possums.
           The exudates and saps that are produced by plants and insects are Leadbeater’s Possums main food source. In these months, food is enough and the probability of finding possums is high. 
             
           {/* <br />
@@ -72,7 +75,7 @@ export default function(props) {
         
         </Grid>
         <Grid item xs={12} md={8} xl={10} style={{display: 'flex', flexDirection: 'column', justifyContent: 'center'}}>
-          <Typography variant="h6" style={{textAlign: 'center', paddingTop: '20px'}}>Monthly Occurrence Record of Leadbeater's Possum</Typography>
+          <Typography variant="h6" style={{textAlign: 'center', paddingTop: '20px'}}>Monthly Occurrence Record of the Leadbeater's Possum</Typography>
 
           <Bar data={data} height={90}
             options={{ scales: { xAxes: [{ stacked: true }], yAxes: [{ stacked: true }] } }}

@@ -244,14 +244,8 @@ export default function(props) {
   return <div>
     <Snackbar
       open={completed}
-      message={
-        <div>
-          <Typography variant='h5'>Congratulations!</Typography>
-        </div>
-      }
-      action={
-        <Button color='inherit' href='/'>Learn more</Button>
-      }
+      message={<Typography variant='h5'>Congratulations!</Typography>}
+      action={<Button color='inherit' href='/'>Learn more</Button>}
     />
 
   </div>;

@@ -50,7 +50,7 @@ function SinuoStepIcon(props) {
 
  const useStyles = makeStyles(theme => ({
     root: {
-      marginTop: theme.spacing(5),
+      marginTop: theme.spacing(8),
       margin: theme.spacing(3),
     },
     title: {
@@ -109,26 +109,28 @@ function getStepContent(step) {
 }
 
 const equipments = {
-  'Hiking Poles': {
-    'desc': [
-      'Choose the correct size hiking pole help to walk safer, as you may need extra stability because at night time even the most experienced hikers can feel off-balance.',
-      '(Basically, the top of the handle should be at the waist/hip level and the elbow should be at 90 degrees.)',
-    ].join(' '),
-    'img': 'poles.jpg',
-  },
   'Illumination': {
     'desc': [
-      'Bring plenty of lights for night hiking, so you know where you are going on a moonless night, such as the headlamp, flashlight and spares batteries.',
+      "Visit the Leadbeater's Possum habitat is important to bring plenty of lights to walk in a moonless night, including headlamp, flashlight and spares batteries. Headlamp with two head-bands, one band goes from back to the front helps to keep the actual light in place, the headlamp it will help you walk safely in the native forest's rough surface to find Leadbeater's Possums.",
     ].join(' '),
     'img': 'illumination.jpg',
+    'img1': 'illumination-1.jpg',
+  },
+  'Hiking Poles': {
+    'desc': [
+      "To find the Leadbeater's Possum at night, choose the correct size hiking pole to help you to walk safer and closer for the habitat observation.",
+      "Thus, you will need extra stability to walk in the dense wet rugged mossy grass with hiking poles. Basically, the top of the handle should be at the waist or hip level and the elbow should be at 90 degrees, so it can help you to balance your walk."
+    ].join(' '),
+    'img': 'poles.jpg',
+    'img1': 'poles-1.jpg',
   },
   'Thermal imaging cameras': {
     'desc': [
-      'Many warm-blooded animals are mostly active at night, under the complete darkness to remain undetected.',
-      'The thermal imager converts the energy of the infrared wavelength into a visible light display in all wether condition.',
-      'Thermal cameras can see people running in the night, even through the cover of trees.',
+      "The Leadbeater's Possum are small and speedy, mostly active at night feeding on insects and sweet nectar in the habitat has a dense understory of wattle.",
+      "Under the complete darkness at night, the thermal imager helps to converts the energy of the possum’s infrared wavelength of into visible light, so you can find it easier in the dark night even though the cover of trees."
     ].join(' '),
     'img': 'camera.jpg',
+    'img1': 'camera-1.jpg',
   },
 }
 
@@ -137,37 +139,54 @@ export default function VerticalLinearStepper() {
   const [activeStep, setActiveStep] = React.useState(-1);
   const steps = Object.keys(equipments);
 
+  const handleClick = (index) => {
+    if (activeStep === index) {
+      setActiveStep(-1);
+    } else {
+      setActiveStep(index);
+    }
+  }
+
   return (
     <Paper className={classes.root}>
       <Grid container spacing={3}>
         <Grid item xs={12} sm={6} className={classes.title}>
-          <Typography variant='h4' style={{textAlign: 'center'}} color='secondary'>What equipment should I take?</Typography>
+          <Typography variant='h4' align='center' color='secondary'>What equipment should I take?</Typography>
+          <Typography align='center'>
+            Passing through dark, wet and dense mountain ash forest is dangerous. 
+            Leadbeater's Possums live is a mysterious species and difficult to detect, as it typically nests in large old trees and only emerges under the cover of night.
+            They live in really thick forest with 80-metre-tall trees, 30-metres in the mid story and really dense understory. 
+          </Typography>
         </Grid>
         <Grid item xs={12} sm={6}>
-      <Stepper activeStep={activeStep} orientation="vertical">
-        {steps.map((label, index) => (
-          <Step key={label} disabled={false}>
-            <StepLabel
-              className={classes.keybar}
-              onClick={() => { setActiveStep(index); }}
-              StepIconComponent={SinuoStepIcon}
-            >
-              <div style={{color: '#000', fontWeight:500}}>{label}</div>
-            </StepLabel>
-            <StepContent>
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={10} className={classes.tipContent}>
-                  <Typography>{equipments[label]['desc']}</Typography>
-                </Grid>
-                <Grid item xs={12} sm={2}>
-                  <CardMedia style={{height: 180}} image={`../../static/img/equipment/${equipments[label]['img']}`} />
-                </Grid>              
-              </Grid>
-            </StepContent>
-          </Step>
-        ))}
-      </Stepper>
-      </Grid></Grid>
+          <Stepper activeStep={activeStep} orientation="vertical">
+            {steps.map((label, index) => (
+              <Step key={label} disabled={false}>
+                <StepLabel
+                  className={classes.keybar}
+                  onClick={() => handleClick(index)}
+                  StepIconComponent={SinuoStepIcon}
+                >
+                  <Typography variant='h6' style={{color: '#000', fontWeight:500}}>{label}</Typography>
+                </StepLabel>
+                <StepContent>
+                  <Grid container spacing={2}>
+                    <Grid item xs={12} sm={12} className={classes.tipContent}>
+                      <Typography>{equipments[label]['desc']}</Typography>
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <CardMedia style={{height: 180}} image={`../../static/img/equipment/${equipments[label]['img']}`} />
+                    </Grid>
+                    <Grid item xs={12} sm={6}>
+                      <CardMedia style={{height: 180}} image={`../../static/img/equipment/${equipments[label]['img1']}`} />
+                    </Grid>              
+                  </Grid>
+                </StepContent>
+              </Step>
+            ))}
+          </Stepper>
+        </Grid>
+      </Grid>
     </Paper>
   );
 }

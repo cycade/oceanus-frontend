@@ -200,7 +200,7 @@ export default class RecordMap extends Component {
     })
 
     // highlight user's location
-    if (this.props.userLocation) {
+    if (this.props.userLocation.length > 0) {
       L.mapquest.textMarker(this.props.userLocation, {
         text: 'Your Location',
         position: 'right',
@@ -238,6 +238,15 @@ export default class RecordMap extends Component {
           }
         }  
       }
+    }
+
+    if (prevProps.userLocation.length === 0 && this.props.userLocation.length > 0) {
+      L.mapquest.textMarker(this.props.userLocation, {
+        text: 'Your Location',
+        position: 'right',
+        type: 'marker',
+        icon: { primaryColor: '#DD3333', secondaryColor: '#DD3333', size: 'sm' }
+      }).addTo(this.map);  
     }
   }
 

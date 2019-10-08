@@ -17,13 +17,14 @@ const description = {
     leaves: 'reg-leaves.jpg',
     fruit: 'reg-fruit.jpg',
     desc: [
-      'It is a species of Eucalyptus native in Tasmania and south eastern Australian sate of Victoria.',
-      'In Victoria tall tress are found in the Otway, Dandenong, Yarra and Strzelecki ranges, as well as East Gippsland.',
-      'It is the tallest flowering plants and the third tallest tree in the world.'
+      'This is a species of Eucalyptus native in Tasmania and south eastern Australian sate of Victoria.',
+      'It is the tallest flowering plants and the third tallest tree in the world.',
     ].join(' '),
     feature: [
-      'A straight-trunked tree with smooth grey bark, but with a stocking of rough brown, fibrous or fragile bark from 5 to 20 metres (16 ft 5 in to 65 ft 7 in) above the ground.',
-      'It regularly grows to 85 metres (280 ft), with peeled bark in the upper branch Ribbon.',
+      'In the Leadbeater’s Possum habitats, the trees with shedding bark and hanging ribbons are important for the possum’s living.',
+      'Its source of food such as spider, moths, tree crickets and beetles can be claws out from underneath tree bark, or the hang on the bark.',
+      'Eucalyptus regnans is a straight-trunked tree with smooth grey bark, but with a stocking of rough brown, fibrous or fragile bark from 5 to 20 metres (16 ft 5 into 65 ft 7 in) above the ground.',
+      'It regularly grows to 85 metres (280 ft), with peeled bark in the upper branch Ribbon, the environment and dense understory suitable for the Leadbeater’s Possum living.',
     ].join(' '),
   },
   'Eucalyptus delegatensis': {
@@ -32,12 +33,13 @@ const description = {
     leaves: 'del-leaves.jpg',
     fruit: 'del-fruit.jpg',
     desc: [
-      'Known as alpine ash, woollybutt, gum-topped stringybark, and white-top.',
+      'Alpine Ash is known as alpine ash, woollybutt, gum-topped stringybark, and white-top.',
       'It is a sub-alpine or temperate tree in Victoria, is a member of the Stringybark Group of eucalypts and the 10th tallest species of tree in the world.',
     ].join(' '),
     feature: [
-      'A straight, grey-trunked tree, it reaches heights of over 90 metres in suitable conditions.',
-      'The bark is thick, fibrous, and woolly at the base and smooth on the smaller branches.',
+      'For the Leadbeater’s Possum living, with shedding bark and hanging ribbons are suitable for them to move from one tree to another.',
+      'Alpine Ash is a straight and grey-trunked tree reached over 90 metres.',
+      'Its bark is thick, fibrous and woolly at the base and smooth on the smaller branches, which is easy for the Leadbeater’s Possum running along branches and move from one tree jumping up to 1 meter to another tree in search of food.'
     ].join(' '),
   },
   'Eucalyptus nitens': {
@@ -46,13 +48,15 @@ const description = {
     leaves: 'nit-leaves.jpg',
     fruit: 'nit-fruit.jpg',
     desc: [
-      'It is a very tall forest tree growing to 60 m, in Victoria reach to 90m.',
-      'Eucalyptus is one of the most important plantation species in Tasmania.',
-      'The wood is mainly used in general construction but started to be used for furniture.',
+      'It is a very tall forest tree reach 90m in Victoria.',
+      'Eucalyptus is one of the most important plantation species in Tasmania, as the wood is mainly used in general construction but started to be used for furniture.'
     ].join(' '),
     feature: [
-      'Eucalyptus nitens’ bark is persistent in the lower trunk, gray to grayish brown, flaky fibers, smooth on the top, white, gray or yellow, and stripped off.',
-      'Young leaves opposite, ovate to elliptic, heart-shaped, sessile-lanceolate.',
+      'The species of Eucalyptus native, it nectar and juice is a sugar-rich energy food for The Leadbeater\'s possum, such as the Eucalyptus nitens.',
+      'Eucalyptus nitens\' bark is persistent in the lower trunk with flaky fibres, smooth on the top and stripped off.',
+      'Its young leaves are opposite with ovate to elliptic or heart-shaped, sessile-lanceolate.',
+      'The Leadbeater\'s possum threw the leaves of the tree off for sugar, as some sap-sucking insects exude a sweet liquid called “honeydew” in the leaves.',
+      'They also like the gum, nectar and juice of wattle and eucalyptus.',
     ].join(' '),
   },
   'Eucalyptus pauciflora': {
@@ -61,23 +65,30 @@ const description = {
     leaves: 'pau-leaves.jpg',
     fruit: 'pau-fruit.jpg',
     desc: [
-      'Known as snow gum or white sallee, it is a sub-alpine or temperate tree in Victoria, and a species of flowering plant in the family Myrtaceae.',
+      'Snow Gum known as snow gum or white sallee, it is a sub-alpine or temperate tree in Victoria, and a species of flowering plant in the family Myrtaceae.',
     ].join(' '),
     feature: [
-      'The bark of the eucalyptus is smooth, white to light gray, sometimes brownish red, falling off into plaques or strips, showing a mottled appearance.',
-      'Gray-green adult leaves are usually lanceolate to wide-lanceolate, with distinct parallel veins, but may be oval.',
+      'The most common predator for the Leadbeater\'s Possums would be the largest Owl in the habitats, and when they came nearer to the ground predators include feral species such as foxes and cats.',
+      'Thus the Leadbeater\'s Possums need dense bushes that perch under the trees to provide connectivity, so they can safely cross the forest and forage without being preyed by owls. The bark of the snow gum is smooth and white to light grey, sometimes brownish red, and it falling off into plaques or strips.',
+      'It helps to cover and protect the possum for moving.',
+      // 'Its leaves are usually grey-green lanceolate to wide-lanceolate, with distinct parallel veins, this eucalyptus also provides gum, nectar and juice for the possum as food.',
     ].join(' '),
   },
 }
 
 const useStyles = makeStyles(theme => ({
   root: {
+    marginTop: theme.spacing(6),
     margin: theme.spacing(3),
   },
   title: {
-    borderBottom: '1px solid #eee',
     textAlign: 'center',
-    padding: theme.spacing(2),
+    padding: theme.spacing(1),
+  },
+  titleDesc: {
+    margin: theme.spacing(3),
+    borderBottom: '1px solid #eee',
+    paddingBottom: theme.spacing(2),
   },
   tab: {
     paddingBottom: theme.spacing(0),
@@ -128,6 +139,12 @@ export default function EucalyptusInfo(props) {
   return (
     <Paper className={classes.root}>
       <Typography variant='h4' color='secondary' className={classes.title}>Where to find Leadbeater's Possum?</Typography>
+      <Typography variant='subtitle1' className={classes.titleDesc}>
+        The Leadbeater’s Possum lives almost exclusively in the Central Highlands in the state of Victoria, within the native forests 700m above sea level, including the <strong>Mountain Ash</strong>, <strong>Alpine Ash</strong>, <strong>Shining Gum</strong> and <strong>Snow Gum</strong>.
+        In Victoria tall trees are found in the Otway, Dandenong, Yarra and Strzelecki ranges, as well as East Gippsland.
+        The dead or alive large old trees hollows which over 150 years old are suitable for the Leadbeater’s Possum to build their nest for rest and breeding.
+        In the dense and understory of branch enable the possum to safely pass through the forest for food searching and living.
+      </Typography>
       <Tabs className={classes.tab} value={species} onChange={handleChange} centered={true}>
         <Tab label={description['Eucalyptus regnans']['nickname']} {...ariaTabProps(0)}/>
         <Tab label={description['Eucalyptus delegatensis']['nickname']} {...ariaTabProps(1)}/>

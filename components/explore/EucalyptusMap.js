@@ -65,7 +65,7 @@ export default class EucalyptusMap extends Component {
           </div>
         </div>
                 
-        <div id='eucalyptus-map' style={{height: '500px'}}></div>
+        <div id='eucalyptus-map' style={{height: '520px'}}></div>
       </div>
     );
   }
