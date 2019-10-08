@@ -40,7 +40,7 @@ export default class RecordMap extends Component {
       recordsByMonth: null,
       
       // show records reported by user #render
-      recordsFromUser: null,
+      // recordsFromUser: null,
 
       // show bushwalking route when icon selected
       bushwalking: null,
@@ -57,7 +57,7 @@ export default class RecordMap extends Component {
       markColor: '#c43a31',
       layerState: {
         'distribution': true,
-        'recordsFromUser': false,
+        // 'recordsFromUser': false,
         'bushwalking': false,
         'heatmap': true,
       },
@@ -75,7 +75,7 @@ export default class RecordMap extends Component {
       })
     })
     .bindPopup(getMessageFromRecord(record))
-    .addTo(this.layers.recordsFromUser);
+    .addTo(this.layers.distribution);
   }
 
   _addHighlightRecord(record) {
