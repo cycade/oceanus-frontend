@@ -4,6 +4,7 @@ import NavigationBar from '../components/NavigationBar.js';
 import RecordChartByMonth from '../components/map/RecordChartByMonth.js';
 import ExploreTip from '../components/explore/ExploreTip.js';
 import EucalyptusInfo from '../components/explore/EucalyptusInfo.js';
+import InfoButton from '../components/explore/InfoButtion.js';
 
 export default function explore() {
     return (
@@ -12,6 +13,7 @@ export default function explore() {
         <RecordChartByMonth onChooseMonth={() => {}}/>
         <EucalyptusInfo />
         <ExploreTip />
+        <InfoButton />
       </div>
     )
   }

@@ -58,7 +58,7 @@ const tileData = [
   {type: 'text', content: "I'm the only species in the petaurid genus Gymnobelideus in an ancestral form.", title: 'Rarity', button: 'Find Me', href: './recordmap'},
   {type: 'img', img: image2, title: 'title', featured: true},
   {type: 'text', content: 'The greatest threats to my conservation in the wild are logging, low habitats protection, bush fire and predator threats.', title: 'Threats', button: 'Attempt Quiz', href: './quiz'},
-  {type: 'text', content: 'I\'m listed as a "critically endangered" species under the EPBC Act in 2015.', title: 'Endanger', button: 'Report', href: './recordmap'},
+  {type: 'text', content: 'I\'m listed as a "critically endangered" species under the EPBC Act in 2015.', title: 'Endanger', button: 'Explore', href: './explore'},
   {type: 'img', img: image3, title: 'title', featured: true},
   {type: 'text', content: 'My conservation includes montane ash forest (i.e. Mt Ritchie) and sub-alpine woodland (i.e. Mount Baw Baw).', title: 'Conservation', button: 'News', href: './news'},
   {type: 'img', img: image4, title: 'title', featured: true},

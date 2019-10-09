@@ -2,6 +2,12 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import { makeStyles } from '@material-ui/styles';
 
+const labelmap = {
+  'distribution': 'Occurrence',
+  'bushwalking': 'Bushwalking',
+  'heatmap': 'Heatmap',
+}
+
 const useStyles = makeStyles(theme => ({
   switch: {
     '&$checked': {
@@ -22,7 +28,7 @@ export default function MapControlLabel(props) {
           // color='primary'
         />
       }
-      label={props.name}
+      label={labelmap[props.name]}
     />
   )
 }

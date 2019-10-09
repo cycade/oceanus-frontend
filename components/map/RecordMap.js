@@ -1,6 +1,8 @@
 import { Component } from 'react';
 import bushwalking from '../../static/json/bushwalking.json';
 import MapControlLabel from './MapControlLabel.js';
+import { Typography } from '@material-ui/core';
+import { borderRadius } from '@material-ui/system';
 
 function makeGeojson(coords) {
   return ({
@@ -53,7 +55,7 @@ export default class RecordMap extends Component {
     };
 
     this.state = {
-      baseColor: '#22407F',
+      baseColor: '#000080',
       markColor: '#c43a31',
       layerState: {
         'distribution': true,
@@ -66,9 +68,9 @@ export default class RecordMap extends Component {
 
   _addRecordFromUser(record) {
     L.marker([record.latitude, record.longitude], {
-      icon: L.mapquest.icons.flag({
-        primaryColor: this.state.baseColor,
-        secondaryColor: '#ABA998',
+      icon: L.mapquest.icons.via({
+        primaryColor: '#dc143c',
+        secondaryColor: '#233333',
         shadow: true,
         size: 'sm',
         symbol: `${record['count']}`
@@ -156,7 +158,7 @@ export default class RecordMap extends Component {
       L.marker([record['latitude'], record['longitude']], {
         icon: L.mapquest.icons.via({
           primaryColor: this.state.baseColor,
-          secondaryColor: '#ABA998',
+          secondaryColor: '#eeeeee',
           shadow: true,
           size: 'sm',
           symbol: `${record['count']}`
@@ -267,15 +269,29 @@ export default class RecordMap extends Component {
     return (
       <div>
         <div style={{'position': 'absolute', 'top': '2vw', 'right': 10, 'zIndex': 1000, 'display': 'flex', 'flexDirection': 'column'}}>
-        {
-          Object.keys(this.state.layerState).map((e, i) => {
-            return <MapControlLabel key={i+1}
-              state={this.state.layerState[e]}
-              setState={((event) => this._handleMapLayerChange(event, e)).bind(this)}
-              name={e}
-            />;
-          })
-        }
+          <div style={{marginBottom: '8px', paddingLeft: '40px'}}>
+            <Typography variant='h6'>Data Source</Typography>
+            <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
+              <div style={{display: 'flex'}}>
+                <div style={{height: '10px', width: '10px', backgroundColor: '#000080', display:'inline-block', marginTop: '4px', marginRight: '2px'}}></div>
+                <div>Offcial data</div>
+              </div>
+              <div style={{display: 'flex'}}>
+                <div style={{height: '10px', width: '10px', backgroundColor: '#dc143c', display:'inline-block', marginTop: '4px', marginRight: '2px'}}></div>
+                <div>Reported data</div>
+              </div>
+            </div>
+          </div>
+
+          {
+            Object.keys(this.state.layerState).map((e, i) => {
+              return <MapControlLabel key={i+1}
+                state={this.state.layerState[e]}
+                setState={((event) => this._handleMapLayerChange(event, e)).bind(this)}
+                name={e}
+              />;
+            })
+          }
         </div>
         <div id='recordmap' style={{height: '92vh', width: '100vw'}}></div>
 
