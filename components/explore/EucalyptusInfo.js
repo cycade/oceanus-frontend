@@ -167,7 +167,7 @@ export default function EucalyptusInfo(props) {
           </div>
 
           <div className={classes.desc}>
-          <Typography variant='h5' className={classes.subtitle}>Galary</Typography>
+          <Typography variant='h5' className={classes.subtitle}>Pictures</Typography>
           <Grid container>
             <Grid item xs={12} sm={4}>
               <CardMedia className={classes.img} image={`../../static/img/forest/${description[speciesName]['trunk']}`} />

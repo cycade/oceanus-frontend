@@ -8,7 +8,7 @@ export default function(props) {
     let camera, controls, scene, renderer, stats;
     let boards = [], edges = new Map();
     let planeColor = 0x6b7b69, distanceLimit = 0.08;
-    let combination = new Set(), displayResult = false;
+    let combination = new Set();
 
     // CSG util method
     const makeCSG = function(a, b, op, mat) {
@@ -87,7 +87,7 @@ export default function(props) {
       // Initialize camera
       camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
       camera.position.y = 10;
-      camera.position.z = window.innerWidth/10;
+      camera.position.z = window.innerWidth / 6.5;
 
       // Initialzie world
       scene = new THREE.Scene();
@@ -202,11 +202,7 @@ export default function(props) {
           if (!foundNearest && e.object !== backBoard && combination.has(e.object)) { combination.delete(e.object); }
         }
 
-        if (combination.size === 6 && !displayResult) {
-          displayResult = true;
-          // setTimeout(() => alert('Congratulations!'), 500);
-          setComplete(true);
-        }
+        setComplete(combination.size === 6);
       });
 
       dragControls.addEventListener('dragend', function () {
