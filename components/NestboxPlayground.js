@@ -86,8 +86,8 @@ export default function(props) {
     function init() {
       // Initialize camera
       camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
-      camera.position.y = 40;
-      camera.position.z = 160;
+      camera.position.y = 10;
+      camera.position.z = window.innerWidth/10;
 
       // Initialzie world
       scene = new THREE.Scene();
@@ -100,23 +100,23 @@ export default function(props) {
       boards.push(backBoard);
       combination.add(backBoard);
 
-      let baseBoard = makeBoard([23, 1, 20], [0, -50, 0]);
+      let baseBoard = makeBoard([23, 1, 20], [-120, 50, 0]);
       scene.add(baseBoard);
       boards.push(baseBoard);
 
-      let frontBoard = makeBoard([23, 38, 1], [100, 0, 0]);
+      let frontBoard = makeBoard([23, 38, 1], [-160, -50, 0]);
       scene.add(frontBoard);
       boards.push(frontBoard);
 
-      let rightBoard = makeSideBoard([50, 0, 0], true)
+      let rightBoard = makeSideBoard([-120, 0, 0], true)
       scene.add(rightBoard);
       boards.push(rightBoard);
 
-      let lidBoard = makeBoard([23, 1, 26], [0, 50, 0], [6, 0, 0]);
+      let lidBoard = makeBoard([23, 1, 26], [-160, 50, 0], [6, 0, 0]);
       scene.add(lidBoard);
       boards.push(lidBoard);
 
-      let leftBoard = makeSideBoard([-50, 0, 0])
+      let leftBoard = makeSideBoard([-160, 0, 0])
       scene.add(leftBoard);
       boards.push(leftBoard);
 
@@ -199,7 +199,7 @@ export default function(props) {
             if (combination.has(baseBoard) && e.object === frontBoard) { combination.add(e.object); }
             break;
           }
-          if (!foundNearest && combination.has(e.object)) { combination.delete(e.object); }
+          if (!foundNearest && e.object !== backBoard && combination.has(e.object)) { combination.delete(e.object); }
         }
 
         if (combination.size === 6 && !displayResult) {
@@ -223,14 +223,17 @@ export default function(props) {
     }
 
     function onWindowResize() {
-      camera.aspect = window.innerWidth / window.innerHeight*0.8;
+      camera.aspect = window.innerWidth / window.innerHeight*0.99;
       camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight*0.8);
+      renderer.setSize(window.innerWidth, window.innerHeight*0.99);
       controls.handleResize();
       render();
     }
 
     function render() {
+      camera.aspect = window.innerWidth / window.innerHeight*0.99;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight*0.99);
       renderer.render(scene, camera)
       requestAnimationFrame(render)
       controls.update();
