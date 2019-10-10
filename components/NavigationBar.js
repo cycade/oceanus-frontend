@@ -9,7 +9,7 @@ const routes = [
   { name: 'Record Map', route: './recordmap' },
   { name: 'Quiz', route: './quiz' },
   { name: 'News', route: './news' },
-  // { name: 'Nestbox', route: './nestbox' },
+  { name: 'Nestbox', route: './nestbox' },
 ]
 
 const styles = theme => ({

@@ -91,7 +91,7 @@ export default function(props) {
 
       // Initialzie world
       scene = new THREE.Scene();
-      scene.background = new THREE.Color(0xcccccc);
+      scene.background = new THREE.Color(0xeeeeee);
       scene.fog = new THREE.FogExp2(0xcccccc, 0.002);
 
       // add sample plane
@@ -120,11 +120,16 @@ export default function(props) {
       scene.add(leftBoard);
       boards.push(leftBoard);
 
+      let baffleBoard = makeBoard([10, 10, 1], [-120, -50, 0], [0, 135, 0]);
+      scene.add(baffleBoard);
+      boards.push(baffleBoard);
+
       edges.set(backBoard, new Map([
         [baseBoard, [0, -19.5, 10]],
         [lidBoard, [0, 19.25, 12.92]],
         [rightBoard, [11, 0, 11]],
         [leftBoard, [-11, 0, 11]],
+        [baffleBoard, [7.4, -15, 4.072]],
       ]));
       
       edges.set(lidBoard, new Map([
@@ -146,6 +151,10 @@ export default function(props) {
 
       edges.set(frontBoard, new Map([
         [baseBoard, [0, -19, -9.5]],
+      ]))
+
+      edges.set(baffleBoard, new Map([
+        [backBoard, [-7.4, 15, -4.072]],
       ]))
 
       // lights
@@ -202,7 +211,7 @@ export default function(props) {
           if (!foundNearest && e.object !== backBoard && combination.has(e.object)) { combination.delete(e.object); }
         }
 
-        setComplete(combination.size === 6);
+        setComplete(combination.size === 7);
       });
 
       dragControls.addEventListener('dragend', function () {
