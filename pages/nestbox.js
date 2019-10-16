@@ -2,7 +2,7 @@ import NavigationBar from '../components/NavigationBar.js';
 import NestboxPlayground from '../components/NestboxPlayground.js';
 import CardMedia from '@material-ui/core/CardMedia';
 import { Typography, Dialog } from '@material-ui/core';
-import Notification from '../nestbox/Notification.js';
+import NestboxIntro from '../nestbox/NestboxIntro.js';
 
 export default function test(props) {
   return (
@@ -19,7 +19,7 @@ export default function test(props) {
         <img src='/static/img/nestbox-tutorial.png' style={{width: '30vw'}}/>
         <Typography variant='h5' align='center'>Material you need</Typography>
       </div>
-      <Notification />
+      <NestboxIntro />
     </div>
   );
 }
