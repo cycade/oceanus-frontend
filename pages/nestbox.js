@@ -13,7 +13,6 @@ export default function test(props) {
       <script src='/static/threejs/threejs-controls/DragControls.js'></script>
       <script src='/static/threejs/threejs-controls/TrackballControls.js'></script>
       <script src='/static/threejs/threejs-controls/CSGMesh.js'></script>
-      {/* <script src='/static/threejs/scene.js'></script> */}
       <NestboxPlayground />
       <div style={{position: 'absolute', right: 0, top: '15%', backgroundColor: 'white', padding: '6px'}}>
         <img src='/static/img/nestbox-tutorial.png' style={{width: '30vw'}}/>

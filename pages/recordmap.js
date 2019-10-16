@@ -13,7 +13,7 @@ export default function distributionMap(props) {
         <link type="text/css" rel="stylesheet" href="https://api.mqcdn.com/sdk/mapquest-js/v1.3.2/mapquest.css"/>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.heat/0.2.0/leaflet-heat.js"></script>
       </Head>
-      <NavigationBar currentPage='recordmap'/>
+      <NavigationBar currentPage='record map'/>
       <RecordMapWrapper />
     </div>
   )
