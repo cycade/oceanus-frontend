@@ -280,7 +280,7 @@ export default function InfoCard(props) {
         {
           introData.map((e, i) => {
             return (
-              <Grid item key={i} className={classes.intro} xs={12} style={{backgroundColor: i % 2 === 0 ?'#f7f7f7' : '#fff'}}>
+              <Grid item key={i} className={classes.intro} xs={12} style={{backgroundColor: i % 2 !== 0 ?'#f7f7f7' : '#fff'}}>
                 <Grid container className={classes.grid}>
                   {
                     i % 2 === 0

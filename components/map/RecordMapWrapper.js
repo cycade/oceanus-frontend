@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { makeStyles, Button, Drawer, Snackbar, Typography } from '@material-ui/core';
+import { makeStyles, Button, Drawer, Snackbar, Typography, LinearProgress } from '@material-ui/core';
 
 import RecordMap from './RecordMap.js';
 import RecordChartByMonth from './RecordChartByMonth.js';
@@ -168,7 +168,11 @@ export default function RecordMapWrapper(props) {
             count={recordsFromUser.length > 0 ? recordsFromUser[recordsFromUser.length - 1].count : 0}
           />
         </div>
-        : <div>loading</div>
+        : <div style={{marginTop: '240px', marginLeft: '10vw', marginRight: '10vw'}}>
+          <Typography variant='subtitle1' align='center' color='secondary'>Finding the Leadbeater's Possum for you</Typography>
+          <LinearProgress color='primary'/>
+        </div>
+  
       }
     </div>
   )

@@ -270,7 +270,7 @@ export default class RecordMap extends Component {
   render() {
     return (
       <div>
-        <div style={{'position': 'absolute', 'top': '20vw', 'right': 10, 'zIndex': 1000, 'display': 'flex', 'flexDirection': 'column'}}>
+        <div style={{'position': 'absolute', 'top': '80px', 'right': 10, 'zIndex': 1000, 'display': 'flex', 'flexDirection': 'column'}}>
           {
             Object.keys(this.state.layerState).map((e, i) => {
               return <MapControlLabel key={i+1}
