@@ -6,8 +6,7 @@ const description = [
   " The total marks for all questions in the quiz are 30 marks.",
   "There are some hints for each question.",
   " If you get the right answer based on the hint, you will get 3 marks for this question.",
-  " Let's get start!",
-].join(' ');
+];
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -19,14 +18,17 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1),
     padding: theme.spacing(3),
     width: '65vw',
-
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  description: {
+  start: {
+    fontWeight: 500,
     margin: theme.spacing(2),
+  },
+  description: {
+
   }
 }))
 
@@ -36,7 +38,12 @@ export default function QuizWelcome(props) {
   return (
     <div className={classes.root}>
       <Paper className={classes.content}>
-        <Typography variant='h5' className={classes.description} align='center'>{description}</Typography>
+        {
+          description.map((e, i) => (
+            <Typography key={i} variant='h5' className={classes.description} align='center'>{e}</Typography>
+          ))
+        }
+        <Typography variant='h5' className={classes.start} align='center'>Let's get start!</Typography>
         <Button variant='contained' onClick={props.onStart} color='primary'>Attemp Quiz</Button>
       </Paper>
     </div>

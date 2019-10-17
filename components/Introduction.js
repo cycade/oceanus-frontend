@@ -4,7 +4,7 @@ import image1 from '../static/img/S1.jpg'
 import image2 from '../static/img/S2.jpg'
 import image3 from '../static/img/S3.jpg'
 import image4 from '../static/img/S4.jpg'
-
+import image5 from '../static/img/S5.jpg'
 
 // const useStyles = makeStyles(theme => ({
 //   root: {
@@ -164,30 +164,38 @@ import image4 from '../static/img/S4.jpg'
 
 const introData = [
   {
-    title: 'Rarity',
-    desc: "I'm the only species in the petaurid genus Gymnobelideus in an ancestral form.",
+    title: 'Explore',
+    desc: 'We offer the explore page for you to maximize chances of finding the Leadbeater’s possum and assist you in obtaining sufficient information and knowledge of “when”, “where” and “what kind of equipment” to increase the possibility of seeking the Leadbeater’s possum.',
     img: image1,
-    button: 'Find Me',
-    href: './recordmap',
-  },
-  {
-    title: 'Threats',
-    desc: 'The greatest threats to my conservation in the wild are logging, low habitats protection, bush fire and predator threats.',
-    img: image2,
-    button: 'Attempt Quiz',
-    href: './quiz'
-  },
-  {
-    title: 'Endanger',
-    desc: 'I\'m listed as a "critically endangered" species under the EPBC Act in 2015.',
-    img: image3,
     button: 'Explore',
     href: './explore'
   },
   {
-    title: 'Conservation',
-    desc: 'My conservation includes montane ash forest (i.e. Mt Ritchie) and sub-alpine woodland (i.e. Mount Baw Baw).',
+    title: 'Map and Report',
+    desc: "As there is not enough occurrence record of the Leadbeater’s possum, we cannot fully participate in the protection of the possum, so are expecting you to find and upload sightings of them. Based on the occurrence record, the map will guide you to find them in a real time. Once you see them, you can upload the sighting, providing users with updated data and contributing to protection.",
+    img: image2,
+    button: 'Find Me',
+    href: './recordmap',
+  },
+  {
+    title: 'Nest Box',
+    desc: "The Leadbeater’s possums are competing for nest hollows with Suger Gliders, so creating the nest box can help them settling down and breeding. We offer an online game about building the nest-box them, and you can gain the skills of building the nest-box in the real world.",
+    img: image3,
+    button: 'Build a nest box',
+    href: './nestbox',
+  },
+
+  {
+    title: 'Quiz',
+    desc: 'Are you an eligible possum lover? Let’s attempt the quiz to quickly check whether you have sufficient knowledge about the Leadbeater’s possum. If you have had enough knowledge about them, you will have a higher probability to see them in the wild.',
     img: image4,
+    button: 'Attempt Quiz',
+    href: './quiz'
+  },
+  {
+    title: 'News',
+    desc: 'If you want to contribute to the Leadbeater’s possum conservation, you can try to read more news and obtain the information of protection. You can browse updated news and professional articles about the Leadbeater’s possum from our website.',
+    img: image5,
     button: 'News',
     href: './news'
   },
@@ -197,15 +205,19 @@ const useStyles = makeStyles(theme => ({
   root: {
     marginTop: theme.spacing(8),
     marginBottom: theme.spacing(8),
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    // marginLeft: theme.spacing(18),
-    // marginRight: theme.spacing(18),
+  },
+  mdGrid: {
+    marginLeft: theme.spacing(3),
+    marginRight: theme.spacing(3),
+  },
+  xlGrid: {
+
   },
   grid: {
-    width: '95vw',
+    width: '65vw',
+    maxWidth: '1080px',
+    marginTop: theme.spacing(3),
+    marginBottom: theme.spacing(3),
   },
   title: {
     textAlign: 'center',
@@ -214,12 +226,17 @@ const useStyles = makeStyles(theme => ({
     marginBottom: theme.spacing(4),
   },
   intro: {
-    // padding: theme.spacing(10),
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   introImg: {
-    marginLeft: theme.spacing(4),
-    marginRight: theme.spacing(4),
+    marginTop: theme.spacing(4),
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
     minHeight: '240px',
+    height: '80%',
     borderRadius: 4,
     boxShadow: '2px 2px 5px #aaa',
   },
@@ -233,7 +250,6 @@ const useStyles = makeStyles(theme => ({
     fontWeight: 500,
     margin: theme.spacing(2),
     marginBottom: theme.spacing(0),
-    // borderBottom: 'thick green',
   },
   introDesc: {
     fontWeight: 300,
@@ -258,23 +274,83 @@ export default function InfoCard(props) {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <Typography variant='h3' className={classes.title}>Do you know me?</Typography>
-      <Grid container spacing={6} className={classes.grid}>
+      <Typography variant='h3' className={classes.title}>What do we provide?</Typography>
+      <Hidden smDown xlUp>
+      <Grid container spacing={6}>
         {
           introData.map((e, i) => {
             return (
-              <Grid item key={i} className={classes.intro} xs={12} md={6} xl={3}>
-                <CardMedia image={e.img} className={classes.introImg}/>
-                <div className={classes.introText}>
-                  <Typography variant='h4' className={classes.introTitle}>{e.title}</Typography>
-                  <Typography variant='h6' className={classes.introDesc}>{e.desc}</Typography>
-                  <Button href={e.href} variant='contained' color='primary' className={classes.button}>{e.button}</Button>
-                </div>
+              <Grid item key={i} className={classes.intro} xs={12} style={{backgroundColor: i % 2 === 0 ?'#f7f7f7' : '#fff'}}>
+                <Grid container className={classes.grid}>
+                  {
+                    i % 2 === 0
+                    ? <Grid item xs={7}>
+                      <div className={classes.introText}>
+                        <Typography variant='h4' className={classes.introTitle} style={{textAlign: 'right'}}>{e.title}</Typography>
+                        <Typography variant='h6' className={classes.introDesc} style={{textAlign: 'right'}}>{e.desc}</Typography>
+                        <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                          <div></div>
+                          <Button href={e.href} variant='contained' color='primary' className={classes.button}>{e.button}</Button>
+                        </div>
+                      </div>
+                    </Grid>
+                    : <div></div>
+                  }
+                  <Grid item xs={5}>
+                    <CardMedia image={e.img} className={classes.introImg}/>
+                  </Grid>
+                  {
+                    i % 2 !== 0
+                    ? <Grid item xs={7}>
+                      <div className={classes.introText}>
+                        <Typography variant='h4' className={classes.introTitle}>{e.title}</Typography>
+                        <Typography variant='h6' className={classes.introDesc}>{e.desc}</Typography>
+                        <Button href={e.href} variant='contained' color='primary' className={classes.button}>{e.button}</Button>
+                      </div>
+                    </Grid>
+                    : <div></div>
+                  }
+                </Grid>
               </Grid>
             )
           })
         }
       </Grid>
+      </Hidden>
+      <Hidden mdUp>
+        {
+          introData.map((e, i) => (
+            <div key={i} className={classes.mdGrid}>
+              <CardMedia image={e.img} className={classes.introImg}/>
+              <div className={classes.introText}>
+                <Typography variant='h4' className={classes.introTitle}>{e.title}</Typography>
+                <Typography variant='h6' className={classes.introDesc}>{e.desc}</Typography>
+                <Button href={e.href} variant='contained' color='primary' className={classes.button}>{e.button}</Button>
+              </div>
+            </div>
+          ))
+        }
+      </Hidden>
+      <Hidden lgDown>
+        <div style={{display: 'flex', justifyContent: 'center'}}>
+        <Grid container spacing={10} style={{width: '80vw'}} justify='center'>
+        {
+          introData.map((e, i) => (
+            <Grid item xs={4} key={i} className={classes.xlGrid}>
+              <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '100%'}}>
+                <div>
+                  <CardMedia image={e.img} style={{height: '360px'}}/>
+                  <Typography variant='h4' className={classes.introTitle}>{e.title}</Typography>
+                  <Typography variant='h6' className={classes.introDesc}>{e.desc}</Typography>
+                </div>
+                <Button href={e.href} variant='contained' color='primary' className={classes.button}>{e.button}</Button>
+              </div>
+            </Grid>
+          ))
+        }
+        </Grid>
+        </div>
+      </Hidden>
     </div>
   )
 }

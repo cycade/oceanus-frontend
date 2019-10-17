@@ -38,11 +38,11 @@ export default function Banner(props) {
       <div className={classes.text}>
         <Hidden smDown>
           <Typography align='center' variant='h2' className={classes.title}>Leadbeater's Possum</Typography>
-          <Typography align='center' variant='h5' className={classes.desc}>The only member of the genus Gymnobelideus and wild populations are confined to Victoria.</Typography>
+          <Typography align='center' variant='h4' className={classes.desc}>Join us to protect this species which only exist about 2000 all over the world</Typography>
         </Hidden>
         <Hidden mdUp>
           <Typography align='center' variant='h4' className={classes.title}>Leadbeater's Possum</Typography>
-          <Typography align='center' variant='subtitle1' className={classes.desc}>The only member of the genus Gymnobelideus and wild populations are confined to Victoria.</Typography>
+          <Typography align='center' variant='h6' className={classes.desc}>Join us to protect this species which only exist about 2000 all over the world</Typography>
         </Hidden>
       </div>
     </Paper>

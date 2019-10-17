@@ -14,13 +14,16 @@ const useStyles = makeStyles(theme => ({
   text: {
     color: 'white',
   },
+  corp: {
+    color: '#bbb',
+  }
 }))
 
 export default function Footer(props) {
   const classes = useStyles();
   return (
     <Paper square className={classes.root}>
-      <Typography className={classes.text} variant='h6'>Build by OceanWorld</Typography>
+      <Typography className={classes.corp} variant='body1'>© 2019 OceanWorld</Typography>
       <Typography className={classes.text} variant='body1'>All rights reserved</Typography>
     </Paper>
   );

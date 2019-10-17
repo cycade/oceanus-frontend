@@ -8,9 +8,7 @@ import QuestionResult from './QuestionResult.js';
 const useStyles = makeStyles(theme => ({
   root: {
     margin: theme.spacing(5),
-    padding: theme.spacing(3),
-    paddingTop: theme.spacing(5),
-    paddingBottom: theme.spacing(5),
+    padding: theme.spacing(5),
     width: '75vw',
     display: 'flex',
     flexDirection: 'column',
@@ -101,10 +99,10 @@ export default function Question(props) {
 
       {/* render options for the question */}
       <div className={classes.items}>
-        <Grid container>
+        <Grid container spacing={3}>
         {
           props.question.items.map((e, i) => 
-            <Grid item md={6} xs={12} spacing={3} key={i+1}>
+            <Grid item md={6} xs={12} key={i+1}>
               <QuestionOption key={i+1}
                 bgImage={e.img}
                 text={e.text}
@@ -116,7 +114,6 @@ export default function Question(props) {
         }
         </Grid>
       </div>
-
 
       {/* render the result after answer */}
       {userChoice >= 0

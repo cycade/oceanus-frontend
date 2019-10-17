@@ -36,7 +36,7 @@ export default function QuizResult(props) {
         <div className={classes.finish}>
         <Typography variant='h5'>Score: {props.score}</Typography>
         <Typography variant='h5'> {getResult(props.score)}</Typography>
-        <Button className={classes.redo} variant='contained' href='/news'>Read More</Button>
+        <Button className={classes.redo} variant='contained' color='primary' href='/news'>Read More</Button>
         {
           props.score > 25
           ? <Button className={classes.redo} variant='contained' href='/recordmap'>Go to find them</Button>
