@@ -95,7 +95,7 @@ export default function Question(props) {
         ? <QuestionResult value={score} />
         : <div></div>
       }
-      <QuestionHint open={open} onClick={handleClick} hint={props.question.hint} />
+      <QuestionHint finished={userChoice >= 0} onClick={handleClick} hint={props.question.hint} />
 
       {/* render options for the question */}
       <div className={classes.items}>

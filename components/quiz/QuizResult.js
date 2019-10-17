@@ -33,8 +33,7 @@ export default function QuizResult(props) {
     const classes = useStyles();
     
     return (
-        <div className={classes.finish}>
-        <Typography variant='h5'>Score: {props.score}</Typography>
+      <div className={classes.finish}>
         <Typography variant='h5'> {getResult(props.score)}</Typography>
         <Button className={classes.redo} variant='contained' color='primary' href='/news'>Read More</Button>
         {

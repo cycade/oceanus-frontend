@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
+import Link from 'next/link';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -33,7 +34,6 @@ export default function NewsCard(props) {
     <Card className={classes.card}>
       <div className={classes.content}>
       <div>
-      <CardActionArea>
         <CardMedia
           className={classes.media}
           image={`../static/img/N${props.num}.png`}
@@ -47,13 +47,14 @@ export default function NewsCard(props) {
             {props.desc}
           </Typography>
         </CardContent>
-      </CardActionArea>
       </div>
       <div>
       <CardActions>
-        <Button size="small" color="secondary" variant='outlined' href={props.link}>
-          Learn More
-        </Button>
+        <Link href={props.link}>
+          <a target='_blank' style={{textDecoration: 'none'}}>
+            <Button size="small" color="secondary" variant='outlined'>Learn More</Button>
+          </a>
+        </Link>
       </CardActions>
       </div>
       </div>

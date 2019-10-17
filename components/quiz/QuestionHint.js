@@ -24,20 +24,29 @@ export default function QuestionHint(props) {
   const classes = useStyles();
   const content = props.hint === null ? 'No hint here. Try your best!' : props.hint;
   const [open, setOpen] = useState(false);
+  const [showHint, setHint] = useState(false);
+
   function handleTooltipClose() {
     setOpen(false);
   }
+
   function handleTooltipOpen() {
     setOpen(true);
   }
+
+  function handleHintClick(event) {
+    props.onClick(event);
+    setHint(!showHint);
+  }
+
   return (
     <div className={classes.root}>
       <Tooltip onClose={handleTooltipClose} onOpen={handleTooltipOpen} open={open} title="Get Some Hint?">
-      <Button onClick={props.onClick} variant='outlined' color='primary'>Hint?</Button>
+        <Button onClick={handleHintClick} variant='outlined' color='primary'>Hint?</Button>
       </Tooltip>
       <div className={classes.hint}>
         {
-          props.open
+          showHint || props.finished
           ? <div className={classes.text}>{content}</div>
           : <div></div>
         }
