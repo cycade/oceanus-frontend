@@ -95,7 +95,7 @@ export default function(props) {
       camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
       camera.position.x = -50;
       camera.position.y = 10;
-      camera.position.z = window.innerWidth / 6.5;
+      camera.position.z = 360;
       
       // Initialzie world
       scene = new THREE.Scene();
@@ -108,25 +108,25 @@ export default function(props) {
       // boards.push(backBoard);
       combination.add(backBoard);
 
-      let baseBoard = makeBoard([23, 1, 20], [-120, 50, 0]);
+      let baseBoard = makeBoard([23, 1, 20], [-60, 50, 0]);
       scene.add(baseBoard);
       boards.push(baseBoard);
 
-      let frontBoard = makeBoard([23, 38, 1], [-160, -50, 0]);
+      let frontBoard = makeBoard([23, 38, 1], [-100, -50, 0]);
 
-      let rightBoard = makeSideBoard([-120, 0, 0], true)
+      let rightBoard = makeSideBoard([-60, 0, 0], true)
       scene.add(rightBoard);
       boards.push(rightBoard);
 
-      let lidBoard = makeBoard([23, 1, 26], [-160, 50, 0], [6, 0, 0]);
+      let lidBoard = makeBoard([23, 1, 26], [-100, 50, 0], [6, 0, 0]);
       scene.add(lidBoard);
       boards.push(lidBoard);
 
-      let leftBoard = makeSideBoard([-160, 0, 0])
+      let leftBoard = makeSideBoard([-100, 0, 0])
       scene.add(leftBoard);
       boards.push(leftBoard);
 
-      let baffleBoard = makeBoard([10, 10, 1], [-120, -50, 0], [0, 135, 0]);
+      let baffleBoard = makeBoard([10, 10, 1], [-60, -50, 0], [0, 135, 0]);
       camera.lookAt(backBoard);
 
       edges.set(backBoard, new Map([

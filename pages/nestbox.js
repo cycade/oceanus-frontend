@@ -1,6 +1,6 @@
 import NavigationBar from '../components/NavigationBar.js';
 import NestboxPlayground from '../components/NestboxPlayground.js';
-import CardMedia from '@material-ui/core/CardMedia';
+import Hidden from '@material-ui/core/Hidden';
 import { Typography, Dialog } from '@material-ui/core';
 import NestboxIntro from '../nestbox/NestboxIntro.js';
 
@@ -14,10 +14,12 @@ export default function test(props) {
       <script src='/static/threejs/threejs-controls/TrackballControls.js'></script>
       <script src='/static/threejs/threejs-controls/CSGMesh.js'></script>
       <NestboxPlayground />
+      <Hidden smDown>
       <div style={{position: 'absolute', right: 0, top: '15%', backgroundColor: 'white', padding: '6px'}}>
         <img src='/static/img/nestbox-tutorial.png' style={{width: '30vw'}}/>
         <Typography variant='h5' align='center'>Material you need</Typography>
       </div>
+      </Hidden>
       <NestboxIntro />
     </div>
   );
