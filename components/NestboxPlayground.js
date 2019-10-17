@@ -2,7 +2,14 @@ import { useEffect, useState } from "react";
 import { Snackbar, Typography, Button } from "@material-ui/core";
 
 export default function(props) {
-  const [completed, setComplete] = useState(false);
+  const [stage, setStage] = useState(0);
+
+  const info = [
+    'Put RIHGT, LEFT, LID and BASE board to the tree',
+    'Put BALLFE board to hide the hole in RIGHT board',
+    'For the last step, put the FRONT board on it',
+    'Congratulations! A nest box is completed!',
+  ]
 
   useEffect(() => {
     let camera, controls, scene, renderer, stats;
@@ -97,7 +104,7 @@ export default function(props) {
       // add sample plane
       let backBoard = makeBackBoard([0, 0, 0]);
       scene.add(backBoard);
-      boards.push(backBoard);
+      // boards.push(backBoard);
       combination.add(backBoard);
 
       let baseBoard = makeBoard([23, 1, 20], [-120, 50, 0]);
@@ -105,8 +112,6 @@ export default function(props) {
       boards.push(baseBoard);
 
       let frontBoard = makeBoard([23, 38, 1], [-160, -50, 0]);
-      scene.add(frontBoard);
-      boards.push(frontBoard);
 
       let rightBoard = makeSideBoard([-120, 0, 0], true)
       scene.add(rightBoard);
@@ -121,8 +126,6 @@ export default function(props) {
       boards.push(leftBoard);
 
       let baffleBoard = makeBoard([10, 10, 1], [-120, -50, 0], [0, 135, 0]);
-      scene.add(baffleBoard);
-      boards.push(baffleBoard);
 
       edges.set(backBoard, new Map([
         [baseBoard, [0, -19.5, 10]],
@@ -156,6 +159,19 @@ export default function(props) {
       edges.set(baffleBoard, new Map([
         [backBoard, [-7.4, 15, -4.072]],
       ]))
+
+      let truncGeometry = new THREE.CylinderBufferGeometry(15, 20, 600, 7);
+      let truncMaterial = new THREE.MeshBasicMaterial({color: 0x5d3d21});
+      let trunc = new THREE.Mesh( truncGeometry, truncMaterial );
+      trunc.position.set(0, 200, -19);
+      scene.add(trunc);
+
+      let groundGeometry = new THREE.PlaneGeometry(6400, 6400);
+      let groundMaterial = new THREE.MeshBasicMaterial( {color: 0x445034, side: THREE.DoubleSide} );
+      let ground = new THREE.Mesh( groundGeometry, groundMaterial );
+      ground.rotateX(Math.PI / 2);
+      ground.position.set(0, -100, 0);
+      scene.add(ground);
 
       // lights
       let light = new THREE.DirectionalLight(0xffffff);
@@ -203,15 +219,24 @@ export default function(props) {
             foundNearest = true;
             current.set(item.position.x - vec[0], item.position.y - vec[1], item.position.z - vec[2]);
             e.object.updateMatrix();
-            if (e.object !== backBoard && item === backBoard) { combination.add(e.object); }
-            if (e.object === backBoard && item !== backBoard) { combination.add(item); }
+            if (item === backBoard) { combination.add(e.object); }
             if (combination.has(baseBoard) && e.object === frontBoard) { combination.add(e.object); }
             break;
           }
           if (!foundNearest && e.object !== backBoard && combination.has(e.object)) { combination.delete(e.object); }
         }
 
-        setComplete(combination.size === 7);
+        if (combination.size === 5) {
+          setStage(stage + 1);
+          scene.add(baffleBoard);
+          boards.push(baffleBoard);    
+        } else if (combination.size === 6) {
+          setStage(stage + 2);
+          scene.add(frontBoard);
+          boards.push(frontBoard);
+        } else if (combination.size === 7) {
+          setStage(stage + 3);
+        }
       });
 
       dragControls.addEventListener('dragend', function () {
@@ -251,10 +276,13 @@ export default function(props) {
 
   return <div>
     <Snackbar
-      open={completed}
-      message={<Typography variant='h5'>Congratulations!</Typography>}
-      action={<Button color='inherit' href='/'>Learn more</Button>}
+      open={true}
+      message={<Typography variant='h5'>{info[stage]}</Typography>}
+      action={
+        stage === info.length - 1
+        ? <div><Button color='inherit' href='/'>Learn more</Button><Button color='inherit' href='/nestbox'>Redo</Button></div>
+        : <div></div>
+      }
     />
-
   </div>;
 }

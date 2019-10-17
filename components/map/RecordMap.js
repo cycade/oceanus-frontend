@@ -72,7 +72,7 @@ export default class RecordMap extends Component {
         primaryColor: '#dc143c',
         secondaryColor: '#233333',
         shadow: true,
-        size: 'sm',
+        size: 'md',
         symbol: `${record['count']}`
       })
     })
