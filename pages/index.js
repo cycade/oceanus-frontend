@@ -2,7 +2,7 @@ import React from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline/CssBaseline';
 import NavigationBar from '../components/NavigationBar.js';
 import Banner from '../components/Banner.js';
-import InfoCard from '../components/InfoCard.js';
+import Introduction from '../components/Introduction.js';
 import Footer from '../components/Footer.js';
 
 export default function index() {
@@ -11,7 +11,7 @@ export default function index() {
       <CssBaseline />
       <NavigationBar currentPage='home'/>
       <Banner />
-      <InfoCard />
+      <Introduction />
       <Footer />
     </React.Fragment>
   )
