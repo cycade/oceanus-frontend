@@ -9,7 +9,7 @@ import Dialog from './Dialog.js';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    marginTop: theme.spacing(8),
+    // marginTop: theme.spacing(8),
   },
   mapcontainer: {
     position: 'relative'
@@ -130,10 +130,6 @@ export default function RecordMapWrapper(props) {
       {
         _isRecordsReady()
         ? <div className={classes.mapcontainer}>
-{/*           
-          <div style={{ position: 'absolute', zIndex: 1000 }}>
-            <RecordChartByMonth recordFromUser={_getUserRecordByMonth()} onChooseMonth={(m) => setMonthRecords(m)}/>
-          </div> */}
 
           <RecordMap
             data={records}

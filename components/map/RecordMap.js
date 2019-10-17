@@ -201,6 +201,8 @@ export default class RecordMap extends Component {
       zoom: 10
     })
 
+    this.map.zoomControl.setPosition('bottomleft');
+
     // highlight user's location
     if (this.props.userLocation.length > 0) {
       L.mapquest.textMarker(this.props.userLocation, {
@@ -268,7 +270,19 @@ export default class RecordMap extends Component {
   render() {
     return (
       <div>
-        <div style={{'position': 'absolute', 'top': '2vw', 'right': 10, 'zIndex': 1000, 'display': 'flex', 'flexDirection': 'column'}}>
+        <div style={{'position': 'absolute', 'top': '20vw', 'right': 10, 'zIndex': 1000, 'display': 'flex', 'flexDirection': 'column'}}>
+          {
+            Object.keys(this.state.layerState).map((e, i) => {
+              return <MapControlLabel key={i+1}
+                state={this.state.layerState[e]}
+                setState={((event) => this._handleMapLayerChange(event, e)).bind(this)}
+                name={e}
+              />;
+            })
+          }
+        </div>
+
+        <div style={{'position': 'absolute', 'bottom': '4vw', 'right': '3vw', 'zIndex': 1000, 'display': 'flex', 'flexDirection': 'column'}}>
           <div style={{marginBottom: '8px', paddingLeft: '40px'}}>
             <Typography variant='h6'>Data Source</Typography>
             <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
@@ -282,18 +296,9 @@ export default class RecordMap extends Component {
               </div>
             </div>
           </div>
-
-          {
-            Object.keys(this.state.layerState).map((e, i) => {
-              return <MapControlLabel key={i+1}
-                state={this.state.layerState[e]}
-                setState={((event) => this._handleMapLayerChange(event, e)).bind(this)}
-                name={e}
-              />;
-            })
-          }
         </div>
-        <div id='recordmap' style={{height: '92vh', width: '100vw'}}></div>
+
+        <div id='recordmap' style={{height: '100vh', width: '100vw'}}></div>
 
       </div>
     );
