@@ -6,7 +6,7 @@ export default function(props) {
 
   const info = [
     'Put RIHGT, LEFT, LID and BASE board to the tree',
-    'Put BALLFE board to hide the hole in RIGHT board',
+    'Put BAFFLE board to hide the hole in RIGHT board',
     'For the last step, put the FRONT board on it',
     'Congratulations! A nest box is completed!',
   ]
@@ -93,9 +93,10 @@ export default function(props) {
     function init() {
       // Initialize camera
       camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
+      camera.position.x = -50;
       camera.position.y = 10;
       camera.position.z = window.innerWidth / 6.5;
-
+      
       // Initialzie world
       scene = new THREE.Scene();
       scene.background = new THREE.Color(0xeeeeee);
@@ -126,6 +127,7 @@ export default function(props) {
       boards.push(leftBoard);
 
       let baffleBoard = makeBoard([10, 10, 1], [-120, -50, 0], [0, 135, 0]);
+      camera.lookAt(backBoard);
 
       edges.set(backBoard, new Map([
         [baseBoard, [0, -19.5, 10]],
