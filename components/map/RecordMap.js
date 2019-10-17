@@ -201,7 +201,7 @@ export default class RecordMap extends Component {
       zoom: 10
     })
 
-    this.map.zoomControl.setPosition('bottomleft');
+    // this.map.zoomControl.setPosition('bottomleft');
 
     // highlight user's location
     if (this.props.userLocation.length > 0) {
@@ -282,7 +282,7 @@ export default class RecordMap extends Component {
           }
         </div>
 
-        <div style={{'position': 'absolute', 'bottom': '4vw', 'right': '3vw', 'zIndex': 1000, 'display': 'flex', 'flexDirection': 'column'}}>
+        <div style={{'position': 'absolute', 'bottom': '144px', 'right': '3vw', 'zIndex': 1000, 'display': 'flex', 'flexDirection': 'column'}}>
           <div style={{marginBottom: '8px', paddingLeft: '40px'}}>
             <Typography variant='h6'>Data Source</Typography>
             <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>

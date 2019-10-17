@@ -141,7 +141,7 @@ export default function RecordMapWrapper(props) {
             onSelect={_handleSelectLocation}
           />
 
-          <div style={{ position: 'absolute', zIndex: 1000, marginTop: -80, width:'100vw', display: 'flex', justifyContent: 'center' }}>
+          <div style={{ position: 'absolute', zIndex: 1000, marginTop: -128, width:'100vw', display: 'flex', justifyContent: 'center' }}>
             <Snackbar style={{ marginTop: '120px' }}
               anchorOrigin={{'vertical': 'top', 'horizontal': 'center'}}
               open={selectState}
